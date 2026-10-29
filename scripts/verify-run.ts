@@ -4,6 +4,9 @@
 //   npm run verify -- gemini YOUR_KEY            (or openrouter / anthropic; works on Windows, Mac and Linux)
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from "node:fs";
 import { execSync } from "node:child_process";
+import { Agent, setGlobalDispatcher } from "undici";
+
+setGlobalDispatcher(new Agent({ headersTimeout: 600_000, bodyTimeout: 600_000, connectTimeout: 30_000 }));
 
 const base = process.env.API_URL ?? "http://localhost:3001/api/v1";
 const provider = process.argv[2] ?? process.env.LLM_PROVIDER ?? "gemini";

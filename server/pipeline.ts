@@ -90,7 +90,7 @@ export async function runGenerate(args: {
   const blueprint = args.blueprintFile ? await parseUpload(args.blueprintFile) : null;
 
   const extracted = extractFromDocs(spec, blueprint);
-  const structured = overlayExtracted(await structureCourse(spec, blueprint, args.cfg), extracted);
+  const structured = overlayExtracted(await structureCourse(spec, blueprint, args.cfg, extracted), extracted);
 
   const cosForMap = structured.course_outcomes.map((co) => ({
     ...co,

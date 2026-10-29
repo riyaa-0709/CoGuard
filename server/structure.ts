@@ -1,9 +1,10 @@
+import type { Extracted } from "./extract.js";
 import type { LlmConfig } from "./llm.js";
 import { generateJson } from "./llm.js";
 import type { ParsedDoc } from "./parse.js";
 import { StructuredCourseSchema, type StructuredCourse } from "./schema.js";
 
-function chunk(s: string, max = 12000): string {
+function chunk(s: string, max = 6000): string {
   if (s.length <= max) return s;
   return s.slice(0, max) + "\n…[truncated]…\n" + s.slice(-Math.min(4000, s.length - max));
 }
@@ -14,7 +15,7 @@ function tablesBlock(doc: ParsedDoc): string {
     .join("\n\n");
 }
 
-export async function structureCourse(spec: ParsedDoc, blueprint: ParsedDoc | null, cfg: LlmConfig): Promise<StructuredCourse> {
+export async function structureCourse(spec: ParsedDoc, blueprint: ParsedDoc | null, cfg: LlmConfig, extracted?: Extracted): Promise<StructuredCourse> {
   const bpNote = blueprint
     ? `A blueprint is supplied. Course outcomes (id + statement) and units (number, title, lab) MUST come from the BLUEPRINT. All other fields come from the SPEC.`
     : `No blueprint supplied. Take course outcomes and units from the SPEC. Note "no blueprint supplied" only in findings if relevant.`;
@@ -32,11 +33,24 @@ Rules:
 - assessment.co_coverage: each CO id → list of component names marked X for that CO (e.g. "Tests", "Assignments", "Lab CE", "Written exam", "LSEE").
 - findings: only real issues you see (typos like broken CO labels, summary that clearly misses units). Use codes TYPO_OR_FORMAT, SUMMARY_SYLLABUS_MISMATCH, LABEL_OR_TITLE_MISMATCH, or OTHER.
 
+${extracted ? `A parser already filled this JSON. Keep its values unless a source table clearly contradicts them. Fill only empty fields.\nEXTRACTED:\n${JSON.stringify({
+    title: extracted.title,
+    code: extracted.code,
+    department: extracted.department,
+    credits_ltp: extracted.credits_ltp,
+    course_type: extracted.course_type,
+    summary: extracted.summary,
+    course_outcomes: extracted.course_outcomes,
+    units: extracted.units,
+    teaching_hours: extracted.teaching_hours,
+    assessment: extracted.assessment,
+  })}\n` : ""}
+
 === SPEC TEXT ===
 ${chunk(spec.text)}
 
 === SPEC TABLES ===
-${chunk(tablesBlock(spec), 8000)}
+${chunk(tablesBlock(spec), 5000)}
 
 ${
   blueprint
