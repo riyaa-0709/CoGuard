@@ -2,7 +2,7 @@
 // The key arrives per request from the browser. Never store it, log it or return it.
 import { GoogleGenAI } from "@google/genai";
 import type { Request } from "express";
-import type { ZodType } from "zod";
+import type { z, ZodTypeAny } from "zod";
 import { ApiError } from "./envelope.js";
 
 export type Provider = "gemini" | "openrouter" | "anthropic";
@@ -27,7 +27,11 @@ async function callProvider(prompt: string, cfg: LlmConfig): Promise<string> {
   if (cfg.provider === "gemini") {
     try {
       const ai = new GoogleGenAI({ apiKey: cfg.key });
-      const r = await ai.models.generateContent({ model: cfg.model, contents: prompt, config: { responseMimeType: "application/json" } });
+      const r = await ai.models.generateContent({
+        model: cfg.model,
+        contents: prompt,
+        config: { responseMimeType: "application/json", temperature: 0 },
+      });
       return r.text ?? "";
     } catch (e: any) {
       const status = Number(e?.status ?? e?.code ?? 0);
@@ -40,7 +44,7 @@ async function callProvider(prompt: string, cfg: LlmConfig): Promise<string> {
     const r = await fetch("https://api.anthropic.com/v1/messages", {
       method: "POST",
       headers: { "x-api-key": cfg.key, "anthropic-version": "2023-06-01", "content-type": "application/json" },
-      body: JSON.stringify({ model: cfg.model, max_tokens: 8000, messages: [{ role: "user", content: prompt }] }),
+      body: JSON.stringify({ model: cfg.model, max_tokens: 8000, temperature: 0, messages: [{ role: "user", content: prompt }] }),
     });
     if (r.status === 429 || r.status === 529) throw new ApiError(429, "RATE_LIMITED", "The AI provider says too many requests. Wait a minute or switch model.");
     if (r.status === 401 || r.status === 403) throw new ApiError(401, "BAD_KEY", "The provider rejected this key. Check Settings.");
@@ -51,7 +55,12 @@ async function callProvider(prompt: string, cfg: LlmConfig): Promise<string> {
   const r = await fetch("https://openrouter.ai/api/v1/chat/completions", {
     method: "POST",
     headers: { Authorization: `Bearer ${cfg.key}`, "Content-Type": "application/json" },
-    body: JSON.stringify({ model: cfg.model, messages: [{ role: "user", content: prompt }], response_format: { type: "json_object" } }),
+    body: JSON.stringify({
+      model: cfg.model,
+      temperature: 0,
+      messages: [{ role: "user", content: prompt }],
+      response_format: { type: "json_object" },
+    }),
   });
   if (r.status === 429) throw new ApiError(429, "RATE_LIMITED", "The AI provider says too many requests. Wait a minute or switch model.");
   if (r.status === 401 || r.status === 403) throw new ApiError(401, "BAD_KEY", "The provider rejected this key. Check Settings.");
@@ -60,7 +69,7 @@ async function callProvider(prompt: string, cfg: LlmConfig): Promise<string> {
   return j?.choices?.[0]?.message?.content ?? "";
 }
 
-export async function generateJson<T>(prompt: string, schema: ZodType<T>, cfg: LlmConfig): Promise<T> {
+export async function generateJson<S extends ZodTypeAny>(prompt: string, schema: S, cfg: LlmConfig): Promise<z.output<S>> {
   let last = "";
   for (let attempt = 0; attempt < 2; attempt++) {
     const suffix = attempt === 0 ? "" : `\n\nYour previous answer was invalid: ${last}. Reply with valid JSON only.`;
