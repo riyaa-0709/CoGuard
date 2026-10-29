@@ -186,14 +186,12 @@ export function localMapping(args: {
     const text = co.statement.toLowerCase();
     const comps = args.coverage[co.id] ?? [];
     const practical = hasPracticalAssessment(comps);
-    // Strong tool use (PO-5) needs the CO to be assessed in a lab or programming component, as the defect check requires.
-    const toolUse = comps.some((n) => /lab|practical|programming/i.test(n));
     const unitsCite = relatedUnits(co.statement, args.units);
     const assess = assessPhrase(comps);
     const row: Record<string, { level: 1 | 2 | 3 | ""; justification: string }> = {};
     const put = (col: string, want: number, why: string) => {
       const level = capLevel(want, co.bloom_level);
-      if ((col === "PO-3" || col === "PO-5") && level >= 2 && !(col === "PO-5" ? toolUse : practical)) {
+      if ((col === "PO-3" || col === "PO-5") && level >= 2 && !practical) {
         if (col === "PO-5" && hasLab) {
           row[col] = { level: 1, justification: justify(co, col, 1, why) };
         } else if (col === "PO-3") {
