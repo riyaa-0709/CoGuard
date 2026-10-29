@@ -48,20 +48,29 @@ async function callProvider(prompt: string, cfg: LlmConfig): Promise<string> {
       });
       return r.text ?? "";
     };
-    try {
-      return await run(cfg.model);
-    } catch (e: any) {
-      const msg = String(e?.message ?? e?.error?.message ?? "unknown");
-      console.error("Gemini error:", msg.slice(0, 240));
-      if (cfg.model !== GEMINI_FALLBACK && /no longer available|not found|NOT_FOUND/i.test(msg)) {
-        try {
-          return await run(GEMINI_FALLBACK);
-        } catch (e2: any) {
-          throw mapGeminiError(e2);
+    let last: unknown;
+    for (let attempt = 0; attempt < 2; attempt++) {
+      try {
+        return await run(cfg.model);
+      } catch (e: any) {
+        last = e;
+        const msg = String(e?.message ?? e?.error?.message ?? "unknown");
+        console.error("Gemini error:", msg.slice(0, 240));
+        if (cfg.model !== GEMINI_FALLBACK && /no longer available|not found|NOT_FOUND/i.test(msg)) {
+          try {
+            return await run(GEMINI_FALLBACK);
+          } catch (e2: any) {
+            last = e2;
+          }
         }
+        if (attempt === 0 && /fetch failed|ECONNRESET|ETIMEDOUT|socket|network/i.test(msg)) {
+          await new Promise((r) => setTimeout(r, 1500));
+          continue;
+        }
+        break;
       }
-      throw mapGeminiError(e);
     }
+    throw mapGeminiError(last);
   }
   if (cfg.provider === "anthropic") {
     const r = await fetch("https://api.anthropic.com/v1/messages", {

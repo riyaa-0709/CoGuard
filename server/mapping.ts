@@ -27,8 +27,8 @@ export async function proposeMap(
   cosWithBloom: { id: string; statement: string; bloom_level: number | null }[],
   cfg: LlmConfig,
 ): Promise<MappingAi> {
-  const posBlock = poPso.pos.map((p) => `${p.id} (${p.title}): ${p.statement}`).join("\n");
-  const psoBlock = poPso.psos.map((p) => `${p.id}: ${p.statement}`).join("\n");
+  const posBlock = poPso.pos.map((p) => `${p.id} ${p.title}: ${p.statement.slice(0, 140)}`).join("\n");
+  const psoBlock = poPso.psos.map((p) => `${p.id}: ${p.statement.slice(0, 140)}`).join("\n");
   const cosBlock = cosWithBloom
     .map((c) => {
       const bloom = c.bloom_level != null ? `Bloom L${c.bloom_level}` : "Bloom UNKNOWN — classify from leading verb";
@@ -36,9 +36,9 @@ export async function proposeMap(
     })
     .join("\n");
   const unitsBlock = structured.units
-    .map((u) => `Unit ${u.number}: ${u.title}${u.lab ? ` | Lab: ${u.lab}` : ""}`)
+    .map((u) => `Unit ${u.number}: ${u.title}${u.lab ? ` | Lab: ${u.lab.slice(0, 80)}` : ""}`)
     .join("\n");
-  const assessBlock = JSON.stringify(structured.assessment, null, 2);
+  const assessBlock = JSON.stringify(structured.assessment);
   const needBloom = cosWithBloom.filter((c) => c.bloom_level == null).map((c) => c.id);
 
   const prompt = `You build a CO-PO-PSO contribution map and rewrite the course summary.
