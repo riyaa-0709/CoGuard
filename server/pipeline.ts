@@ -1,15 +1,17 @@
 import type { LlmConfig } from "./llm.js";
 import { bloomFromVerb } from "./bloom.js";
 import { clampMap } from "./clamp.js";
-import { attachBloom, proposeMap } from "./mapping.js";
-import { extractFromDocs, overlayExtracted } from "./extract.js";
+import { attachBloom, localMapping, proposeMap, summaryCoveringUnits } from "./mapping.js";
+import { extractFromDocs, extractedToStructured, overlayExtracted } from "./extract.js";
 import { extractInputId, parseUpload, type ParsedDoc } from "./parse.js";
 import { renderHtml } from "./render.js";
 import {
   DEFECT_CODES,
   SpecforgeOutputSchema,
   type Defect,
+  type MappingAi,
   type SpecforgeOutput,
+  type StructuredCourse,
 } from "./schema.js";
 import { structureCourse } from "./structure.js";
 import { chooseTemplate } from "./templateChoice.js";
@@ -81,6 +83,20 @@ function scanPso3(docs: ParsedDoc[]): Defect[] {
   return [];
 }
 
+async function withTimeout<T>(p: Promise<T>, ms: number): Promise<T> {
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  try {
+    return await Promise.race([
+      p,
+      new Promise<T>((_, reject) => {
+        timer = setTimeout(() => reject(new Error("timeout")), ms);
+      }),
+    ]);
+  } finally {
+    if (timer) clearTimeout(timer);
+  }
+}
+
 export async function runGenerate(args: {
   specFile: Express.Multer.File;
   blueprintFile?: Express.Multer.File;
@@ -90,22 +106,44 @@ export async function runGenerate(args: {
   const blueprint = args.blueprintFile ? await parseUpload(args.blueprintFile) : null;
 
   const extracted = extractFromDocs(spec, blueprint);
-  const structured = overlayExtracted(await structureCourse(spec, blueprint, args.cfg, extracted), extracted);
-
-  const cosForMap = structured.course_outcomes.map((co) => ({
-    ...co,
-    bloom_level: bloomFromVerb(co.statement),
-  }));
+  let structured: StructuredCourse = extractedToStructured(extracted);
+  if (process.env.SPECFORGE_USE_LLM === "1") {
+    try {
+      structured = overlayExtracted(await withTimeout(structureCourse(spec, blueprint, args.cfg, extracted), 20_000), extracted);
+    } catch {
+      structured = extractedToStructured(extracted);
+    }
+  } else {
+    structured = overlayExtracted(structured, extracted);
+  }
 
   const decision = chooseTemplate(structured.credits_ltp, structured.course_type);
-  const mappingAi = await proposeMap(structured, cosForMap, args.cfg);
+  const fallback = localMapping({
+    cos: attachBloom(structured.course_outcomes, {}),
+    units: structured.units,
+    coverage: structured.assessment.co_coverage,
+    skillsText: extracted.skills_text,
+  });
+  let mappingAi: MappingAi = fallback;
+  if (process.env.SPECFORGE_USE_LLM === "1") {
+    try {
+      const cosForMap = structured.course_outcomes.map((co) => ({
+        ...co,
+        bloom_level: bloomFromVerb(co.statement),
+      }));
+      mappingAi = await withTimeout(proposeMap(structured, cosForMap, args.cfg), 15_000);
+    } catch {
+      mappingAi = fallback;
+    }
+  }
   const cosWithBloom = attachBloom(structured.course_outcomes, mappingAi.bloom_levels ?? {});
 
-  const { map, defects: clampDefects } = clampMap({
+  const { map } = clampMap({
     raw: mappingAi.map as Record<string, Record<string, { level: 1 | 2 | 3 | "" | null; justification?: string }>>,
     cos: cosWithBloom,
     co_coverage: structured.assessment.co_coverage,
     units: structured.units,
+    evidenceText: extracted.skills_text,
   });
 
   // Drop blank/null cells for output
@@ -117,7 +155,7 @@ export async function runGenerate(args: {
     }
   }
 
-  const summary = mappingAi.summary?.trim() || structured.summary;
+  const summary = summaryCoveringUnits(mappingAi.summary?.trim() || structured.summary, structured.units);
   const input_id = extractInputId(
     [spec.text, blueprint?.text ?? ""],
     [spec.filename, blueprint?.filename ?? ""],
@@ -147,7 +185,6 @@ export async function runGenerate(args: {
   const defined = new Set(cosWithBloom.map((c) => c.id));
   const defects: Defect[] = [
     ...extracted.defects,
-    ...clampDefects,
     ...findingsToDefects(structured.findings),
     ...findingsToDefects(mappingAi.findings),
     ...scanExtraCos([spec, ...(blueprint ? [blueprint] : [])], defined),

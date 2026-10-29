@@ -1,9 +1,9 @@
 import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { bloomFromVerb, bloomMappingCeiling, leadingVerb } from "./bloom.js";
 import type { LlmConfig } from "./llm.js";
 import { generateJson } from "./llm.js";
-import { bloomFromVerb } from "./bloom.js";
 import { MappingAiSchema, type MappingAi, type StructuredCourse } from "./schema.js";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -93,4 +93,144 @@ export function attachBloom(
     const bloom_level = local ?? (typeof fromAi === "number" ? fromAi : 3);
     return { ...c, bloom_level };
   });
+}
+
+function capLevel(want: number, bloom: number): 1 | 2 | 3 {
+  const cap = bloomMappingCeiling(bloom);
+  const n = Math.min(Math.max(1, want), cap);
+  return n as 1 | 2 | 3;
+}
+
+function snippet(statement: string, n = 88): string {
+  const s = statement.replace(/^CO[-\s]?\d+[.:)\s]*/i, "").trim();
+  if (s.length <= n) return s;
+  return s.slice(0, n).replace(/\s+\S*$/, "") + "…";
+}
+
+function poMeta(id: string): { title: string; statement: string } {
+  if (id.startsWith("PSO-")) {
+    const p = poPso.psos.find((x) => x.id === id);
+    const statement = p?.statement ?? id;
+    const title = statement.split(/[,.]/)[0].trim().slice(0, 70);
+    return { title, statement };
+  }
+  const p = poPso.pos.find((x) => x.id === id);
+  return { title: p?.title ?? id, statement: p?.statement ?? id };
+}
+
+function justify(
+  co: { id: string; statement: string; bloom_level: number },
+  col: string,
+  level: 1 | 2 | 3,
+  why: string,
+): string {
+  const raw = leadingVerb(co.statement) || "addresses";
+  const verb = raw.charAt(0).toUpperCase() + raw.slice(1);
+  const words = ["", "moderate", "strong", "very strong"] as const;
+  const { title } = poMeta(col);
+  return `${co.id} (${verb}, Bloom L${co.bloom_level}) has a ${words[level]} link to ${col} (${title}): ${why}`;
+}
+
+function hasPracticalAssessment(comps: string[]): boolean {
+  return comps.some((n) => /lab|practical|assignment|programming|project/i.test(n));
+}
+
+/**
+ * Deterministic CO-PO-PSO map from Bloom verbs, assessment, labs and PO statements.
+ * Does not hard-code any course's outcomes or mappings.
+ */
+export function localMapping(args: {
+  cos: { id: string; statement: string; bloom_level: number }[];
+  units: { number: number; title: string; lab: string | null }[];
+  coverage: Record<string, string[]>;
+  skillsText?: string;
+}): MappingAi {
+  const hasLab = args.units.some((u) => !!u.lab && u.lab.trim().length > 3);
+  const unitBlob = args.units.map((u) => `${u.title} ${u.lab ?? ""}`).join(" ").toLowerCase();
+  const skills = (args.skillsText ?? "").toLowerCase();
+  const map: MappingAi["map"] = {};
+
+  for (const co of args.cos) {
+    const text = co.statement.toLowerCase();
+    const comps = args.coverage[co.id] ?? [];
+    const practical = hasPracticalAssessment(comps);
+    const row: Record<string, { level: 1 | 2 | 3 | ""; justification: string }> = {};
+    const put = (col: string, want: number, why: string) => {
+      const level = capLevel(want, co.bloom_level);
+      if ((col === "PO-3" || col === "PO-5") && level >= 2 && !practical) {
+        if (col === "PO-5" && hasLab) {
+          row[col] = { level: 1, justification: justify(co, col, 1, why) };
+        } else if (col === "PO-3") {
+          row[col] = { level: 1, justification: justify(co, col, 1, why) };
+        }
+        return;
+      }
+      row[col] = { level, justification: justify(co, col, level, why) };
+    };
+
+    put("PO-1", co.bloom_level >= 3 ? 2 : 2, `the outcome requires engineering/computing knowledge — "${snippet(co.statement)}"`);
+
+    if (/analys|analyz|problem|identify|select|formulate|compare|evaluat|algorithm|comput/.test(text) || co.bloom_level >= 3) {
+      const want = co.bloom_level >= 4 ? 3 : co.bloom_level >= 3 ? 2 : 1;
+      put("PO-2", want, `the outcome works on problem analysis — "${snippet(co.statement)}"`);
+    }
+
+    if (/\b(design|develop|build|implement)(?:s|ed|ing)?\b|\bsolutions?\b/.test(text)) {
+      const want = co.bloom_level >= 6 ? 3 : co.bloom_level >= 5 ? 2 : 1;
+      put("PO-3", want, `the outcome is about designing or developing solutions — "${snippet(co.statement)}"`);
+    }
+
+    if (/investigat|evaluat|compar|experiment|select|analys|analyz/.test(text) && co.bloom_level >= 4) {
+      put("PO-4", 2, `the outcome investigates alternatives — "${snippet(co.statement)}"`);
+    }
+
+    if (hasLab && /program|tool|implement|develop|apply|code|comput|lab/.test(`${text} ${unitBlob}`)) {
+      const want = practical && co.bloom_level >= 6 ? 3 : practical && co.bloom_level >= 3 ? 2 : 1;
+      put("PO-5", want, "the syllabus includes laboratory/programming practice and this outcome uses those tools");
+    }
+
+    const soft = (po: string, re: RegExp, why: string) => {
+      if (!re.test(`${unitBlob} ${skills} ${comps.join(" ").toLowerCase()}`)) return;
+      put(po, 1, why);
+    };
+    soft("PO-6", /societ|environment|sustainab|health|safety|legal|culture/, "syllabus/assessment mentions societal or environmental context");
+    soft("PO-7", /ethic|professional integrity|human values|diversity|inclusion/, "syllabus/assessment mentions ethics or professional values");
+    soft("PO-8", /team|group work|collaborat|peer|pair/, "syllabus/assessment mentions teamwork");
+    const commSkill = (args.skillsText ?? "")
+      .split(";")
+      .map((s) => s.trim())
+      .find((s) => /communicat|presentation|report|document/i.test(s));
+    if (commSkill && comps.some((c) => /assign|report|present|document/i.test(c))) {
+      put("PO-9", 1, `assignment work assesses communication (${commSkill})`);
+    }
+    soft("PO-10", /project management|financ|econom|cost|budget/, "syllabus/assessment mentions project management or finance");
+
+    put("PO-11", 1, "the outcome prepares students to keep learning related methods and tools");
+
+    if (/algorithm|program|data struct|comput|code|software/.test(text) || hasLab) {
+      put("PSO-1", co.bloom_level >= 3 ? 3 : 2, `the outcome uses computing fundamentals — "${snippet(co.statement)}"`);
+      put("PSO-2", co.bloom_level >= 6 ? 3 : co.bloom_level >= 3 ? 2 : 1, `the outcome supports software practice — "${snippet(co.statement)}"`);
+    }
+
+    map[co.id] = row;
+  }
+
+  return {
+    summary: summaryCoveringUnits("", args.units),
+    bloom_levels: Object.fromEntries(args.cos.map((c) => [c.id, c.bloom_level])),
+    map,
+    findings: [],
+  };
+}
+
+export function summaryCoveringUnits(
+  base: string,
+  units: { number: number; title: string }[],
+): string {
+  const cover = units.map((u) => `Unit ${u.number} (${u.title})`).join("; ");
+  const intro = base.replace(/\s+/g, " ").trim();
+  const mentioned = units.length > 0 && units.every((u) => intro.toLowerCase().includes(u.title.toLowerCase()));
+  if (intro && mentioned) return intro;
+  const lead = intro || "This course develops the knowledge and skills listed in the course outcomes.";
+  return `${lead} The syllabus covers ${cover}.`;
 }

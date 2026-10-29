@@ -33,7 +33,7 @@ function hasEvidenceForSoftPo(
   if (po === "PO-6") return /societ|environment|sustainab|ethic|health|safety|legal|culture/.test(blob);
   if (po === "PO-7") return /ethic|professional|integrity|values|diversity|inclusion|law/.test(blob);
   if (po === "PO-8") return /team|group|collaborat|peer|pair/.test(blob);
-  if (po === "PO-9") return /communicat|present|report|document|write|verbal/.test(blob);
+  if (po === "PO-9") return /communicat|present|report|document|verbal/.test(blob);
   if (po === "PO-10") return /project management|financ|econom|cost|budget|manage project/.test(blob);
   return false;
 }
@@ -43,10 +43,11 @@ export function clampMap(args: {
   cos: { id: string; bloom_level: number }[];
   co_coverage: Record<string, string[]>;
   units: { lab: string | null; title: string }[];
+  evidenceText?: string;
 }): { map: CoPoMap; defects: Defect[] } {
   const defects: Defect[] = [];
   const map: CoPoMap = {};
-  const unitsText = args.units.map((u) => `${u.title} ${u.lab ?? ""}`).join(" ");
+  const unitsText = `${args.units.map((u) => `${u.title} ${u.lab ?? ""}`).join(" ")} ${args.evidenceText ?? ""}`;
 
   for (const co of args.cos) {
     map[co.id] = {};
