@@ -1,5 +1,7 @@
 # SpecForge starter
 
+Participant portal (sign in, prompts, submit): **https://specforge-arena.vercel.app**
+
 Level 0 is already built: a React app and an Express server that run together, plus a Settings panel where you paste your own AI key.
 
 ## Start (5 minutes)
@@ -17,6 +19,7 @@ Don't have a key yet? Ask at the help desk. It is free.
 
 | Folder | What it is |
 | --- | --- |
+| `kit/` | Handbook, one-page guidelines, primer cards and the prompt pack (`specforge-prompt.json`, every level prompt). |
 | `sample-inputs/` | A sample course spec, a blueprint and the PO/PSO reference. Practice here. |
 | `templates/` | The two HTML layouts your export must use. |
 | `config/` | `po_pso.json` (POs, PSOs, Bloom's levels) and `specforge_output.schema.json` (the format of your output file). |
