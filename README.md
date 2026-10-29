@@ -1,4 +1,33 @@
-# SpecForge starter
+# CoGuard (SpecForge Buildathon)
+
+Reads a messy course spec and a question-paper blueprint, and produces a corrected spec with a CO-PO-PSO map,
+a defects list and `specforge_output.json`.
+
+## How to run
+
+```bash
+npm install
+npm start          # API on http://localhost:3001 (what the scorer runs)
+npm run dev        # web on http://localhost:5173 plus the API
+npm run verify -- gemini YOUR_KEY   # the scorer's call against the running app
+```
+
+## How it works
+
+Rules first, with the AI as an option: files are parsed in code (mammoth, word-extractor), Bloom's levels come from
+the verb list in `config/bloom_verbs.json`, the CO-PO-PSO map is built and clamped by the mapping rules, and defects
+come from plain-code checks (V1 to V10 plus source-map rule checks). AI calls through `server/llm.ts` are only made
+when `SPECFORGE_USE_LLM=1` is set; without it the pipeline runs on rules alone and gives the same output every run.
+
+## AI tools used
+
+- Cursor (agent mode) for building levels L1 to L4.
+- Claude Code for planning, the generic defect and mapping rules, and testing against the scorer.
+- Claude Design for the frontend design handoff in `design/`.
+
+Track: coder (own editor with AI help).
+
+---
 
 Participant portal (sign in, prompts, submit): **https://specforge-arena.vercel.app**
 
