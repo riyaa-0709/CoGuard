@@ -22,6 +22,7 @@ export type Extracted = {
   teaching_hours?: { lectures: number; lab: number; tests_exams: number; total: number };
   assessment?: StructuredCourse["assessment"];
   skills_text?: string;
+  unit_topics: Record<number, string>;
   defects: Defect[];
 };
 
@@ -143,6 +144,25 @@ function parseUnits(blueprint: ParsedDoc | null, spec: ParsedDoc): Extracted["un
     }
   }
   return units.sort((a, b) => a.number - b.number);
+}
+
+// Each unit's topic text (after "Title:" in the blueprint, or "Unit n (Title):" in the spec).
+function parseUnitTopics(blueprint: ParsedDoc | null, spec: ParsedDoc): Record<number, string> {
+  const topics: Record<number, string> = {};
+  for (const t of blueprint?.tables ?? []) {
+    for (const row of t.rows) {
+      const n = norm(row[0] ?? "").match(/^(\d{1,2})$/);
+      const cell = norm(row[1] ?? "");
+      const colon = cell.indexOf(":");
+      if (n && colon > 0 && !topics[Number(n[1])]) topics[Number(n[1])] = cell.slice(colon + 1).trim();
+    }
+  }
+  if (!Object.keys(topics).length) {
+    for (const m of spec.text.matchAll(/Unit\s+(\d+)\s*\([^)]*\)\s*:\s*([\s\S]*?)(?=Lab Exercises|Unit\s+\d+\s*\(|Course Map|$)/gi)) {
+      topics[Number(m[1])] = norm(m[2]);
+    }
+  }
+  return topics;
 }
 
 function parseHours(spec: ParsedDoc): {
@@ -437,47 +457,79 @@ function isPracticalName(name: string): boolean {
   return /lab|practical|assignment|programming|project/i.test(name);
 }
 
+// Strongest PO-3 (design) link a Bloom level supports: understanding-level outcomes cannot design.
+function designCeiling(bloom: number): 1 | 2 | 3 {
+  return bloom <= 2 ? 1 : bloom <= 4 ? 2 : 3;
+}
+
+// Words in the syllabus or assessment that count as evidence for PO-6 to PO-10.
+const SOFT_PO_EVIDENCE: Record<string, RegExp> = {
+  "PO-6": /societ|environment|sustainab|health|safety|legal|culture/i,
+  "PO-7": /ethic|professional integrity|human values|diversity|inclusion/i,
+  "PO-8": /team|group work|collaborat|peer|pair/i,
+  "PO-9": /communicat|presentation|report|documentation/i,
+  "PO-10": /project management|financ|econom|cost|budget/i,
+};
+
+// One defect per source-map cell: the first rule it breaks.
 function sourceMapRuleDefects(
   spec: ParsedDoc,
   coverage: Record<string, string[]>,
   bloomByCo: Map<string, number>,
+  contentsText: string,
 ): Defect[] {
   const defects: Defect[] = [];
   for (const row of parseSourceMap(spec)) {
     const comps = coverage[row.coId] ?? [];
     const practical = comps.some(isPracticalName);
+    const toolUse = comps.some((c) => /lab|practical|programming/i.test(c));
+    const evidence = `${contentsText} ${comps.join(" ")}`;
     const bloom = bloomByCo.get(row.coId);
     for (const cell of row.cells) {
       const raw = cell.raw.trim();
       if (!raw) continue;
+      const refs = [row.coId, cell.col];
+      const add = (code: Defect["code"], description: string, fix: string) =>
+        defects.push({ code, location: { source: "spec", section: 5, refs }, description, fix });
       if (!/^[123]$/.test(raw)) {
         if (/very strong|strong contribution|moderate/i.test(raw)) continue;
-        defects.push({
-          code: "MAPPING_UNSUPPORTED",
-          location: { source: "spec", section: 5, refs: [row.coId, cell.col] },
-          description: `${row.coId}/${cell.col} has mapping value "${raw}" (only 1, 2, 3 or blank are allowed).`,
-          fix: `Blank ${row.coId}/${cell.col} or set it to 1, 2 or 3.`,
-        });
+        add("MAPPING_UNSUPPORTED", `${row.coId}/${cell.col} has mapping value "${raw}" (only 1, 2, 3 or blank are allowed).`, `Blank ${row.coId}/${cell.col} or set it to 1, 2 or 3.`);
         continue;
       }
+      if (!/^PO-\d+$/.test(cell.col)) continue;
       const level = Number(raw) as 1 | 2 | 3;
-      if (bloom != null && level > (bloom <= 1 ? 1 : bloom <= 2 ? 2 : 3)) {
-        defects.push({
-          code: "MAPPING_BLOOM_MISMATCH",
-          location: { source: "spec", section: 5, refs: [row.coId, cell.col] },
-          description: `${row.coId} is Bloom L${bloom} but the source map sets ${cell.col}=${level}.`,
-          fix: `Lower ${cell.col} to the Bloom ceiling or raise the outcome verb.`,
-        });
-      }
-      if ((cell.col === "PO-3" || cell.col === "PO-5") && level >= 2 && !practical) {
-        defects.push({
-          code: "MAPPING_UNSUPPORTED",
-          location: { source: "spec", section: 5, refs: [row.coId, cell.col] },
-          description: `Source map sets ${row.coId}→${cell.col}=${level} but ${row.coId} is not assessed in a practical or assignment.`,
-          fix: `Blank ${cell.col} or add practical/assignment coverage for ${row.coId}.`,
-        });
+      const ceiling = bloom == null ? 3 : cell.col === "PO-3" ? designCeiling(bloom) : bloom <= 1 ? 1 : bloom <= 2 ? 2 : 3;
+      if (level > ceiling) {
+        add("MAPPING_BLOOM_MISMATCH", `${row.coId} is Bloom L${bloom} but the source map sets ${cell.col}=${level}; the most that level supports is ${ceiling}.`, `Lower ${row.coId}/${cell.col} to ${ceiling} or less.`);
+      } else if (SOFT_PO_EVIDENCE[cell.col] && !SOFT_PO_EVIDENCE[cell.col].test(evidence)) {
+        add("MAPPING_UNSUPPORTED", `Source map sets ${row.coId}→${cell.col}=${level}, but the syllabus and assessment show no evidence for ${cell.col}.`, `Blank ${row.coId}/${cell.col}.`);
+      } else if (cell.col === "PO-5" && level >= 2 && !toolUse) {
+        add("MAPPING_UNSUPPORTED", `Source map sets ${row.coId}→PO-5=${level}, but ${row.coId} is not assessed in a lab or programming component, so there is no real tool use.`, `Lower or blank ${row.coId}/PO-5.`);
+      } else if ((cell.col === "PO-3" || cell.col === "PO-5") && level >= 2 && !practical) {
+        add("MAPPING_UNSUPPORTED", `Source map sets ${row.coId}→${cell.col}=${level} but ${row.coId} is not assessed in a practical or assignment.`, `Blank ${cell.col} or add practical/assignment coverage for ${row.coId}.`);
       }
     }
+  }
+  return defects;
+}
+
+// A unit's lab line that names a different unit title (e.g. a shortened or older title).
+function labLabelDefects(units: Extracted["units"]): Defect[] {
+  const defects: Defect[] = [];
+  const words = (s: string) => s.toLowerCase().replace(/[^a-z0-9 ]/g, " ").split(/\s+/).filter(Boolean);
+  for (const u of units) {
+    const named = u.lab?.match(/^Lab exercises on\s+(.+?)\.?$/i)?.[1];
+    if (!named) continue;
+    const t = words(u.title);
+    const n = words(named);
+    if (t.length < 2 || n.join(" ") === t.join(" ")) continue;
+    if (n[0] !== t[0] || n[1] !== t[1]) continue;
+    defects.push({
+      code: "LABEL_OR_TITLE_MISMATCH",
+      location: { source: "spec", section: 4, refs: [`Unit-${u.number}`] },
+      description: `Unit ${u.number}'s lab line names "${named}", which does not match the unit title "${u.title}".`,
+      fix: `Rename the lab line to match the unit title "${u.title}".`,
+    });
   }
   return defects;
 }
@@ -593,8 +645,10 @@ export function extractFromDocs(spec: ParsedDoc, blueprint: ParsedDoc | null): E
   const bloomByCo = new Map(
     course_outcomes.map((c) => [c.id, bloomFromVerb(c.statement) ?? 3] as const),
   );
-  defects.push(...sourceMapRuleDefects(spec, assessment?.co_coverage ?? {}, bloomByCo));
+  const contentsText = spec.text.match(/Course Contents([\s\S]*?)(?=Course Map|CO-PO)/i)?.[1] ?? "";
+  defects.push(...sourceMapRuleDefects(spec, assessment?.co_coverage ?? {}, bloomByCo, contentsText));
   defects.push(...labAssessmentDefect(assessment, definedIds));
+  defects.push(...labLabelDefects(units));
 
   return {
     title,
@@ -609,6 +663,7 @@ export function extractFromDocs(spec: ParsedDoc, blueprint: ParsedDoc | null): E
     teaching_hours: hours,
     assessment,
     skills_text: parseSkillsText(spec),
+    unit_topics: parseUnitTopics(blueprint, spec),
     defects,
   };
 }

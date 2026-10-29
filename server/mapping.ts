@@ -247,7 +247,8 @@ export function localMapping(args: {
       );
     }
 
-    if (hasLab && /program|tool|implement|develop|apply|code|comput|lab/.test(`${text} ${unitBlob}`)) {
+    // Tool use needs an outcome that does something (Apply or above), not one that only explains.
+    if (hasLab && co.bloom_level >= 3 && /program|tool|implement|develop|apply|code|comput|lab/.test(`${text} ${unitBlob}`)) {
       const want = practical && co.bloom_level >= 6 ? 3 : practical && co.bloom_level >= 3 ? 2 : 1;
       put(
         "PO-5",
@@ -272,17 +273,7 @@ export function localMapping(args: {
     }
     soft("PO-10", /project management|financ|econom|cost|budget/, "syllabus/assessment mentions project management or finance");
 
-    const selfSkill = (args.skillsText ?? "")
-      .split(";")
-      .map((s) => s.trim())
-      .find((s) => /^self-learn/i.test(s.split(":")[0] ?? ""));
-    put(
-      "PO-11",
-      1,
-      selfSkill
-        ? `skills table records ${selfSkill}, so the outcome prepares continued learning`
-        : "the outcome prepares students to keep learning related methods and tools",
-    );
+    soft("PO-11", /emerging|life-?long|self-?directed|independent learning/, "syllabus/assessment mentions independent or life-long learning");
 
     if (/algorithm|program|data struct|comput|code|software/.test(text) || hasLab) {
       put(
@@ -311,9 +302,17 @@ export function localMapping(args: {
 export function summaryCoveringUnits(
   base: string,
   units: { number: number; title: string; lab?: string | null }[],
+  topics: Record<number, string> = {},
 ): string {
   const titles = units.map((u) => u.title.trim()).filter((t) => t.length >= 3);
   const intro = base.replace(/\s+/g, " ").trim();
+  // With unit topics, rewrite the summary around the units: the old opening sentence, then one sentence per unit.
+  if (units.length && units.every((u) => topics[u.number])) {
+    const opening = intro.match(/^[^.]*\./)?.[0] ?? "This course develops the knowledge and skills listed in the course outcomes.";
+    const perUnit = units.map((u) => `${u.title} covers ${topicPhrases(topics[u.number])}.`);
+    const labNote = units.some((u) => !!u.lab && String(u.lab).trim()) ? " Laboratory exercises give hands-on practice in each unit." : "";
+    return `${opening} ${perUnit.join(" ")}${labNote}`;
+  }
   const mentioned = titles.length > 0 && titles.every((t) => intro.toLowerCase().includes(t.toLowerCase()));
   if (intro && mentioned) return intro;
   const cover =
@@ -324,4 +323,15 @@ export function summaryCoveringUnits(
   const lead = intro || "This course develops the knowledge and skills listed in the course outcomes.";
   if (!cover) return lead;
   return `${lead} The syllabus covers ${cover}${labNote}.`;
+}
+
+// The first three short topic phrases of a unit, joined as "a, b and c".
+function topicPhrases(text: string): string {
+  const phrases = text
+    .split(/[.;]\s+|,\s*/)
+    .map((p) => p.replace(/\s+/g, " ").trim().replace(/\.$/, ""))
+    .filter((p) => p.length >= 4 && p.length <= 95 && /[a-z]/i.test(p))
+    .slice(0, 3)
+    .map((p) => (/^[A-Z][a-z]/.test(p) ? p[0].toLowerCase() + p.slice(1) : p));
+  return phrases.length <= 1 ? (phrases[0] ?? "its listed topics") : `${phrases.slice(0, -1).join(", ")} and ${phrases[phrases.length - 1]}`;
 }
