@@ -78,7 +78,8 @@ export function clampMap(args: {
       }
       if (level == null) continue;
 
-      if (level > ceiling) {
+      // Knowledge (PO-1) is not limited by Bloom level; doing and designing are.
+      if (col !== "PO-1" && level > ceiling) {
         defects.push({
           code: "MAPPING_BLOOM_MISMATCH",
           location: { source: "spec", section: 5, refs: [co.id, col] },

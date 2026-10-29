@@ -202,11 +202,12 @@ export function localMapping(args: {
       row[col] = { level, justification: justify(co, col, level, why) };
     };
 
-    put(
-      "PO-1",
-      co.bloom_level >= 6 ? 3 : co.bloom_level >= 3 ? 2 : 1,
-      `syllabus ${unitsCite} teaches computing/engineering knowledge for "${snippet(co.statement)}" (${assess})`,
-    );
+    // Knowledge (PO-1) is strongest for understanding-level outcomes and weakens as the outcome moves to doing and creating.
+    const knowledge = co.bloom_level <= 2 ? 3 : co.bloom_level <= 4 ? 2 : 1;
+    row["PO-1"] = {
+      level: knowledge,
+      justification: justify(co, "PO-1", knowledge, `syllabus ${unitsCite} teaches computing/engineering knowledge for "${snippet(co.statement)}" (${assess})`),
+    };
 
     if (/analys|analyz|problem|identify|select|formulate|compare|evaluat|algorithm|comput/.test(text) || co.bloom_level >= 3) {
       const want = co.bloom_level >= 4 ? 3 : co.bloom_level >= 3 ? 2 : 1;
@@ -218,7 +219,7 @@ export function localMapping(args: {
     }
 
     if (/\b(design|develop|build|implement|apply|solve)(?:s|ed|ing)?\b|\bsolutions?\b/.test(text)) {
-      const want = co.bloom_level >= 6 ? 3 : co.bloom_level >= 5 ? 2 : 1;
+      const want = co.bloom_level >= 5 ? 3 : co.bloom_level >= 3 ? 2 : 1;
       put(
         "PO-3",
         want,
@@ -250,7 +251,7 @@ export function localMapping(args: {
 
     // Tool use needs an outcome that does something (Apply or above), not one that only explains.
     if (hasLab && co.bloom_level >= 3 && /program|tool|implement|develop|apply|code|comput|lab/.test(`${text} ${unitBlob}`)) {
-      const want = practical && co.bloom_level >= 6 ? 3 : practical && co.bloom_level >= 3 ? 2 : 1;
+      const want = 3;
       put(
         "PO-5",
         want,
@@ -279,7 +280,7 @@ export function localMapping(args: {
     if (/algorithm|program|data struct|comput|code|software/.test(text) || hasLab) {
       put(
         "PSO-1",
-        co.bloom_level >= 3 ? 3 : 2,
+        co.bloom_level >= 5 ? 3 : co.bloom_level >= 3 ? 2 : 1,
         `computing fundamentals, algorithms or data structures in ${unitsCite} — "${snippet(co.statement)}" (${assess})`,
       );
       put(
