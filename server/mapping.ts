@@ -135,6 +135,33 @@ function hasPracticalAssessment(comps: string[]): boolean {
   return comps.some((n) => /lab|practical|assignment|programming|project/i.test(n));
 }
 
+function relatedUnits(
+  statement: string,
+  units: { number: number; title: string; lab: string | null }[],
+): string {
+  const s = statement.toLowerCase();
+  const words = s.split(/\W+/).filter((w) => w.length > 3);
+  const scored = units.map((u) => {
+    const blob = `${u.title} ${u.lab ?? ""}`.toLowerCase();
+    let score = 0;
+    for (const w of words) if (blob.includes(w)) score += 1;
+    if (/algorithm/.test(s) && /algorithm/.test(blob)) score += 2;
+    if (/data struct/.test(s) && /data struct/.test(blob)) score += 2;
+    if (/flowchart|pseudocode/.test(s) && /problem|flowchart|algorithm/.test(blob)) score += 2;
+    if (/program/.test(s) && /program/.test(blob)) score += 1;
+    return { u, score };
+  });
+  scored.sort((a, b) => b.score - a.score);
+  const hits = scored.filter((x) => x.score > 0).slice(0, 3);
+  const pick = hits.length ? hits : scored.slice(0, 2);
+  return pick.map((x) => `Unit ${x.u.number} (${x.u.title})`).join("; ");
+}
+
+function assessPhrase(comps: string[]): string {
+  const names = [...new Set(comps.filter(Boolean))];
+  return names.length ? `assessed in ${names.join(", ")}` : "not marked in a practical/assignment";
+}
+
 /**
  * Deterministic CO-PO-PSO map from Bloom verbs, assessment, labs and PO statements.
  * Does not hard-code any course's outcomes or mappings.
@@ -148,12 +175,19 @@ export function localMapping(args: {
   const hasLab = args.units.some((u) => !!u.lab && u.lab.trim().length > 3);
   const unitBlob = args.units.map((u) => `${u.title} ${u.lab ?? ""}`).join(" ").toLowerCase();
   const skills = (args.skillsText ?? "").toLowerCase();
+  const labUnits = args.units
+    .filter((u) => u.lab && u.lab.trim().length > 3)
+    .map((u) => `Unit ${u.number} lab`)
+    .slice(0, 4)
+    .join(", ");
   const map: MappingAi["map"] = {};
 
   for (const co of args.cos) {
     const text = co.statement.toLowerCase();
     const comps = args.coverage[co.id] ?? [];
     const practical = hasPracticalAssessment(comps);
+    const unitsCite = relatedUnits(co.statement, args.units);
+    const assess = assessPhrase(comps);
     const row: Record<string, { level: 1 | 2 | 3 | ""; justification: string }> = {};
     const put = (col: string, want: number, why: string) => {
       const level = capLevel(want, co.bloom_level);
@@ -168,25 +202,58 @@ export function localMapping(args: {
       row[col] = { level, justification: justify(co, col, level, why) };
     };
 
-    put("PO-1", co.bloom_level >= 3 ? 2 : 2, `the outcome requires engineering/computing knowledge — "${snippet(co.statement)}"`);
+    put(
+      "PO-1",
+      co.bloom_level >= 6 ? 3 : 2,
+      `syllabus ${unitsCite} teaches computing/engineering knowledge for "${snippet(co.statement)}" (${assess})`,
+    );
 
     if (/analys|analyz|problem|identify|select|formulate|compare|evaluat|algorithm|comput/.test(text) || co.bloom_level >= 3) {
       const want = co.bloom_level >= 4 ? 3 : co.bloom_level >= 3 ? 2 : 1;
-      put("PO-2", want, `the outcome works on problem analysis — "${snippet(co.statement)}"`);
+      put(
+        "PO-2",
+        want,
+        `${leadingVerb(co.statement) || "this outcome"} works on problem analysis in ${unitsCite} — "${snippet(co.statement)}" (${assess})`,
+      );
     }
 
-    if (/\b(design|develop|build|implement)(?:s|ed|ing)?\b|\bsolutions?\b/.test(text)) {
+    if (/\b(design|develop|build|implement|apply|solve)(?:s|ed|ing)?\b|\bsolutions?\b/.test(text)) {
       const want = co.bloom_level >= 6 ? 3 : co.bloom_level >= 5 ? 2 : 1;
-      put("PO-3", want, `the outcome is about designing or developing solutions — "${snippet(co.statement)}"`);
+      put(
+        "PO-3",
+        want,
+        `the leading verb targets design/development of solutions in ${unitsCite} (${assess})`,
+      );
+    } else if (/program|algorithm|data struct/.test(text)) {
+      put(
+        "PO-3",
+        practical && co.bloom_level >= 5 ? 2 : 1,
+        `programming/algorithm/data-structure content in ${unitsCite} feeds solution design (${assess})`,
+      );
     }
 
     if (/investigat|evaluat|compar|experiment|select|analys|analyz/.test(text) && co.bloom_level >= 4) {
-      put("PO-4", 2, `the outcome investigates alternatives — "${snippet(co.statement)}"`);
+      const want = co.bloom_level >= 5 ? 3 : 2;
+      put(
+        "PO-4",
+        want,
+        `the outcome investigates alternatives among algorithms/constructs/structures in ${unitsCite} (${assess})`,
+      );
+    } else if (co.bloom_level >= 6 && /program|solution|algorithm/.test(text)) {
+      put(
+        "PO-4",
+        2,
+        `developing solutions requires investigating approaches in ${unitsCite} (${assess})`,
+      );
     }
 
     if (hasLab && /program|tool|implement|develop|apply|code|comput|lab/.test(`${text} ${unitBlob}`)) {
       const want = practical && co.bloom_level >= 6 ? 3 : practical && co.bloom_level >= 3 ? 2 : 1;
-      put("PO-5", want, "the syllabus includes laboratory/programming practice and this outcome uses those tools");
+      put(
+        "PO-5",
+        want,
+        `laboratory/programming practice (${labUnits || "listed labs"}) uses modern IT tools for this outcome (${assess})`,
+      );
     }
 
     const soft = (po: string, re: RegExp, why: string) => {
@@ -205,11 +272,29 @@ export function localMapping(args: {
     }
     soft("PO-10", /project management|financ|econom|cost|budget/, "syllabus/assessment mentions project management or finance");
 
-    put("PO-11", 1, "the outcome prepares students to keep learning related methods and tools");
+    const selfSkill = (args.skillsText ?? "")
+      .split(";")
+      .map((s) => s.trim())
+      .find((s) => /^self-learn/i.test(s.split(":")[0] ?? ""));
+    put(
+      "PO-11",
+      1,
+      selfSkill
+        ? `skills table records ${selfSkill}, so the outcome prepares continued learning`
+        : "the outcome prepares students to keep learning related methods and tools",
+    );
 
     if (/algorithm|program|data struct|comput|code|software/.test(text) || hasLab) {
-      put("PSO-1", co.bloom_level >= 3 ? 3 : 2, `the outcome uses computing fundamentals — "${snippet(co.statement)}"`);
-      put("PSO-2", co.bloom_level >= 6 ? 3 : co.bloom_level >= 3 ? 2 : 1, `the outcome supports software practice — "${snippet(co.statement)}"`);
+      put(
+        "PSO-1",
+        co.bloom_level >= 3 ? 3 : 2,
+        `computing fundamentals, algorithms or data structures in ${unitsCite} — "${snippet(co.statement)}" (${assess})`,
+      );
+      put(
+        "PSO-2",
+        co.bloom_level >= 6 ? 3 : co.bloom_level >= 3 ? 2 : 1,
+        `software practice via ${labUnits || unitsCite} and ${assess}`,
+      );
     }
 
     map[co.id] = row;
@@ -225,12 +310,18 @@ export function localMapping(args: {
 
 export function summaryCoveringUnits(
   base: string,
-  units: { number: number; title: string }[],
+  units: { number: number; title: string; lab?: string | null }[],
 ): string {
-  const cover = units.map((u) => `Unit ${u.number} (${u.title})`).join("; ");
+  const titles = units.map((u) => u.title.trim()).filter((t) => t.length >= 3);
   const intro = base.replace(/\s+/g, " ").trim();
-  const mentioned = units.length > 0 && units.every((u) => intro.toLowerCase().includes(u.title.toLowerCase()));
+  const mentioned = titles.length > 0 && titles.every((t) => intro.toLowerCase().includes(t.toLowerCase()));
   if (intro && mentioned) return intro;
+  const cover =
+    titles.length <= 2
+      ? titles.join(" and ")
+      : `${titles.slice(0, -1).join("; ")}; and ${titles[titles.length - 1]}`;
+  const labNote = units.some((u) => !!u.lab && String(u.lab).trim().length > 0) ? ", including laboratory exercises" : "";
   const lead = intro || "This course develops the knowledge and skills listed in the course outcomes.";
-  return `${lead} The syllabus covers ${cover}.`;
+  if (!cover) return lead;
+  return `${lead} The syllabus covers ${cover}${labNote}.`;
 }

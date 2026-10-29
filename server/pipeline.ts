@@ -155,7 +155,7 @@ export async function runGenerate(args: {
     }
   }
 
-  const summary = summaryCoveringUnits(mappingAi.summary?.trim() || structured.summary, structured.units);
+  const summary = summaryCoveringUnits(extracted.summary || structured.summary, structured.units);
   const input_id = extractInputId(
     [spec.text, blueprint?.text ?? ""],
     [spec.filename, blueprint?.filename ?? ""],
