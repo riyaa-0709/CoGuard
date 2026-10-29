@@ -2,6 +2,7 @@ import type { LlmConfig } from "./llm.js";
 import { bloomFromVerb } from "./bloom.js";
 import { clampMap } from "./clamp.js";
 import { attachBloom, proposeMap } from "./mapping.js";
+import { extractFromDocs, overlayExtracted } from "./extract.js";
 import { extractInputId, parseUpload, type ParsedDoc } from "./parse.js";
 import { renderHtml } from "./render.js";
 import {
@@ -88,7 +89,8 @@ export async function runGenerate(args: {
   const spec = await parseUpload(args.specFile);
   const blueprint = args.blueprintFile ? await parseUpload(args.blueprintFile) : null;
 
-  const structured = await structureCourse(spec, blueprint, args.cfg);
+  const extracted = extractFromDocs(spec, blueprint);
+  const structured = overlayExtracted(await structureCourse(spec, blueprint, args.cfg), extracted);
 
   const cosForMap = structured.course_outcomes.map((co) => ({
     ...co,
@@ -144,6 +146,7 @@ export async function runGenerate(args: {
 
   const defined = new Set(cosWithBloom.map((c) => c.id));
   const defects: Defect[] = [
+    ...extracted.defects,
     ...clampDefects,
     ...findingsToDefects(structured.findings),
     ...findingsToDefects(mappingAi.findings),

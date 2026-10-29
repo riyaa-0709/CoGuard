@@ -235,6 +235,14 @@ function fillAssessment($: cheerio.CheerioAPI, out: SpecforgeOutput) {
   });
 }
 
+function dropUnknownCoRows($: cheerio.CheerioAPI, allowed: Set<string>) {
+  $("tr").each((_, tr) => {
+    const first = norm($(tr).find("td").first().text());
+    const m = first.match(/^CO-(\d+)$/i);
+    if (m && !allowed.has(`CO-${Number(m[1])}`)) $(tr).remove();
+  });
+}
+
 function scrubResources($: cheerio.CheerioAPI) {
   const sampleHints = [
     "Computer Vision",
@@ -270,6 +278,7 @@ export function renderHtml(out: SpecforgeOutput, kind: TemplateKind): { html: st
   fillTeachingHours($, out);
   fillAssessment($, out);
   scrubResources($);
+  dropUnknownCoRows($, new Set(out.course_outcomes.map((c) => c.id)));
 
   $("h2").each((_, h2) => {
     if (!/Course Organization/i.test($(h2).text())) return;
