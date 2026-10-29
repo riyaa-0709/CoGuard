@@ -166,12 +166,6 @@ function parseHours(spec: ParsedDoc): {
   }
 
   if (lectures == null && lab == null && tests == null && tableTotal == null) return { interaction, tableTotal: tableTotal ?? undefined };
-  const teach = (lectures ?? 0) + (lab ?? 0);
-  // Prefer section-2 interaction as `total` when it equals lectures+lab (exam hours sit extra).
-  const total =
-    interaction != null && Math.abs(teach - interaction) < 0.01
-      ? interaction
-      : (tableTotal ?? teach + (tests ?? 0));
   return {
     interaction,
     tableTotal: tableTotal ?? undefined,
@@ -179,7 +173,7 @@ function parseHours(spec: ParsedDoc): {
       lectures: lectures ?? 0,
       lab: lab ?? 0,
       tests_exams: tests ?? 0,
-      total,
+      total: tableTotal ?? (lectures ?? 0) + (lab ?? 0) + (tests ?? 0),
     },
   };
 }
@@ -271,7 +265,7 @@ function hoursDefect(
       code: "HOURS_INCONSISTENT",
       location: { source: "spec", section: 2, refs: [] },
       description: `Total hours of interaction (${interaction}) do not match the teaching-and-learning table total (${tableTotal}; ${hours.lectures} lectures + ${hours.lab} lab + ${hours.tests_exams} tests/exams = ${sum}).`,
-      fix: "Keep section-2 interaction as teaching_hours.total and flag the section-6 table figure.",
+      fix: "Keep the teaching-hours table total and flag the section 2 figure.",
     });
     return defects;
   }
