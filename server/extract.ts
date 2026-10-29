@@ -58,7 +58,7 @@ function parseLabs(specText: string): Map<number, string> {
   for (const part of parts) {
     const head = part.match(/^Unit\s+(\d+)/i);
     if (!head) continue;
-    const lab = part.match(/Lab\s+Exercises?\s*:?\s*([\s\S]*?)(?=Unit\s+\d+|$)/i);
+    const lab = part.match(/Lab\s+Exercises?\s*:?\s*([\s\S]*?)(?=Unit\s+\d+|Course\s+Map|Course\s+Teaching|Course\s+Assessment|$)/i);
     if (!lab) continue;
     const text = norm(lab[1]);
     if (text.length > 3) labs.set(Number(head[1]), text);
