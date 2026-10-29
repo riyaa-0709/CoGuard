@@ -39,7 +39,31 @@ npm run verify -- gemini YOUR_KEY
 ```
 
 This sends the sample files to your app's `POST /api/v1/generate`, exactly as the organisers will, saves
-`outputs/specforge_output.json` and `outputs/spec.html`, and checks the output file. Upload both files on the portal.
+`outputs/specforge_output.json` and `outputs/spec.html`, and checks the output file. Upload both files on the portal,
+or zip the whole project (with `outputs/` inside) and upload just the zip.
 
-Your final score comes from the organisers running your code at your last commit before 15:45, so `npm install` + `npm start`
-must work on a fresh copy of your repo. Don't commit your key.
+Your final score comes from the organisers running your code: your last commit before 15:45, or your latest zip if that is
+newer. So `npm install` + `npm start` must work on a fresh copy of your project. Don't commit your key.
+
+## Handing in a zip instead of a repo
+
+No GitHub repo, or it won't push? Upload a `.zip` of your project in **Submit**. If it has `outputs/` inside, the zip alone
+is a full submission: both files are read from it.
+
+| Put in the zip | Leave out |
+| --- | --- |
+| `package.json`, `package-lock.json` | `node_modules/` (the organisers install packages; it makes the zip too big) |
+| `server/`, `src/`, `scripts/`, `config/`, `templates/` | `.env` (holds your API key; a zip with one is refused) |
+| `index.html`, `tsconfig.json`, `vite.config.ts`, `README.md` | `.git/`, `dist/` |
+| `outputs/specforge_output.json`, `outputs/spec.html` (scored) | `kit/`, `sample-inputs/` (optional) |
+
+- **Windows:** open the project folder, select everything except `node_modules` and `.env`, right-click, **Send to**,
+  **Compressed (zipped) folder**.
+- **Mac:** select the same files in Finder, right-click, **Compress**.
+- **Terminal** (Mac, Linux, Git Bash), in the project folder:
+
+```bash
+zip -r specforge.zip . -x "node_modules/*" ".git/*" "dist/*" ".env*"
+```
+
+Up to 4 MB (this starter zips to about 0.3 MB). Each new zip replaces the last one; zips can be uploaded until 15:45.
