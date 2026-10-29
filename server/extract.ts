@@ -1,6 +1,13 @@
+import { readFileSync } from "node:fs";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 import { bloomFromVerb } from "./bloom.js";
 import type { ParsedDoc } from "./parse.js";
 import type { Defect, StructuredCourse } from "./schema.js";
+
+const REFERENCE = JSON.parse(
+  readFileSync(join(dirname(fileURLToPath(import.meta.url)), "..", "config/reference_names.json"), "utf8"),
+) as { publishers: string[]; tlds: string[] };
 
 export type Extracted = {
   title?: string;
@@ -296,38 +303,66 @@ function typoDefect(spec: ParsedDoc): Defect[] {
     });
   }
 
-  const bibliography: { re: RegExp; description: string; fix: string }[] = [
-    {
-      re: /quantamagazine\.r\s*g/i,
-      description: "A course-resource URL uses the host quantamagazine.rg (broken .org).",
-      fix: "Correct the host to quantamagazine.org.",
-    },
-    {
-      re: /O[''\u2018\u2019]Rielly/i,
-      description: "Recommended reading spells the publisher as O'Rielly.",
-      fix: "Correct the publisher name to O'Reilly.",
-    },
-    {
-      re: /\bHopcropt\b/,
-      description: "A recommended-reading author is spelled Hopcropt.",
-      fix: "Correct the spelling to Hopcroft.",
-    },
-    {
-      re: /\bUlman\b/,
-      description: "A recommended-reading author is spelled Ulman.",
-      fix: "Correct the spelling to Ullman.",
-    },
-  ];
-  for (const t of bibliography) {
-    if (!t.re.test(text) && !t.re.test(html)) continue;
+  defects.push(...badUrlDefects(text), ...publisherSpellingDefects(text));
+  return defects;
+}
+
+// URLs whose last label is not a known domain ending (e.g. ".rg" for ".org").
+function badUrlDefects(text: string): Defect[] {
+  const defects: Defect[] = [];
+  const seen = new Set<string>();
+  for (const m of text.matchAll(/\b(?:https?:\/\/|www\.)([a-z0-9.-]+\.[a-z]+)(?![a-z0-9.-])/gi)) {
+    const host = m[1].toLowerCase().replace(/^www\./, "");
+    const tld = host.split(".").pop() ?? "";
+    if (REFERENCE.tlds.includes(tld) || seen.has(host)) continue;
+    seen.add(host);
     defects.push({
       code: "TYPO_OR_FORMAT",
       location: { source: "spec", section: 9, refs: [] },
-      description: t.description,
-      fix: t.fix,
+      description: `A course-resource URL uses the host ${host}, whose ending ".${tld}" is not a valid domain.`,
+      fix: "Correct the URL's domain ending.",
     });
   }
   return defects;
+}
+
+// Publisher names one edit away from a known publisher (a swapped pair of letters counts as one edit).
+function publisherSpellingDefects(text: string): Defect[] {
+  const defects: Defect[] = [];
+  const words = new Set(text.match(/[A-Z][A-Za-z'\u2018\u2019-]{3,}/g) ?? []);
+  for (const publisher of REFERENCE.publishers) {
+    const target = normaliseName(publisher.split(/\s+/)[0]);
+    if (target.length < 5) continue;
+    for (const word of words) {
+      const w = normaliseName(word);
+      if (w === target || Math.abs(w.length - target.length) > 1) continue;
+      if (editDistance(w, target) > 1) continue;
+      defects.push({
+        code: "TYPO_OR_FORMAT",
+        location: { source: "spec", section: 9, refs: [] },
+        description: `Recommended reading spells the publisher as ${word}.`,
+        fix: `Correct the publisher name to ${publisher.split(/\s+/)[0]}.`,
+      });
+    }
+  }
+  return defects;
+}
+
+function normaliseName(s: string): string {
+  return s.toLowerCase().replace(/[\u2018\u2019]/g, "'");
+}
+
+// Optimal string alignment distance: a swapped pair of letters counts as one edit.
+function editDistance(a: string, b: string): number {
+  const d = Array.from({ length: a.length + 1 }, (_, i) => Array.from({ length: b.length + 1 }, (_, j) => (i === 0 ? j : j === 0 ? i : 0)));
+  for (let i = 1; i <= a.length; i++) {
+    for (let j = 1; j <= b.length; j++) {
+      const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+      d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + cost);
+      if (i > 1 && j > 1 && a[i - 1] === b[j - 2] && a[i - 2] === b[j - 1]) d[i][j] = Math.min(d[i][j], d[i - 2][j - 2] + 1);
+    }
+  }
+  return d[a.length][b.length];
 }
 
 function labelMismatchDefects(spec: ParsedDoc, title?: string): Defect[] {
@@ -338,15 +373,6 @@ function labelMismatchDefects(spec: ParsedDoc, title?: string): Defect[] {
       location: { source: "spec", section: 8, refs: [] },
       description: "Section heading is written as 'Achieving Cos' rather than 'Achieving COs'.",
       fix: "Rename the heading to Achieving COs to match the template.",
-    });
-  }
-  const twin = /\bDigital Twin(?:ing|s)?\b/i.test(spec.text);
-  if (twin && !/twin/i.test(title ?? "")) {
-    defects.push({
-      code: "LABEL_OR_TITLE_MISMATCH",
-      location: { source: "spec", section: 4, refs: [] },
-      description: "Syllabus text refers to Digital Twin(ing), which does not match this course title.",
-      fix: "Remove or replace the Digital Twin(ing) heading so it matches the actual course.",
     });
   }
   return defects;

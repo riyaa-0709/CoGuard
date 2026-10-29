@@ -1,0 +1,13 @@
+{
+  "description": "Reference data for spelling checks in course resources. General lists, not taken from any one course.",
+  "publishers": [
+    "O'Reilly", "Pearson", "McGraw-Hill", "Wiley", "Springer", "Elsevier", "Cengage", "Prentice Hall",
+    "Addison-Wesley", "Oxford University Press", "Cambridge University Press", "MIT Press", "Packt",
+    "Apress", "Manning", "No Starch Press", "PHI Learning", "CRC Press", "Morgan Kaufmann", "Wrox"
+  ],
+  "tlds": [
+    "com", "org", "net", "edu", "gov", "mil", "int", "info", "io", "ai", "co", "dev", "app", "tech",
+    "in", "ac", "uk", "us", "ca", "au", "de", "fr", "jp", "cn", "eu", "nz", "sg", "ie", "nl", "se",
+    "ch", "it", "es", "br", "ru", "kr", "za", "me", "tv", "ly", "gl", "be", "at", "dk", "no", "fi"
+  ]
+}
