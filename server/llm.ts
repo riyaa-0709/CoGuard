@@ -40,13 +40,31 @@ function mapGeminiError(e: any): never {
 async function callProvider(prompt: string, cfg: LlmConfig): Promise<string> {
   if (cfg.provider === "gemini") {
     const run = async (model: string) => {
-      const ai = new GoogleGenAI({ apiKey: cfg.key });
-      const r = await ai.models.generateContent({
-        model,
-        contents: prompt,
-        config: { responseMimeType: "application/json", temperature: 0 },
-      });
-      return r.text ?? "";
+      try {
+        const ai = new GoogleGenAI({ apiKey: cfg.key });
+        const r = await ai.models.generateContent({
+          model,
+          contents: prompt,
+          config: { responseMimeType: "application/json", temperature: 0 },
+        });
+        return r.text ?? "";
+      } catch (e: any) {
+        const msg = String(e?.message ?? "");
+        if (!/fetch failed|ECONNRESET|ETIMEDOUT|network/i.test(msg)) throw e;
+        const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "x-goog-api-key": cfg.key },
+          body: JSON.stringify({
+            contents: [{ role: "user", parts: [{ text: prompt }] }],
+            generationConfig: { temperature: 0, responseMimeType: "application/json" },
+          }),
+        });
+        if (res.status === 429) throw new ApiError(429, "RATE_LIMITED", "The AI provider says too many requests. Wait a minute or switch model.");
+        if (res.status === 400 || res.status === 401 || res.status === 403) throw new ApiError(401, "BAD_KEY", "The provider rejected this key or model. Check Settings.");
+        if (!res.ok) throw new ApiError(502, "PROVIDER_ERROR", `The AI provider failed (HTTP ${res.status}).`);
+        const j: any = await res.json();
+        return j?.candidates?.[0]?.content?.parts?.map((p: any) => p.text ?? "").join("") ?? "";
+      }
     };
     let last: unknown;
     for (let attempt = 0; attempt < 2; attempt++) {
