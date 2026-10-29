@@ -234,11 +234,10 @@ export function localMapping(args: {
       );
     }
 
-    // Investigation peaks at the Evaluate level, where alternatives are weighed against each other.
     if (/investigat|evaluat|compar|experiment|select|analys|analyz/.test(text) && co.bloom_level >= 4) {
       put(
         "PO-4",
-        co.bloom_level === 5 ? 3 : 2,
+        2,
         `the outcome investigates alternatives among algorithms/constructs/structures in ${unitsCite} (${assess})`,
       );
     } else if (co.bloom_level >= 6 && /program|solution|algorithm/.test(text)) {
