@@ -544,12 +544,6 @@ function labLabelDefects(units: Extracted["units"]): Defect[] {
       description: `Unit ${u.number}'s lab line names "${named}", which does not match the unit title "${u.title}".`,
       fix: `Rename the lab line to match the unit title "${u.title}".`,
     });
-    defects.push({
-      code: "TYPO_OR_FORMAT",
-      location: { source: "spec", section: 4, refs: [`Unit-${u.number}`] },
-      description: `Unit ${u.number}'s lab line misquotes the unit title as "${named}".`,
-      fix: `Correct the lab line to "Lab exercises on ${u.title}".`,
-    });
   }
   return defects;
 }

@@ -229,8 +229,7 @@ export function localMapping(args: {
     } else if (/program|algorithm|data struct/.test(text)) {
       put(
         "PO-3",
-        // Without a design verb the outcome only feeds design moderately, whatever its level.
-        1,
+        practical && co.bloom_level >= 5 ? 2 : 1,
         `programming/algorithm/data-structure content in ${unitsCite} feeds solution design (${assess})`,
       );
     }

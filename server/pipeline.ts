@@ -207,15 +207,7 @@ export async function runGenerate(args: {
     return true;
   });
 
-  // The output lists the assessment sub-columns that mark each CO; parent component names stay internal.
-  const componentNames = new Set(base.assessment.components.map((c) => c.name));
-  const co_coverage = Object.fromEntries(
-    Object.entries(base.assessment.co_coverage).map(([id, names]) => {
-      const subs = names.filter((n) => !componentNames.has(n));
-      return [id, subs.length ? subs : names];
-    }),
-  );
-  const outputCandidate = { ...base, assessment: { ...base.assessment, co_coverage }, defects: unique };
+  const outputCandidate = { ...base, defects: unique };
   const parsed = SpecforgeOutputSchema.safeParse(outputCandidate);
   if (!parsed.success) {
     console.error("Specforge output failed Zod validation:", parsed.error.issues.slice(0, 8));
