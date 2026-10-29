@@ -281,7 +281,7 @@ export function localMapping(args: {
     if (/algorithm|program|data struct|comput|code|software/.test(text) || hasLab) {
       put(
         "PSO-1",
-        co.bloom_level >= 5 ? 3 : co.bloom_level >= 3 ? 2 : 1,
+        co.bloom_level >= 3 ? 3 : 1,
         `computing fundamentals, algorithms or data structures in ${unitsCite} — "${snippet(co.statement)}" (${assess})`,
       );
       put(
