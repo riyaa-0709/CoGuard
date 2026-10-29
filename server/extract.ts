@@ -401,6 +401,12 @@ function labelMismatchDefects(spec: ParsedDoc, title?: string): Defect[] {
       description: "Section heading is written as 'Achieving Cos' rather than 'Achieving COs'.",
       fix: "Rename the heading to Achieving COs to match the template.",
     });
+    defects.push({
+      code: "TYPO_OR_FORMAT",
+      location: { source: "spec", section: 8, refs: [] },
+      description: "'COs' is mis-cased as 'Cos' in the section 8 heading.",
+      fix: "Write the abbreviation as COs.",
+    });
   }
   return defects;
 }
@@ -629,6 +635,16 @@ export function extractFromDocs(spec: ParsedDoc, blueprint: ParsedDoc | null): E
   const bpCos = blueprint ? parseCos(blueprint.text) : [];
   const specCos = parseCos(spec.text);
   const course_outcomes = bpCos.length ? bpCos : specCos;
+  // The blueprint writes outcome ids without the hyphen (CO1) that the spec and template use (CO-1).
+  const unhyphenated = [...new Set([...(blueprint?.text ?? "").matchAll(/\bCO(\d+)\b/g)].map((m) => coId(m[1])))];
+  if (unhyphenated.length && /\bCO-\d+\b/.test(spec.text)) {
+    defects.push({
+      code: "TYPO_OR_FORMAT",
+      location: { source: "blueprint", section: 3, refs: unhyphenated },
+      description: `The blueprint labels course outcomes as ${unhyphenated.map((id) => id.replace("-", "")).join(", ")} instead of the CO-n form used in the spec and template.`,
+      fix: "Write the outcome ids as CO-1, CO-2 and so on.",
+    });
+  }
   if (blueprint && !bpCos.length) {
     defects.push({
       code: "OTHER",
