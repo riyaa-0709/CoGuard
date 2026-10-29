@@ -99,9 +99,19 @@ export function validateV1toV10(args: {
     });
   }
 
-  // V6: CE + end-exam (+lab) weightages ~ 100
-  const weights = args.output.assessment.components.reduce((a, c) => a + c.weight_percent, 0);
-  if (Math.abs(weights - 100) > 0.5) {
+  // V6: continuous evaluation plus end exam must total 100 (a lab exam belongs inside the end exam).
+  const comps = args.output.assessment.components;
+  const weights = comps.reduce((a, c) => a + c.weight_percent, 0);
+  const ce = comps.filter((c) => /^CE\b|continuous/i.test(c.name)).reduce((a, c) => a + c.weight_percent, 0);
+  const see = comps.filter((c) => /^SEE\b|end.?exam|semester end/i.test(c.name)).reduce((a, c) => a + c.weight_percent, 0);
+  if (ce > 0 && see > 0 && Math.abs(ce + see - 100) > 0.5) {
+    defects.push({
+      code: "WEIGHTAGE_INCONSISTENT",
+      location: { source: "spec", section: 7, refs: [] },
+      description: `CE (${ce}%) plus SEE (${see}%) total ${ce + see}%, not 100%; the remaining weightage sits in a separate component.`,
+      fix: "State the lab exam inside SEE so CE plus SEE total 100%.",
+    });
+  } else if (Math.abs(weights - 100) > 0.5) {
     defects.push({
       code: "WEIGHTAGE_INCONSISTENT",
       location: { source: "spec", section: 7, refs: [] },
