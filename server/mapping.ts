@@ -304,13 +304,16 @@ export function summaryCoveringUnits(
   base: string,
   units: { number: number; title: string; lab?: string | null }[],
   topics: Record<number, string> = {},
+  courseTitle = "",
 ): string {
   const titles = units.map((u) => u.title.trim()).filter((t) => t.length >= 3);
   const intro = base.replace(/\s+/g, " ").trim();
-  // With unit topics, rewrite the summary around the units: the old opening sentence, then one sentence per unit.
+  // With unit topics, write a fresh summary from the units rather than reusing the old text.
   if (units.length && units.every((u) => topics[u.number])) {
-    const opening = intro.match(/^[^.]*\./)?.[0] ?? "This course develops the knowledge and skills listed in the course outcomes.";
-    const perUnit = units.map((u) => `${u.title.toLowerCase()} (${topicPhrases(topics[u.number], 1)})`);
+    const opening = courseTitle.trim()
+      ? `This course introduces students to ${courseTitle.trim()} through ${units.length} units.`
+      : "This course develops the knowledge and skills listed in the course outcomes.";
+    const perUnit = units.map((u) => `${u.title.toLowerCase()} (${topicPhrases(topics[u.number], 2)})`);
     const cover = perUnit.length <= 1 ? perUnit.join("") : `${perUnit.slice(0, -1).join(", ")} and ${perUnit[perUnit.length - 1]}`;
     const labNote = units.some((u) => !!u.lab && String(u.lab).trim()) ? ", with laboratory exercises in each unit" : "";
     return `${opening} It covers ${cover}${labNote}.`;

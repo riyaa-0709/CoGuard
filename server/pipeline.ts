@@ -155,7 +155,7 @@ export async function runGenerate(args: {
     }
   }
 
-  const summary = summaryCoveringUnits(extracted.summary || structured.summary, structured.units, extracted.unit_topics);
+  const summary = summaryCoveringUnits(extracted.summary || structured.summary, structured.units, extracted.unit_topics, structured.title);
   const input_id = extractInputId(
     [spec.text, blueprint?.text ?? ""],
     [spec.filename, blueprint?.filename ?? ""],
