@@ -3,6 +3,8 @@ import multer from "multer";
 import { z } from "zod";
 import { ApiError, fail, ok } from "./envelope.js";
 import { configFromRequest, generateJson } from "./llm.js";
+import { parseUpload } from "./parse.js";
+import { runGenerate } from "./pipeline.js";
 
 const app = express();
 app.use(express.json({ limit: "10mb" }));
@@ -22,15 +24,35 @@ api.get("/llm-check", async (req, res, next) => {
   }
 });
 
-// Your routes go here (Level 1 onward).
-
-// The scorer runs your app and calls this route with the sample files, exactly like `npm run verify` does.
-// Contract: multipart fields "spec" (required) and "blueprint" (optional), AI key in the x-llm-* headers.
-// Reply: { success: true, data: { output: <specforge_output object>, html: "<the filled spec document>" } }
-// Level 3 builds it. Until then it answers 501.
 const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 15 * 1024 * 1024 } });
-api.post("/generate", upload.fields([{ name: "spec", maxCount: 1 }, { name: "blueprint", maxCount: 1 }]), (_req, res) => {
-  fail(res, 501, "NOT_BUILT", "POST /api/v1/generate is not built yet (Level 3).");
+
+api.post("/parse", upload.fields([{ name: "spec", maxCount: 1 }, { name: "blueprint", maxCount: 1 }]), async (req, res, next) => {
+  try {
+    const files = req.files as { spec?: Express.Multer.File[]; blueprint?: Express.Multer.File[] } | undefined;
+    const specFile = files?.spec?.[0];
+    if (!specFile) throw new ApiError(400, "MISSING_SPEC", "Upload a course specification file in field 'spec'.");
+    const spec = await parseUpload(specFile);
+    const blueprint = files?.blueprint?.[0] ? await parseUpload(files.blueprint[0]) : null;
+    ok(res, {
+      spec: { filename: spec.filename, text: spec.text, tables: spec.tables },
+      blueprint: blueprint ? { filename: blueprint.filename, text: blueprint.text, tables: blueprint.tables } : null,
+    });
+  } catch (e) {
+    next(e);
+  }
+});
+
+api.post("/generate", upload.fields([{ name: "spec", maxCount: 1 }, { name: "blueprint", maxCount: 1 }]), async (req, res, next) => {
+  try {
+    const cfg = configFromRequest(req);
+    const files = req.files as { spec?: Express.Multer.File[]; blueprint?: Express.Multer.File[] } | undefined;
+    const specFile = files?.spec?.[0];
+    if (!specFile) throw new ApiError(400, "MISSING_SPEC", "Upload a course specification file in field 'spec'.");
+    const result = await runGenerate({ specFile, blueprintFile: files?.blueprint?.[0], cfg });
+    ok(res, { output: result.output, html: result.html });
+  } catch (e) {
+    next(e);
+  }
 });
 
 app.use("/api/v1", api);
