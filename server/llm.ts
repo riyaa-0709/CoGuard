@@ -8,7 +8,8 @@ import { ApiError } from "./envelope.js";
 export type Provider = "gemini" | "openrouter" | "anthropic";
 export type LlmConfig = { provider: Provider; key: string; model: string };
 
-export const DEFAULT_MODELS = { gemini: "gemini-2.5-flash", openrouter: "google/gemini-2.5-flash", anthropic: "claude-sonnet-5-5" } as const;
+export const DEFAULT_MODELS = { gemini: "gemini-3.8-flash", openrouter: "google/gemini-2.5-flash", anthropic: "claude-sonnet-5-5" } as const;
+const GEMINI_FALLBACK = "gemini-3.8-flash";
 
 export function configFromRequest(req: Request): LlmConfig {
   const provider = String(req.header("x-llm-provider") ?? "").toLowerCase();
@@ -23,21 +24,43 @@ function stripFences(text: string): string {
   return text.trim().replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/, "").trim();
 }
 
+function mapGeminiError(e: any): never {
+  const msg = String(e?.message ?? e?.error?.message ?? "unknown");
+  const status = Number(e?.status ?? e?.code ?? e?.error?.code ?? 0);
+  const lower = msg.toLowerCase();
+  if (status === 429 || /resource.?exhausted|too many requests|quota/i.test(msg)) {
+    throw new ApiError(429, "RATE_LIMITED", "The AI provider says too many requests. Wait a minute or switch model.");
+  }
+  if (status === 400 || status === 401 || status === 403 || /api key|permission|unauthor|invalid.?key/i.test(lower)) {
+    throw new ApiError(401, "BAD_KEY", "The provider rejected this key or model. Check Settings.");
+  }
+  throw new ApiError(502, "PROVIDER_ERROR", "The AI provider failed. Try again.");
+}
+
 async function callProvider(prompt: string, cfg: LlmConfig): Promise<string> {
   if (cfg.provider === "gemini") {
-    try {
+    const run = async (model: string) => {
       const ai = new GoogleGenAI({ apiKey: cfg.key });
       const r = await ai.models.generateContent({
-        model: cfg.model,
+        model,
         contents: prompt,
         config: { responseMimeType: "application/json", temperature: 0 },
       });
       return r.text ?? "";
+    };
+    try {
+      return await run(cfg.model);
     } catch (e: any) {
-      const status = Number(e?.status ?? e?.code ?? 0);
-      if (status === 429) throw new ApiError(429, "RATE_LIMITED", "The AI provider says too many requests. Wait a minute or switch model.");
-      if (status === 400 || status === 401 || status === 403) throw new ApiError(401, "BAD_KEY", "The provider rejected this key or model. Check Settings.");
-      throw new ApiError(502, "PROVIDER_ERROR", "The AI provider failed. Try again.");
+      const msg = String(e?.message ?? e?.error?.message ?? "unknown");
+      console.error("Gemini error:", msg.slice(0, 240));
+      if (cfg.model !== GEMINI_FALLBACK && /no longer available|not found|NOT_FOUND/i.test(msg)) {
+        try {
+          return await run(GEMINI_FALLBACK);
+        } catch (e2: any) {
+          throw mapGeminiError(e2);
+        }
+      }
+      throw mapGeminiError(e);
     }
   }
   if (cfg.provider === "anthropic") {
