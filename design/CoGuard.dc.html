@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/industry-5314bd1a-ecf6-427a-b964-9bdf8f0fa89a/styles.css">
+<script src="_ds/industry-5314bd1a-ecf6-427a-b964-9bdf8f0fa89a/_ds_bundle.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&amp;family=Barlow:wght@400;500;600&amp;display=swap">
+<style>
+:root{--brand:#1a3d7c;--brand-fill:#1a3d7c;--brand-fill-hover:#143066;--brand-text:#1a3d7c;--brand-soft:#e3ebf8;--bg:#f4f6fb;--surface:#ffffff;--surface-2:#eef2f9;--text:#13203b;--text-muted:#4b5a78;--border:#d9e0ec;--focus:#3b6fd6;--paper:#fffdf9;--paper-text:#1d2433;--night:#0a1430;--night-2:#14275a;
+--s3-bg:#1a3d7c;--s3-fg:#ffffff;--s2-bg:#4570b5;--s2-fg:#ffffff;--s1-bg:#cddff7;--s1-fg:#163564;--s0-border:#9aa9c4;
+--st-draft-bg:#eceff4;--st-draft-fg:#3f4a5c;--st-sub-bg:#dfe9fb;--st-sub-fg:#1a3d7c;--st-rev-bg:#fcefd2;--st-rev-fg:#7a4a00;--st-hod-bg:#ede7fb;--st-hod-fg:#4c2c93;--st-ok-bg:#dcf2e5;--st-ok-fg:#1b6a3e;--st-ret-bg:#fbe4ea;--st-ret-fg:#9a2343;
+--sev-high-bg:#fbe4ea;--sev-high-fg:#9a2343;--sev-med-bg:#fcefd2;--sev-med-fg:#7a4a00;--sev-low-bg:#e8ecf2;--sev-low-fg:#3e4a5d;
+--shadow-soft:0 1px 2px rgba(19,32,59,.06),0 8px 24px rgba(19,32,59,.07);--shadow-lift:0 2px 6px rgba(19,32,59,.08),0 18px 40px rgba(19,32,59,.12);--ease:cubic-bezier(.2,.8,.2,1);color-scheme:light}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--brand-fill:#2b58a8;--brand-fill-hover:#3466bd;--brand-text:#a8c3f3;--brand-soft:#1b2c52;--bg:#0a1222;--surface:#101b33;--surface-2:#172647;--text:#e7ecf6;--text-muted:#a7b3cb;--border:#263759;--focus:#8fb3ff;--s3-bg:#2a5ab3;--s3-fg:#ffffff;--s2-bg:#6f95d3;--s2-fg:#0a1730;--s1-bg:#c9dbf6;--s1-fg:#13305e;--s0-border:#53668c;--st-draft-bg:#232f45;--st-draft-fg:#cfd6e2;--st-sub-bg:#1d3361;--st-sub-fg:#bcd2fa;--st-rev-bg:#3b2d10;--st-rev-fg:#f6d48e;--st-hod-bg:#2e2452;--st-hod-fg:#d5c6fa;--st-ok-bg:#143826;--st-ok-fg:#9fe0b8;--st-ret-bg:#43182a;--st-ret-fg:#f6b3c4;--sev-high-bg:#43182a;--sev-high-fg:#f6b3c4;--sev-med-bg:#3b2d10;--sev-med-fg:#f6d48e;--sev-low-bg:#222d42;--sev-low-fg:#cdd5e2;--shadow-soft:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.3);--shadow-lift:0 2px 6px rgba(0,0,0,.35),0 18px 40px rgba(0,0,0,.4);color-scheme:dark}}
+:root[data-theme="dark"]{--brand-fill:#2b58a8;--brand-fill-hover:#3466bd;--brand-text:#a8c3f3;--brand-soft:#1b2c52;--bg:#0a1222;--surface:#101b33;--surface-2:#172647;--text:#e7ecf6;--text-muted:#a7b3cb;--border:#263759;--focus:#8fb3ff;--s3-bg:#2a5ab3;--s3-fg:#ffffff;--s2-bg:#6f95d3;--s2-fg:#0a1730;--s1-bg:#c9dbf6;--s1-fg:#13305e;--s0-border:#53668c;--st-draft-bg:#232f45;--st-draft-fg:#cfd6e2;--st-sub-bg:#1d3361;--st-sub-fg:#bcd2fa;--st-rev-bg:#3b2d10;--st-rev-fg:#f6d48e;--st-hod-bg:#2e2452;--st-hod-fg:#d5c6fa;--st-ok-bg:#143826;--st-ok-fg:#9fe0b8;--st-ret-bg:#43182a;--st-ret-fg:#f6b3c4;--sev-high-bg:#43182a;--sev-high-fg:#f6b3c4;--sev-med-bg:#3b2d10;--sev-med-fg:#f6d48e;--sev-low-bg:#222d42;--sev-low-fg:#cdd5e2;--shadow-soft:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.3);--shadow-lift:0 2px 6px rgba(0,0,0,.35),0 18px 40px rgba(0,0,0,.4);color-scheme:dark}
+html,body{margin:0;background:var(--bg);color:var(--text);font-family:Barlow,system-ui,sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden}
+a{color:var(--brand-text)}a:hover{color:var(--brand-fill-hover)}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+@keyframes cgGrain{0%{transform:translate(0,0)}25%{transform:translate(-4%,3%)}50%{transform:translate(3%,-2%)}75%{transform:translate(-2%,-4%)}100%{transform:translate(0,0)}}
+@keyframes cgShimmer{from{background-position:200% 0}to{background-position:-200% 0}}
+@keyframes cgRise{from{opacity:0;transform:translateY(14px)}}
+@keyframes cgDraw{from{stroke-dashoffset:30}}
+@keyframes cgWigA{0%,100%{transform:rotate(0)}25%{transform:rotate(-5deg)}50%{transform:rotate(4deg)}75%{transform:rotate(-2deg)}}
+@keyframes cgWigB{0%,100%{transform:rotate(0)}25%{transform:rotate(-5deg)}50%{transform:rotate(4deg)}75%{transform:rotate(-2deg)}}
+@keyframes cgGlow{0%,100%{box-shadow:0 0 0 4px color-mix(in oklab,currentColor 22%,transparent)}50%{box-shadow:0 0 0 10px color-mix(in oklab,currentColor 6%,transparent)}}
+@keyframes cgFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none !important;transition:none !important}}
+</style>
+</helmet>
+<div style="min-height:100vh;background:var(--bg);color:var(--text);font-family:Barlow,system-ui,sans-serif;font-size:16px;line-height:1.6">
+
+<header style="position:sticky;top:0;z-index:30;background:color-mix(in oklab,var(--surface) 90%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border)">
+  <div style="max-width:1160px;margin:0 auto;padding:10px 16px;display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px">
+    <button type="button" onClick="{{ goHome }}" aria-label="CoGuard home" style="display:flex;align-items:center;gap:10px;background:none;border:none;padding:4px 6px;border-radius:14px;cursor:pointer;color:var(--text);flex:1 1 auto;min-height:44px">
+      <svg width="34" height="34" viewBox="0 0 34 34" fill="none" aria-hidden="true"><rect x="1" y="1" width="32" height="32" rx="11" fill="var(--brand-fill)"></rect><path d="M17 8.5c2.6 1.7 5 2.4 7.5 2.6v5.6c0 4.7-3.2 7.6-7.5 9-4.3-1.4-7.5-4.3-7.5-9v-5.6c2.5-.2 4.9-.9 7.5-2.6Z" stroke="#fff" stroke-width="1.75" stroke-linejoin="round"></path><path d="m13.6 17.2 2.4 2.4 4.4-4.6" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      <span style="font-family:Fredoka,Barlow,sans-serif;font-weight:600;font-size:22px;letter-spacing:-.01em">CoGuard</span>
+    </button>
+    <nav aria-label="Main" style="display:flex;gap:4px">
+      <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="2">
+        <button type="button" onClick="{{ n.onClick }}" aria-current="{{ n.current }}" style="min-height:44px;padding:0 14px;border-radius:999px;border:none;background:{{ n.bg }};color:{{ n.fg }};font:500 16px Barlow,sans-serif;cursor:pointer;transition:background .3s var(--ease)" style-hover="background:var(--surface-2)">{{ n.label }}</button>
+      </sc-for>
+    </nav>
+    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+      <div role="radiogroup" aria-label="Role" style="display:flex;gap:2px;padding:4px;border-radius:999px;background:var(--surface-2);border:1px solid var(--border)">
+        <sc-for list="{{ roles }}" as="r" hint-placeholder-count="3">
+          <button type="button" role="radio" aria-checked="{{ r.active }}" onClick="{{ r.onClick }}" style="min-height:36px;padding:0 14px;border-radius:999px;border:none;background:{{ r.bg }};color:{{ r.fg }};box-shadow:{{ r.shadow }};font:600 15px Barlow,sans-serif;cursor:pointer;transition:all .35s var(--ease)">{{ r.label }}</button>
+        </sc-for>
+      </div>
+      <button type="button" onClick="{{ toggleTheme }}" aria-label="Switch light or dark theme" style="width:44px;height:44px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--text);display:grid;place-items:center;cursor:pointer;transition:transform .3s var(--ease)" style-hover="transform:rotate(-12deg)">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>
+      </button>
+      <button type="button" onClick="{{ openSettings }}" aria-label="Settings" aria-haspopup="dialog" style="width:44px;height:44px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--text);display:grid;place-items:center;cursor:pointer;transition:transform .5s var(--ease)" style-hover="transform:rotate(45deg)">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+<section data-screen-label="01 Home" aria-labelledby="hero-title" style="background:#03060d">
+  <div aria-hidden="true" style="height:clamp(14px,4vw,40px);background:#03060d"></div>
+  <div style="position:relative;overflow:hidden;background:radial-gradient(ellipse 70% 60% at 72% 30%,rgba(122,160,255,.30),transparent 62%),radial-gradient(ellipse 50% 50% at 15% 85%,rgba(255,170,205,.14),transparent 60%),linear-gradient(180deg,#0a1430 0%,#0d1b42 55%,#0a1430 100%);color:#eef3ff">
+    <div aria-hidden="true" style="position:absolute;width:340px;height:340px;border-radius:50%;background:#5f86d9;filter:blur(90px);opacity:.35;top:-80px;right:8%"></div>
+    <div aria-hidden="true" style="position:absolute;width:240px;height:240px;border-radius:50%;background:#e9a6c8;filter:blur(90px);opacity:.18;bottom:-60px;left:4%"></div>
+    <div aria-hidden="true" style="position:absolute;width:180px;height:180px;border-radius:50%;background:#b6e3d4;filter:blur(80px);opacity:.14;top:30%;left:42%"></div>
+    <div aria-hidden="true" style="position:absolute;inset:0;background:radial-gradient(ellipse 85% 80% at 50% 45%,transparent 55%,rgba(0,0,0,.55) 100%);pointer-events:none"></div>
+    <sc-if value="{{ grainOn }}" hint-placeholder-val="{{ true }}">
+      <div aria-hidden="true" style="position:absolute;inset:-20%;opacity:.07;pointer-events:none;mix-blend-mode:overlay;background-image:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22180%22 height=%22180%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.85%22 numOctaves=%222%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23n)%22/%3E%3C/svg%3E');animation:cgGrain 1.2s steps(4) infinite"></div>
+    </sc-if>
+    <div style="position:relative;max-width:1160px;margin:0 auto;padding:clamp(48px,9vw,112px) 16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:40px;align-items:center">
+      <div style="animation:cgRise 1.4s var(--ease) both">
+        <p style="display:inline-flex;align-items:center;gap:8px;margin:0 0 20px;padding:6px 14px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);font-size:15px;color:#d6e2ff">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"></path></svg>
+          Course spec checker
+        </p>
+        <h1 id="hero-title" style="font-family:Fredoka,Barlow,sans-serif;font-weight:600;font-size:clamp(36px,6vw,60px);line-height:1.08;letter-spacing:-.02em;margin:0 0 20px;color:#ffffff;text-wrap:balance">Turn a messy course spec into a correct one</h1>
+        <p style="font-size:clamp(17px,2vw,20px);line-height:1.6;color:#c9d6f2;max-width:34ch;margin:0 0 32px;text-wrap:pretty">CoGuard reads your spec, fixes what's off, and builds the CO-PO-PSO map with a reason for every mark.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:12px">
+          <button type="button" onClick="{{ goUpload }}" style="display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:0 26px;border-radius:999px;border:none;background:#ffffff;color:#1a3d7c;font:600 17px Fredoka,Barlow,sans-serif;cursor:pointer;box-shadow:0 10px 30px rgba(95,134,217,.35);transition:transform .4s var(--ease),box-shadow .4s var(--ease)" style-hover="transform:translateY(-2px);box-shadow:0 16px 40px rgba(95,134,217,.5)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+            Upload a spec
+          </button>
+          <button type="button" onClick="{{ goDashboard }}" style="min-height:52px;padding:0 22px;border-radius:999px;border:1px solid rgba(255,255,255,.28);background:transparent;color:#eef3ff;font:500 17px Barlow,sans-serif;cursor:pointer;transition:background .3s var(--ease)" style-hover="background:rgba(255,255,255,.08)">See my specs</button>
+        </div>
+      </div>
+      <div aria-hidden="true" style="display:grid;place-items:center;animation:cgRise 1.8s var(--ease) .2s both">
+        <svg viewBox="0 0 320 280" width="100%" style="max-width:380px" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <ellipse cx="160" cy="252" rx="110" ry="12" fill="rgba(120,160,255,.14)"></ellipse>
+          <g transform="rotate(-10 120 150)"><rect x="58" y="60" width="140" height="176" rx="18" fill="#101f4a" stroke="#6f8fd6" stroke-width="2"></rect><path d="M80 96c14-6 22 6 36 0s22 6 34 0M80 120c10 4 30-6 44 0M80 144c18-6 26 4 52-2" stroke="#6f8fd6" stroke-width="2"></path></g>
+          <g transform="rotate(-3 150 150)"><rect x="84" y="50" width="140" height="180" rx="18" fill="#132656" stroke="#9db5ea" stroke-width="2"></rect><path d="M106 86h70M106 108h88M106 130h54" stroke="#9db5ea" stroke-width="2"></path><path d="M168 130l18 0" stroke="#f3a9c9" stroke-width="2" stroke-dasharray="3 5"></path></g>
+          <g transform="rotate(5 190 150)"><rect x="112" y="42" width="146" height="186" rx="20" fill="#f7f9ff" stroke="#ffffff" stroke-width="2"></rect><rect x="132" y="66" width="56" height="10" rx="5" fill="#cddff7"></rect><path d="M132 96h96M132 116h80M132 136h90" stroke="#9db5ea" stroke-width="2.5"></path><rect x="132" y="156" width="18" height="18" rx="6" fill="#1a3d7c"></rect><rect x="154" y="156" width="18" height="18" rx="6" fill="#4570b5"></rect><rect x="176" y="156" width="18" height="18" rx="6" fill="#cddff7"></rect><rect x="198" y="156" width="18" height="18" rx="6" stroke="#9aa9c4" stroke-width="1.5" stroke-dasharray="2 3"></rect><circle cx="226" cy="200" r="16" fill="#dcf2e5"></circle><path d="m218 200 6 6 10-11" stroke="#1b6a3e" stroke-width="2.5"></path></g>
+          <g style="animation:cgFloat 4s ease-in-out infinite"><path d="M270 46l4 11 11 4-11 4-4 11-4-11-11-4 11-4z" fill="#fff4c9" stroke="#ffe79a" stroke-width="1.5"></path><path d="M292 92l2 5 5 2-5 2-2 5-2-5-5-2 5-2z" fill="#ffd7e8"></path><circle cx="250" cy="22" r="3" fill="#b6e3d4"></circle></g>
+        </svg>
+      </div>
+    </div>
+  </div>
+  <div aria-hidden="true" style="height:clamp(14px,4vw,40px);background:#03060d"></div>
+</section>
+</sc-if>
+
+<sc-if value="{{ inFlow }}" hint-placeholder-val="{{ false }}">
+  <div style="max-width:1160px;margin:0 auto;padding:20px 16px 0">
+    <ol aria-label="Steps" style="list-style:none;margin:0;padding:4px;display:flex;gap:6px;overflow-x:auto;border-radius:999px;background:var(--surface);border:1px solid var(--border);width:fit-content;max-width:100%;box-sizing:border-box">
+      <sc-for list="{{ steps }}" as="s" hint-placeholder-count="5">
+        <li style="flex:0 0 auto">
+          <button type="button" onClick="{{ s.onClick }}" aria-current="{{ s.current }}" style="display:flex;align-items:center;gap:8px;min-height:40px;padding:0 14px 0 6px;border-radius:999px;border:none;background:{{ s.bg }};color:{{ s.fg }};font:600 15px Barlow,sans-serif;cursor:pointer;white-space:nowrap;transition:background .35s var(--ease)">
+            <span style="width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:{{ s.numBg }};color:{{ s.numFg }};font:600 14px Fredoka,sans-serif">{{ s.n }}</span>{{ s.label }}
+          </button>
+        </li>
+      </sc-for>
+    </ol>
+  </div>
+</sc-if>
+
+<main style="max-width:1160px;margin:0 auto;padding:28px 16px 72px">
+
+<sc-if value="{{ isUpload }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="02 Upload" aria-labelledby="up-title" style="animation:cgRise .8s var(--ease) both">
+  <h2 id="up-title" style="font:600 clamp(28px,4vw,36px)/1.15 Fredoka,sans-serif;margin:0 0 8px;color:var(--text)">Upload your files</h2>
+  <p style="margin:0 0 24px;color:var(--text-muted);max-width:60ch">Add the course spec. A question-paper blueprint helps CoGuard check assessment marks, but you can skip it.</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:20px">
+    <sc-for list="{{ zones }}" as="z" hint-placeholder-count="2">
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
+          <h3 id="{{ z.labelId }}" style="font:600 19px Fredoka,sans-serif;margin:0;color:var(--text)">{{ z.title }}</h3>
+          <span style="padding:2px 12px;border-radius:999px;font:600 14px Barlow,sans-serif;background:{{ z.tagBg }};color:{{ z.tagFg }}">{{ z.tag }}</span>
+        </div>
+        <input type="file" ref="{{ z.ref }}" onChange="{{ z.onChange }}" accept=".docx,.pdf,.html,.htm,.doc" tabindex="-1" aria-hidden="true" style="display:none">
+        <button type="button" onClick="{{ z.pick }}" onDragOver="{{ z.onDragOver }}" onDragLeave="{{ z.onDragLeave }}" onDrop="{{ z.onDrop }}" aria-describedby="{{ z.descId }}" aria-labelledby="{{ z.labelId }}" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;min-height:200px;padding:28px 20px;border-radius:24px;border:2px dashed {{ z.border }};background:{{ z.bg }};color:var(--text);cursor:pointer;text-align:center;transition:all .4s var(--ease)" style-hover="border-color:var(--brand-text);transform:translateY(-2px)">
+          <span style="width:56px;height:56px;border-radius:18px;display:grid;place-items:center;background:var(--brand-soft);color:var(--brand-text)">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+          </span>
+          <span style="font:600 17px Barlow,sans-serif">Drop a file here or <span style="color:var(--brand-text);text-decoration:underline;text-underline-offset:3px">browse</span></span>
+          <span id="{{ z.descId }}" style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px">
+            <sc-for list="{{ accepted }}" as="t" hint-placeholder-count="4"><span style="padding:2px 10px;border-radius:999px;background:var(--surface-2);border:1px solid var(--border);font-size:14px;color:var(--text-muted)">{{ t }}</span></sc-for>
+          </span>
+        </button>
+        <sc-if value="{{ z.error }}" hint-placeholder-val="{{ false }}">
+          <p role="alert" style="display:flex;align-items:center;gap:8px;margin:0;color:var(--sev-high-fg);font-weight:500">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4"></path><path d="M12 16h.01"></path></svg>{{ z.error }}
+          </p>
+        </sc-if>
+        <sc-if value="{{ z.file }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;align-items:center;gap:12px;padding:12px 12px 12px 14px;border-radius:18px;background:var(--surface);border:1px solid var(--border);box-shadow:var(--shadow-soft);animation:cgRise .6s var(--ease) both">
+            <span style="width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:var(--surface-2);color:var(--brand-text);flex:none">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+            </span>
+            <span style="flex:1;min-width:0">
+              <span style="display:block;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ z.file.name }}</span>
+              <span style="display:block;font-size:15px;color:var(--text-muted)">{{ z.file.size }}</span>
+            </span>
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--st-ok-fg)" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Added"><path d="M20 6 9 17l-5-5" stroke-dasharray="30" style="animation:cgDraw .7s var(--ease) .15s both"></path></svg>
+            <button type="button" onClick="{{ z.remove }}" aria-label="{{ z.removeLabel }}" style="width:40px;height:40px;border-radius:999px;border:none;background:transparent;color:var(--text-muted);display:grid;place-items:center;cursor:pointer" style-hover="background:var(--surface-2)">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+            </button>
+          </div>
+        </sc-if>
+      </div>
+    </sc-for>
+  </div>
+  <div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:28px">
+    <button type="button" onClick="{{ readFiles }}" aria-busy="{{ reading }}" style="position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:0 28px;border-radius:999px;border:none;background:var(--brand-fill);color:#fff;font:600 17px Fredoka,sans-serif;cursor:pointer;transition:background .3s var(--ease),transform .3s var(--ease)" style-hover="background:var(--brand-fill-hover);transform:translateY(-1px)">
+      <sc-if value="{{ reading }}" hint-placeholder-val="{{ false }}"><span aria-hidden="true" style="position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.35) 50%,transparent 70%);background-size:200% 100%;animation:cgShimmer 1.3s linear infinite"></span></sc-if>
+      <span style="position:relative">{{ readLabel }}</span>
+    </button>
+    <button type="button" onClick="{{ useSamples }}" style="min-height:44px;padding:0 18px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--brand-text);font:600 16px Barlow,sans-serif;cursor:pointer" style-hover="background:var(--surface-2)">Use sample files</button>
+  </div>
+  <sc-if value="{{ reading }}" hint-placeholder-val="{{ false }}">
+    <div aria-live="polite" style="margin-top:28px;display:grid;gap:12px;max-width:640px">
+      <p style="margin:0;color:var(--text-muted)">Reading the spec and finding the template…</p>
+      <div style="height:18px;width:60%;border-radius:999px;background:linear-gradient(90deg,var(--surface-2) 0%,var(--border) 50%,var(--surface-2) 100%);background-size:200% 100%;animation:cgShimmer 1.4s linear infinite"></div>
+      <div style="height:96px;border-radius:20px;background:linear-gradient(90deg,var(--surface-2) 0%,var(--border) 50%,var(--surface-2) 100%);background-size:200% 100%;animation:cgShimmer 1.4s linear infinite"></div>
+      <div style="height:18px;width:80%;border-radius:999px;background:linear-gradient(90deg,var(--surface-2) 0%,var(--border) 50%,var(--surface-2) 100%);background-size:200% 100%;animation:cgShimmer 1.4s linear infinite"></div>
+    </div>
+  </sc-if>
+</section>
+</sc-if>
+
+<sc-if value="{{ isParsed }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="03 Parsed review" aria-labelledby="pr-title" style="animation:cgRise .8s var(--ease) both">
+  <h2 id="pr-title" style="font:600 clamp(28px,4vw,36px)/1.15 Fredoka,sans-serif;margin:0 0 8px">Check what CoGuard found</h2>
+  <p style="margin:0 0 24px;color:var(--text-muted);max-width:60ch">If anything looks wrong, fix it here before the map is built.</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:20px;align-items:start">
+    <div style="padding:24px;border-radius:24px;background:var(--surface);border:1px solid var(--border);box-shadow:var(--shadow-soft)">
+      <p style="margin:0 0 10px;font-size:15px;font-weight:600;color:var(--text-muted)">Template</p>
+      <span style="display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:999px;background:var(--brand-soft);color:var(--brand-text);font:600 18px Fredoka,sans-serif">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>{{ tplLabel }}
+      </span>
+      <sc-if value="{{ overrideApplied }}" hint-placeholder-val="{{ false }}"><p style="margin:10px 0 0;font-size:15px;color:var(--text-muted)">Changed by you. Reason: {{ overrideReasonShown }}</p></sc-if>
+      <p style="margin:20px 0 8px;font-weight:600">Signals used</p>
+      <ul style="list-style:none;margin:0;padding:0;display:grid;gap:8px">
+        <sc-for list="{{ signals }}" as="sig" hint-placeholder-count="3">
+          <li style="display:flex;gap:10px;align-items:flex-start;color:var(--text)"><span style="flex:none;margin-top:4px;width:18px;height:18px;border-radius:50%;background:var(--st-ok-bg);color:var(--st-ok-fg);display:grid;place-items:center"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg></span>{{ sig }}</li>
+        </sc-for>
+      </ul>
+      <button type="button" onClick="{{ toggleOverride }}" aria-expanded="{{ overrideOpen }}" style="margin-top:20px;min-height:44px;padding:0 18px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--brand-text);font:600 16px Barlow,sans-serif;cursor:pointer" style-hover="background:var(--surface-2)">Change template</button>
+      <sc-if value="{{ overrideOpen }}" hint-placeholder-val="{{ false }}">
+        <div style="margin-top:16px;padding:16px;border-radius:18px;background:var(--surface-2);display:grid;gap:14px;animation:cgRise .5s var(--ease) both">
+          <div role="radiogroup" aria-label="Template" style="display:flex;gap:4px;padding:4px;border-radius:999px;background:var(--surface);border:1px solid var(--border);width:fit-content">
+            <sc-for list="{{ tplOptions }}" as="o" hint-placeholder-count="2">
+              <button type="button" role="radio" aria-checked="{{ o.active }}" onClick="{{ o.onClick }}" style="min-height:40px;padding:0 16px;border-radius:999px;border:none;background:{{ o.bg }};color:{{ o.fg }};font:600 15px Barlow,sans-serif;cursor:pointer">{{ o.label }}</button>
+            </sc-for>
+          </div>
+          <label for="ov-reason" style="font-weight:600">Reason <span style="font-weight:400;color:var(--text-muted)">(required)</span></label>
+          <textarea id="ov-reason" value="{{ overrideReason }}" onChange="{{ onReason }}" rows="3" aria-invalid="{{ overrideInvalid }}" aria-describedby="ov-err" placeholder="Why is the detected template wrong?" style="width:100%;box-sizing:border-box;padding:12px 14px;border-radius:14px;border:1.5px solid {{ reasonBorder }};background:var(--surface);color:var(--text);font:16px/1.5 Barlow,sans-serif;resize:vertical"></textarea>
+          <sc-if value="{{ overrideError }}" hint-placeholder-val="{{ false }}"><p id="ov-err" role="alert" style="margin:-6px 0 0;color:var(--sev-high-fg);font-weight:500">{{ overrideError }}</p></sc-if>
+          <button type="button" onClick="{{ applyOverride }}" style="justify-self:start;min-height:44px;padding:0 22px;border-radius:999px;border:none;background:var(--brand-fill);color:#fff;font:600 16px Fredoka,sans-serif;cursor:pointer" style-hover="background:var(--brand-fill-hover)">Apply change</button>
+        </div>
+      </sc-if>
+    </div>
+    <div style="padding:24px;border-radius:24px;background:var(--surface);border:1px solid var(--border);box-shadow:var(--shadow-soft)">
+      <p style="margin:0 0 14px;font-size:15px;font-weight:600;color:var(--text-muted)">Course details</p>
+      <dl style="margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:16px 20px">
+        <sc-for list="{{ details }}" as="d" hint-placeholder-count="5">
+          <div><dt style="font-size:15px;color:var(--text-muted)">{{ d.k }}</dt><dd style="margin:2px 0 0;font:600 18px Fredoka,sans-serif">{{ d.v }}</dd></div>
+        </sc-for>
+      </dl>
+    </div>
+  </div>
+  <h3 style="font:600 22px Fredoka,sans-serif;margin:36px 0 6px">Course outcomes</h3>
+  <p style="margin:0 0 16px;color:var(--text-muted)">Each outcome gets a Bloom's level from 1 Remember to 6 Create.</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:16px">
+    <sc-for list="{{ cos }}" as="co" hint-placeholder-count="5">
+      <article style="padding:20px;border-radius:20px;background:var(--surface);border:1px solid var(--border);box-shadow:var(--shadow-soft);transition:transform .45s var(--ease),box-shadow .45s var(--ease)" style-hover="transform:translateY(-4px);box-shadow:var(--shadow-lift)">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px">
+          <span style="font:600 18px Fredoka,sans-serif;color:var(--brand-text)">{{ co.id }}</span>
+          <span style="padding:3px 12px;border-radius:999px;background:{{ co.bloomBg }};color:{{ co.bloomFg }};font:600 14px Barlow,sans-serif">{{ co.bloomLabel }}</span>
+        </div>
+        <p style="margin:0;color:var(--text)">{{ co.text }}</p>
+      </article>
+    </sc-for>
+  </div>
+  <div style="margin-top:28px"><button type="button" onClick="{{ goMap }}" style="min-height:52px;padding:0 28px;border-radius:999px;border:none;background:var(--brand-fill);color:#fff;font:600 17px Fredoka,sans-serif;cursor:pointer" style-hover="background:var(--brand-fill-hover)">Looks right, build the map</button></div>
+</section>
+</sc-if>
+
+<sc-if value="{{ isMap }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="04 CO-PO-PSO map" aria-labelledby="map-title" style="animation:cgRise .8s var(--ease) both">
+  <h2 id="map-title" style="font:600 clamp(28px,4vw,36px)/1.15 Fredoka,sans-serif;margin:0 0 8px">CO-PO-PSO map</h2>
+  <p style="margin:0 0 18px;color:var(--text-muted);max-width:62ch">Tap or hover a cell to see why it got that mark. {{ mapHint }}</p>
+  <div aria-label="Legend" style="display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin-bottom:16px;padding:12px 16px;border-radius:18px;background:var(--surface);border:1px solid var(--border);width:fit-content;max-width:100%;box-sizing:border-box">
+    <span style="font-weight:600">3 dark, 2 medium, 1 light</span>
+    <span style="display:flex;align-items:center;gap:6px"><span style="width:28px;height:28px;border-radius:9px;background:var(--s3-bg);color:var(--s3-fg);display:grid;place-items:center;font:600 14px Fredoka,sans-serif">3</span>Very strong</span>
+    <span style="display:flex;align-items:center;gap:6px"><span style="width:28px;height:28px;border-radius:9px;background:var(--s2-bg);color:var(--s2-fg);display:grid;place-items:center;font:600 14px Fredoka,sans-serif">2</span>Strong</span>
+    <span style="display:flex;align-items:center;gap:6px"><span style="width:28px;height:28px;border-radius:9px;background:var(--s1-bg);color:var(--s1-fg);display:grid;place-items:center;font:600 14px Fredoka,sans-serif">1</span>Moderate</span>
+    <span style="display:flex;align-items:center;gap:6px"><span style="width:28px;height:28px;border-radius:9px;border:1.5px dotted var(--s0-border);box-sizing:border-box"></span>Blank</span>
+  </div>
+  <div tabindex="0" role="region" aria-label="Map table, scrolls sideways" style="overflow:auto;max-height:520px;border-radius:24px;background:var(--surface);border:1px solid var(--border);box-shadow:var(--shadow-soft)">
+    <table style="border-collapse:separate;border-spacing:0;min-width:100%;font-size:15px">
+      <thead>
+        <tr>
+          <th scope="col" style="position:sticky;top:0;left:0;z-index:3;background:var(--surface-2);text-align:left;padding:12px 14px;font:600 15px Barlow,sans-serif;border-bottom:1px solid var(--border);border-right:1px solid var(--border);white-space:nowrap">CO · Bloom</th>
+          <sc-for list="{{ cols }}" as="c" hint-placeholder-count="13">
+            <th scope="col" style="position:sticky;top:0;z-index:2;background:var(--surface-2);padding:12px 6px;font:600 14px Barlow,sans-serif;border-bottom:1px solid var(--border);white-space:nowrap;min-width:52px">{{ c }}</th>
+          </sc-for>
+        </tr>
+      </thead>
+      <tbody>
+        <sc-for list="{{ mapRows }}" as="row" hint-placeholder-count="5">
+          <tr>
+            <th scope="row" style="position:sticky;left:0;z-index:1;background:var(--surface);text-align:left;padding:8px 14px;border-right:1px solid var(--border);border-bottom:1px solid var(--border);white-space:nowrap">
+              <span style="display:flex;align-items:center;gap:8px"><span style="font:600 16px Fredoka,sans-serif">{{ row.id }}</span><span style="padding:1px 8px;border-radius:999px;background:{{ row.bloomBg }};color:{{ row.bloomFg }};font:600 13px Barlow,sans-serif">{{ row.bloomShort }}</span></span>
+            </th>
+            <sc-for list="{{ row.cells }}" as="cell" hint-placeholder-count="13">
+              <td style="padding:5px;border-bottom:1px solid var(--border);text-align:center">
+                <button type="button" title="{{ cell.title }}" aria-label="{{ cell.aria }}" aria-pressed="{{ cell.selected }}" onClick="{{ cell.onClick }}" onMouseEnter="{{ cell.onClick }}" onFocus="{{ cell.onClick }}" style="width:42px;height:42px;border-radius:12px;border:{{ cell.border }};background:{{ cell.bg }};color:{{ cell.fg }};font:600 17px Fredoka,sans-serif;cursor:pointer;box-shadow:{{ cell.ring }};transition:transform .3s var(--ease)" style-hover="transform:scale(1.08)">{{ cell.label }}</button>
+              </td>
+            </sc-for>
+          </tr>
+        </sc-for>
+      </tbody>
+    </table>
+  </div>
+  <div aria-live="polite" style="margin-top:16px;padding:18px 20px;border-radius:20px;background:var(--surface);border:1px solid var(--border);display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px">
+    <div style="flex:1 1 280px;min-width:0">
+      <p style="margin:0 0 2px;font:600 18px Fredoka,sans-serif">{{ selTitle }} <span style="font:600 15px Barlow,sans-serif;color:var(--text-muted)">· {{ selStrength }}</span></p>
+      <p style="margin:0;color:var(--text-muted)">{{ selReason }}</p>
+    </div>
+    <sc-if value="{{ canEdit }}" hint-placeholder-val="{{ true }}">
+      <label style="display:flex;align-items:center;gap:10px;font-weight:600">Mark
+        <select value="{{ selValue }}" onChange="{{ onCellChange }}" style="min-height:44px;padding:0 14px;border-radius:999px;border:1.5px solid var(--border);background:var(--surface);color:var(--text);font:16px Barlow,sans-serif">
+          <option value="3">3 · Very strong</option><option value="2">2 · Strong</option><option value="1">1 · Moderate</option><option value="0">Blank</option>
+        </select>
+      </label>
+    </sc-if>
+    <sc-if value="{{ cannotEdit }}" hint-placeholder-val="{{ false }}"><p style="margin:0;font-size:15px;color:var(--text-muted)">Only the Author can change marks.</p></sc-if>
+  </div>
+  <div style="margin-top:28px"><button type="button" onClick="{{ goValidate }}" style="min-height:52px;padding:0 28px;border-radius:999px;border:none;background:var(--brand-fill);color:#fff;font:600 17px Fredoka,sans-serif;cursor:pointer" style-hover="background:var(--brand-fill-hover)">Run validation</button></div>
+</section>
+</sc-if>
+
+<sc-if value="{{ isValidate }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="05 Validation report" aria-labelledby="val-title" style="animation:cgRise .8s var(--ease) both">
+  <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:20px">
+    <div>
+      <h2 id="val-title" style="font:600 clamp(28px,4vw,36px)/1.15 Fredoka,sans-serif;margin:0 0 8px">Validation report</h2>
+      <p style="margin:0;color:var(--text-muted)">Every change CoGuard made, with the reason.</p>
+    </div>
+    <button type="button" onClick="{{ downloadReport }}" style="display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 22px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--brand-text);font:600 16px Barlow,sans-serif;cursor:pointer" style-hover="background:var(--surface-2)">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>Download validation_report.html
+    </button>
+  </div>
+  <div style="padding:20px 24px;border-radius:24px;background:var(--surface);border:1px solid var(--border);box-shadow:var(--shadow-soft);display:flex;flex-wrap:wrap;align-items:center;gap:12px 24px;margin-bottom:28px">
+    <p style="margin:0;font:600 22px Fredoka,sans-serif">{{ sevSummary }}</p>
+    <div style="display:flex;flex-wrap:wrap;gap:8px">
+      <sc-for list="{{ sevGroups }}" as="g" hint-placeholder-count="3">
+        <span style="display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:999px;background:{{ g.bg }};color:{{ g.fg }};font:600 15px Barlow,sans-serif">
+          <sc-if value="{{ g.isHigh }}" hint-placeholder-val="{{ false }}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"></polygon><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg></sc-if>
+          <sc-if value="{{ g.isMed }}" hint-placeholder-val="{{ false }}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"></path><path d="M12 9v4"></path><path d="M12 17h.01"></path></svg></sc-if>
+          <sc-if value="{{ g.isLow }}" hint-placeholder-val="{{ false }}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg></sc-if>
+          {{ g.countLabel }}
+        </span>
+      </sc-for>
+    </div>
+  </div>
+  <div style="display:grid;gap:28px">
+    <sc-for list="{{ sevGroups }}" as="g" hint-placeholder-count="3">
+      <div>
+        <h3 style="display:flex;align-items:center;gap:10px;font:600 21px Fredoka,sans-serif;margin:0 0 12px">
+          <span style="width:32px;height:32px;border-radius:11px;display:grid;place-items:center;background:{{ g.bg }};color:{{ g.fg }}">
+            <sc-if value="{{ g.isHigh }}" hint-placeholder-val="{{ false }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"></polygon><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg></sc-if>
+            <sc-if value="{{ g.isMed }}" hint-placeholder-val="{{ false }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"></path><path d="M12 9v4"></path><path d="M12 17h.01"></path></svg></sc-if>
+            <sc-if value="{{ g.isLow }}" hint-placeholder-val="{{ false }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg></sc-if>
+          </span>{{ g.name }} <span style="font:500 16px Barlow,sans-serif;color:var(--text-muted)">{{ g.countParen }}</span>
+        </h3>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr));gap:14px">
+          <sc-for list="{{ g.items }}" as="it" hint-placeholder-count="2">
+            <article style="padding:18px 20px;border-radius:20px;background:var(--surface);border:1px solid var(--border);transition:transform .45s var(--ease),box-shadow .45s var(--ease)" style-hover="transform:translateY(-3px);box-shadow:var(--shadow-lift)">
+              <p style="margin:0 0 8px;font-size:15px;font-weight:600;color:var(--text-muted)">{{ it.section }}</p>
+              <p style="margin:0 0 6px"><span style="font-weight:600">Value chosen: </span>{{ it.value }}</p>
+              <p style="margin:0;color:var(--text-muted)"><span style="font-weight:600;color:var(--text)">Reason: </span>{{ it.reason }}</p>
+            </article>
+          </sc-for>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+  <div style="margin-top:28px"><button type="button" onClick="{{ goSpec }}" style="min-height:52px;padding:0 28px;border-radius:999px;border:none;background:var(--brand-fill);color:#fff;font:600 17px Fredoka,sans-serif;cursor:pointer" style-hover="background:var(--brand-fill-hover)">Preview the spec</button></div>
+</section>
+</sc-if>
+
+<sc-if value="{{ isSpec }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="06 Spec + workflow" aria-labelledby="spec-title" style="animation:cgRise .8s var(--ease) both">
+  <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px">
+    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px">
+      <h2 id="spec-title" style="font:600 clamp(28px,4vw,36px)/1.15 Fredoka,sans-serif;margin:0">Sample Course</h2>
+      <span role="status" style="display:inline-flex;align-items:center;gap:8px;padding:5px 14px;border-radius:999px;background:{{ stBg }};color:{{ stFg }};font:600 15px Barlow,sans-serif;animation:{{ badgeAnim }}"><span aria-hidden="true" style="width:8px;height:8px;border-radius:50%;background:currentColor"></span>{{ status }}</span>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px">
+      <button type="button" onClick="{{ exportHtml }}" style="min-height:44px;padding:0 18px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--brand-text);font:600 16px Barlow,sans-serif;cursor:pointer" style-hover="background:var(--surface-2)">Export spec (.html)</button>
+      <button type="button" onClick="{{ printPdf }}" style="min-height:44px;padding:0 18px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--brand-text);font:600 16px Barlow,sans-serif;cursor:pointer" style-hover="background:var(--surface-2)">Download as PDF</button>
+    </div>
+  </div>
+  <div data-screen-label="07 Workflow" style="padding:20px 16px 16px;border-radius:24px;background:var(--surface);border:1px solid var(--border);box-shadow:var(--shadow-soft);margin-bottom:24px;overflow-x:auto">
+    <ol aria-label="Workflow status" style="list-style:none;margin:0;padding:0;display:flex;min-width:560px">
+      <sc-for list="{{ timeline }}" as="t" hint-placeholder-count="6">
+        <li aria-current="{{ t.current }}" style="flex:1;position:relative;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center">
+          <sc-if value="{{ t.showLine }}" hint-placeholder-val="{{ true }}"><span aria-hidden="true" style="position:absolute;top:15px;left:calc(50% + 20px);right:calc(-50% + 20px);height:2px;border-radius:2px;background:{{ t.line }}"></span></sc-if>
+          <span style="position:relative;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:{{ t.bg }};color:{{ t.fg }};border:{{ t.border }};box-sizing:border-box;animation:{{ t.anim }}">
+            <sc-if value="{{ t.done }}" hint-placeholder-val="{{ false }}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg></sc-if>
+            <sc-if value="{{ t.notDone }}" hint-placeholder-val="{{ true }}"><span style="width:10px;height:10px;border-radius:50%;background:currentColor"></span></sc-if>
+          </span>
+          <span style="font-size:15px;font-weight:{{ t.weight }};color:{{ t.labelColor }}">{{ t.label }}</span>
+        </li>
+      </sc-for>
+    </ol>
+  </div>
+  <div style="display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start">
+    <div style="flex:2 1 560px;min-width:0">
+      <article aria-label="Spec document preview" style="position:relative;overflow:hidden;max-width:780px;margin:0 auto;background:var(--paper);color:var(--paper-text);border-radius:8px;box-shadow:0 1px 2px rgba(19,32,59,.08),0 12px 40px rgba(19,32,59,.16);padding:clamp(24px,6vw,56px) clamp(20px,6vw,60px)">
+        <sc-if value="{{ showWatermark }}" hint-placeholder-val="{{ true }}">
+          <div aria-hidden="true" style="position:absolute;inset:0;display:grid;place-items:center;pointer-events:none;z-index:4"><span style="transform:rotate(-30deg);font:600 clamp(90px,18vw,180px)/1 Fredoka,sans-serif;letter-spacing:.08em;color:rgba(26,61,124,.08);white-space:nowrap">DRAFT</span></div>
+        </sc-if>
+        <p style="margin:0 0 4px;font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:#4b5a78">Course specification · {{ tplName }}</p>
+        <h3 style="font:600 30px/1.2 Fredoka,sans-serif;margin:0 0 24px;color:#13203b">Sample Course</h3>
+        <sc-for list="{{ docSections }}" as="sec" hint-placeholder-count="3">
+          <div style="position:relative;padding:18px 0;border-top:1px solid #e4e8f0">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px">
+              <h4 style="font:600 19px Fredoka,sans-serif;margin:0;color:#13203b">{{ sec.title }}</h4>
+              <button type="button" onClick="{{ sec.toggle }}" aria-expanded="{{ sec.open }}" aria-label="{{ sec.cmtLabel }}" style="display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:0 12px;border-radius:999px;border:1px solid #d9e0ec;background:#ffffff;color:#1a3d7c;font:600 14px Barlow,sans-serif;cursor:pointer" style-hover="background:#eef2f9">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path></svg>{{ sec.countLabel }}
+              </button>
+            </div>
+            <sc-if value="{{ sec.isDetails }}" hint-placeholder-val="{{ false }}">
+              <dl style="margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px 20px">
+                <sc-for list="{{ details }}" as="d" hint-placeholder-count="5"><div><dt style="font-size:14px;color:#4b5a78">{{ d.k }}</dt><dd style="margin:0;font-weight:600">{{ d.v }}</dd></div></sc-for>
+              </dl>
+            </sc-if>
+            <sc-if value="{{ sec.isOutcomes }}" hint-placeholder-val="{{ false }}">
+              <ol style="margin:0;padding-left:0;list-style:none;display:grid;gap:8px">
+                <sc-for list="{{ cos }}" as="co" hint-placeholder-count="5"><li style="display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline"><strong style="flex:none;color:#1a3d7c">{{ co.id }}</strong><span style="flex:1 1 180px">{{ co.text }}</span><span style="flex:none;font-size:14px;color:#4b5a78">{{ co.bloomLabel }}</span></li></sc-for>
+              </ol>
+            </sc-if>
+            <sc-if value="{{ sec.isMap }}" hint-placeholder-val="{{ false }}">
+              <div style="overflow-x:auto">
+                <table style="border-collapse:collapse;font-size:14px;min-width:100%">
+                  <thead><tr><th scope="col" style="text-align:left;padding:6px 8px;border-bottom:1px solid #d9e0ec">CO</th><sc-for list="{{ cols }}" as="c" hint-placeholder-count="13"><th scope="col" style="padding:6px 4px;border-bottom:1px solid #d9e0ec;white-space:nowrap;font-weight:600">{{ c }}</th></sc-for></tr></thead>
+                  <tbody><sc-for list="{{ mapRows }}" as="row" hint-placeholder-count="5"><tr><th scope="row" style="text-align:left;padding:6px 8px;border-bottom:1px solid #eef1f6">{{ row.id }}</th><sc-for list="{{ row.cells }}" as="cell" hint-placeholder-count="13"><td style="padding:6px 4px;text-align:center;border-bottom:1px solid #eef1f6">{{ cell.docLabel }}</td></sc-for></tr></sc-for></tbody>
+                </table>
+              </div>
+            </sc-if>
+            <sc-if value="{{ sec.open }}" hint-placeholder-val="{{ false }}">
+              <div style="position:relative;z-index:5;margin-top:14px;padding:14px;border-radius:16px;background:#eef2f9;display:grid;gap:10px;animation:cgRise .5s var(--ease) both">
+                <sc-for list="{{ sec.list }}" as="cm" hint-placeholder-count="0">
+                  <div style="padding:10px 12px;border-radius:12px;background:#ffffff"><p style="margin:0 0 2px;font-size:14px;color:#4b5a78"><strong style="color:#13203b">{{ cm.user }}</strong> · {{ cm.role }} · {{ cm.time }}</p><p style="margin:0">{{ cm.text }}</p></div>
+                </sc-for>
+                <label for="{{ sec.inputId }}" style="font-weight:600;color:#13203b">Comment on {{ sec.title }}</label>
+                <textarea id="{{ sec.inputId }}" rows="2" value="{{ sec.draft }}" onChange="{{ sec.onDraft }}" placeholder="Write a comment…" style="width:100%;box-sizing:border-box;padding:10px 12px;border-radius:12px;border:1.5px solid #d9e0ec;background:#ffffff;color:#13203b;font:16px/1.5 Barlow,sans-serif;resize:vertical"></textarea>
+                <button type="button" onClick="{{ sec.add }}" style="justify-self:start;min-height:40px;padding:0 18px;border-radius:999px;border:none;background:#1a3d7c;color:#fff;font:600 15px Fredoka,sans-serif;cursor:pointer" style-hover="background:#143066">Add comment</button>
+              </div>
+            </sc-if>
+          </div>
+        </sc-for>
+      </article>
+    </div>
+    <aside style="flex:1 1 300px;min-width:0;display:grid;gap:20px">
+      <div style="padding:22px;border-radius:24px;background:var(--surface);border:1px solid var(--border);box-shadow:var(--shadow-soft)">
+        <p style="margin:0 0 4px;font:600 19px Fredoka,sans-serif">Your next step</p>
+        <p style="margin:0 0 16px;color:var(--text-muted)">Signed in as {{ userName }} ({{ role }})</p>
+        <sc-if value="{{ needsComment }}" hint-placeholder-val="{{ false }}">
+          <label for="act-cmt" style="display:block;font-weight:600;margin-bottom:6px">Comment for the author</label>
+          <textarea id="act-cmt" rows="3" value="{{ actionComment }}" onChange="{{ onActionComment }}" aria-invalid="{{ actionInvalid }}" aria-describedby="act-err" placeholder="What needs to change?" style="width:100%;box-sizing:border-box;padding:10px 12px;border-radius:14px;border:1.5px solid {{ actionBorder }};background:var(--surface);color:var(--text);font:16px/1.5 Barlow,sans-serif;resize:vertical;margin-bottom:8px"></textarea>
+          <sc-if value="{{ actionError }}" hint-placeholder-val="{{ false }}"><p id="act-err" role="alert" style="margin:0 0 10px;color:var(--sev-high-fg);font-weight:500">{{ actionError }}</p></sc-if>
+        </sc-if>
+        <div style="display:flex;flex-wrap:wrap;gap:10px">
+          <sc-if value="{{ primaryAction }}" hint-placeholder-val="{{ true }}">
+            <button type="button" onClick="{{ primaryAction.fn }}" style="min-height:48px;padding:0 24px;border-radius:999px;border:none;background:var(--brand-fill);color:#fff;font:600 16px Fredoka,sans-serif;cursor:pointer;transition:transform .3s var(--ease)" style-hover="background:var(--brand-fill-hover);transform:translateY(-1px)">{{ primaryAction.label }}</button>
+          </sc-if>
+          <sc-if value="{{ secondaryAction }}" hint-placeholder-val="{{ false }}">
+            <button type="button" onClick="{{ secondaryAction.fn }}" style="min-height:48px;padding:0 20px;border-radius:999px;border:1.5px solid var(--st-ret-fg);background:transparent;color:var(--st-ret-fg);font:600 16px Barlow,sans-serif;cursor:pointer" style-hover="background:var(--st-ret-bg)">{{ secondaryAction.label }}</button>
+          </sc-if>
+        </div>
+        <sc-if value="{{ waitingText }}" hint-placeholder-val="{{ false }}"><p style="margin:0;color:var(--text-muted)">{{ waitingText }}</p></sc-if>
+        <sc-if value="{{ isApproved }}" hint-placeholder-val="{{ false }}">
+          <p style="display:flex;align-items:center;gap:10px;margin:12px 0 0;color:var(--st-ok-fg);font-weight:600"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" opacity=".35"></circle><path d="m8 12.5 3 3 5-6" stroke-dasharray="30" style="animation:cgDraw .8s var(--ease) .1s both"></path></svg>Approved. The DRAFT mark is gone.</p>
+        </sc-if>
+      </div>
+      <div data-screen-label="08 Activity log" style="padding:22px;border-radius:24px;background:var(--surface);border:1px solid var(--border);box-shadow:var(--shadow-soft)">
+        <h3 style="font:600 19px Fredoka,sans-serif;margin:0 0 16px">Activity</h3>
+        <ol style="list-style:none;margin:0;padding:0;display:grid">
+          <sc-for list="{{ logItems }}" as="e" hint-placeholder-count="2">
+            <li style="position:relative;padding:0 0 18px 28px">
+              <sc-if value="{{ e.showLine }}" hint-placeholder-val="{{ true }}"><span aria-hidden="true" style="position:absolute;left:6px;top:18px;bottom:0;width:2px;border-radius:2px;background:var(--border)"></span></sc-if>
+              <span aria-hidden="true" style="position:absolute;left:0;top:6px;width:14px;height:14px;border-radius:50%;background:{{ e.dotBg }};border:3px solid var(--surface);box-shadow:0 0 0 1.5px {{ e.dotFg }};box-sizing:border-box"></span>
+              <p style="margin:0;display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px"><strong>{{ e.user }}</strong><span style="padding:0 8px;border-radius:999px;background:var(--surface-2);font-size:14px;color:var(--text-muted)">{{ e.role }}</span><span style="font-size:14px;color:var(--text-muted)">{{ e.time }}</span></p>
+              <p style="margin:2px 0 0;color:var(--text)">{{ e.comment }}</p>
+            </li>
+          </sc-for>
+        </ol>
+      </div>
+    </aside>
+  </div>
+</section>
+</sc-if>
+
+<sc-if value="{{ isDashboard }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="09 Dashboard" aria-labelledby="dash-title" style="animation:cgRise .8s var(--ease) both">
+  <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin-bottom:24px">
+    <h2 id="dash-title" style="font:600 clamp(28px,4vw,36px)/1.15 Fredoka,sans-serif;margin:0">Your specs</h2>
+    <button type="button" onClick="{{ goUpload }}" style="display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:0 22px;border-radius:999px;border:none;background:var(--brand-fill);color:#fff;font:600 16px Fredoka,sans-serif;cursor:pointer" style-hover="background:var(--brand-fill-hover)">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg>Upload a spec
+    </button>
+  </div>
+  <sc-if value="{{ hasSpecs }}" hint-placeholder-val="{{ true }}">
+    <ul style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:16px">
+      <sc-for list="{{ specs }}" as="sp" hint-placeholder-count="4">
+        <li>
+          <button type="button" onClick="{{ sp.open }}" style="width:100%;text-align:left;padding:20px;border-radius:22px;background:var(--surface);border:1px solid var(--border);box-shadow:var(--shadow-soft);color:var(--text);cursor:pointer;display:grid;gap:10px;transition:transform .45s var(--ease),box-shadow .45s var(--ease)" style-hover="transform:translateY(-4px);box-shadow:var(--shadow-lift)">
+            <span style="display:flex;align-items:center;justify-content:space-between;gap:8px">
+              <span style="font-size:15px;font-weight:600;color:var(--text-muted)">{{ sp.code }}</span>
+              <span style="display:inline-flex;align-items:center;gap:6px;padding:2px 12px;border-radius:999px;background:{{ sp.bg }};color:{{ sp.fg }};font:600 14px Barlow,sans-serif"><span aria-hidden="true" style="width:7px;height:7px;border-radius:50%;background:currentColor"></span>{{ sp.status }}</span>
+            </span>
+            <span style="font:600 20px Fredoka,sans-serif">{{ sp.title }}</span>
+            <span style="font-size:15px;color:var(--text-muted)">Updated {{ sp.updated }}</span>
+          </button>
+        </li>
+      </sc-for>
+    </ul>
+  </sc-if>
+  <sc-if value="{{ noSpecs }}" hint-placeholder-val="{{ false }}">
+    <div style="display:grid;justify-items:center;text-align:center;gap:12px;padding:56px 20px;border-radius:28px;border:2px dashed var(--border);background:var(--surface)">
+      <svg width="180" height="140" viewBox="0 0 180 140" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M28 96h124l-12 30H40z" stroke="var(--text-muted)" stroke-width="2" fill="var(--surface-2)"></path>
+        <rect x="58" y="26" width="64" height="80" rx="12" stroke="var(--brand-text)" stroke-width="2" fill="var(--surface)" transform="rotate(-6 90 66)"></rect>
+        <path d="M72 50h34M72 64h28M72 78h20" stroke="var(--brand-text)" stroke-width="2" transform="rotate(-6 90 66)"></path>
+        <g style="animation:cgFloat 4s ease-in-out infinite"><path d="M140 22l3 8 8 3-8 3-3 8-3-8-8-3 8-3z" fill="#fff4c9" stroke="#e5b93a" stroke-width="1.5"></path><circle cx="36" cy="40" r="3" fill="#f3a9c9"></circle></g>
+      </svg>
+      <p style="margin:0;font:600 21px Fredoka,sans-serif">Upload your first spec to start</p>
+      <p style="margin:0;color:var(--text-muted);max-width:40ch">CoGuard will read it and get it ready for review.</p>
+    </div>
+  </sc-if>
+</section>
+</sc-if>
+</main>
+
+<sc-if value="{{ settingsOpen }}" hint-placeholder-val="{{ false }}">
+  <div onClick="{{ closeSettings }}" style="position:fixed;inset:0;z-index:50;background:rgba(5,10,24,.55);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);display:grid;place-items:center;padding:16px;animation:cgRise .4s var(--ease) both">
+    <div role="dialog" aria-modal="true" aria-labelledby="set-title" data-screen-label="10 Settings" onClick="{{ stop }}" style="width:100%;max-width:460px;max-height:calc(100vh - 32px);overflow:auto;box-sizing:border-box;padding:24px;border-radius:24px;background:var(--surface);color:var(--text);border:1px solid var(--border);box-shadow:var(--shadow-lift)">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:6px">
+        <h2 id="set-title" style="font:600 24px Fredoka,sans-serif;margin:0">Settings</h2>
+        <button type="button" onClick="{{ closeSettings }}" aria-label="Close settings" style="width:44px;height:44px;border-radius:999px;border:none;background:var(--surface-2);color:var(--text);display:grid;place-items:center;cursor:pointer">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+        </button>
+      </div>
+      <p style="display:flex;gap:8px;align-items:flex-start;margin:0 0 20px;padding:10px 14px;border-radius:14px;background:var(--brand-soft);color:var(--brand-text);font-size:15px">
+        <svg style="flex:none;margin-top:2px" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+        Your key stays in this browser only. CoGuard never stores it on a server.
+      </p>
+      <div style="display:grid;gap:16px">
+        <label style="display:grid;gap:6px;font-weight:600">Provider
+          <select value="{{ provider }}" onChange="{{ onProvider }}" style="min-height:48px;padding:0 14px;border-radius:14px;border:1.5px solid var(--border);background:var(--surface);color:var(--text);font:16px Barlow,sans-serif">
+            <option value="Gemini">Gemini</option><option value="OpenRouter">OpenRouter</option>
+          </select>
+        </label>
+        <div style="display:grid;gap:6px">
+          <label for="api-key" style="font-weight:600">API key</label>
+          <div style="display:flex;gap:8px">
+            <input id="api-key" type="{{ keyType }}" value="{{ apiKey }}" onChange="{{ onKey }}" autocomplete="off" aria-describedby="key-msg" placeholder="Paste your key" style="flex:1;min-width:0;min-height:48px;padding:0 14px;border-radius:14px;border:1.5px solid {{ keyBorder }};background:var(--surface);color:var(--text);font:16px Barlow,sans-serif">
+            <button type="button" onClick="{{ toggleShowKey }}" aria-pressed="{{ showKey }}" aria-label="{{ showKeyLabel }}" style="width:48px;height:48px;flex:none;border-radius:14px;border:1.5px solid var(--border);background:var(--surface);color:var(--text);display:grid;place-items:center;cursor:pointer">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+            </button>
+          </div>
+        </div>
+        <label style="display:grid;gap:6px;font-weight:600">Model name
+          <input type="text" value="{{ model }}" onChange="{{ onModel }}" placeholder="Model name" style="min-height:48px;padding:0 14px;border-radius:14px;border:1.5px solid var(--border);background:var(--surface);color:var(--text);font:16px Barlow,sans-serif">
+        </label>
+        <sc-if value="{{ keyTesting }}" hint-placeholder-val="{{ false }}"><div aria-hidden="true" style="height:10px;border-radius:999px;background:linear-gradient(90deg,var(--surface-2) 0%,var(--border) 50%,var(--surface-2) 100%);background-size:200% 100%;animation:cgShimmer 1.2s linear infinite"></div></sc-if>
+        <p id="key-msg" aria-live="polite" style="margin:0;min-height:1.6em;font-weight:500;color:{{ keyMsgColor }}">{{ keyMsg }}</p>
+        <div style="display:flex;flex-wrap:wrap;gap:10px">
+          <button type="button" onClick="{{ testKey }}" style="min-height:48px;padding:0 24px;border-radius:999px;border:none;background:var(--brand-fill);color:#fff;font:600 16px Fredoka,sans-serif;cursor:pointer" style-hover="background:var(--brand-fill-hover)">Test key</button>
+          <button type="button" onClick="{{ clearKey }}" style="min-height:48px;padding:0 20px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--text);font:600 16px Barlow,sans-serif;cursor:pointer" style-hover="background:var(--surface-2)">Clear key</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;system&quot;,&quot;light&quot;,&quot;dark&quot;],&quot;default&quot;:&quot;system&quot;,&quot;tsType&quot;:&quot;'system'|'light'|'dark'&quot;},&quot;grain&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;emptyDashboard&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;States&quot;}}">
+const COLS = ['PO-1','PO-2','PO-3','PO-4','PO-5','PO-6','PO-7','PO-8','PO-9','PO-10','PO-11','PSO-1','PSO-2'];
+const BLOOM = [null,'Remember','Understand','Apply','Analyse','Evaluate','Create'];
+const BLOOM_C = [null,['#e6eefb','#1d3f78'],['#ddf2ec','#155c4d'],['#fdf0d4','#734600'],['#fde4d9','#86320f'],['#efe5fb','#55308d'],['#fbe2ee','#8c2356']];
+const COS = [1,2,3,4,5].map((n,i)=>({ id:'CO-'+n, text:'CO-'+n+' … placeholder outcome statement.', bloom:[2,3,3,4,6][i] }));
+const SEED = [[3,2,1,0,0,1,0,0,1,0,1,2,1],[2,3,2,1,0,0,0,0,1,1,0,3,1],[1,2,3,2,1,0,1,0,2,0,1,2,2],[1,1,2,3,2,0,0,1,1,1,0,1,3],[0,1,2,2,3,1,1,1,2,2,1,2,3]];
+const STR = {3:'Very strong',2:'Strong',1:'Moderate',0:'Blank'};
+const S = {
+  'Draft':['var(--st-draft-bg)','var(--st-draft-fg)'],'Submitted':['var(--st-sub-bg)','var(--st-sub-fg)'],
+  'Under Review':['var(--st-rev-bg)','var(--st-rev-fg)'],'Pending HOD':['var(--st-hod-bg)','var(--st-hod-fg)'],
+  'Approved':['var(--st-ok-bg)','var(--st-ok-fg)'],'Returned':['var(--st-ret-bg)','var(--st-ret-fg)']};
+const TL = ['Draft','Submitted','Under Review','Pending HOD','Approved','Returned'];
+const USERS = {Author:'Author A', Reviewer:'Reviewer B', HOD:'HOD C'};
+const VAL = {
+  High:[{section:'Course outcomes',value:'CO-3 set to Bloom L4 Analyse',reason:'The outcome verb belongs to Analyse, not Apply.'},
+        {section:'CO-PO-PSO map',value:'PO-7 marked 1 for CO-3',reason:'Every PO needs at least one mapped CO or a note.'},
+        {section:'Credits',value:'L:T:P set to 3:0:2',reason:'The listed hours did not add up to the stated credits.'}],
+  Medium:[{section:'Course details',value:'Type set to Integrated',reason:'Lab hours are present, so Non-Lab does not fit.'},
+          {section:'Assessment',value:'Weightage scaled to 100%',reason:'The original weightages added up to 110%.'}],
+  Low:[{section:'Formatting',value:'Headings renamed to the standard set',reason:'Headings differed from the template wording.'}]};
+const SEV = {High:['var(--sev-high-bg)','var(--sev-high-fg)'],Medium:['var(--sev-med-bg)','var(--sev-med-fg)'],Low:['var(--sev-low-bg)','var(--sev-low-fg)']};
+const OK_EXT = ['docx','pdf','html','htm','doc'];
+const fmtSize = b => b < 1024 ? b+' B' : b < 1048576 ? Math.round(b/1024)+' KB' : (b/1048576).toFixed(1)+' MB';
+const nowStr = () => 'Today, ' + new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+
+class Component extends DCLogic {
+  state = {
+    theme: this.props.theme ?? 'system', screen:'home', role:'Author', status:'Draft', wig:null, returnedFrom:2,
+    files:{spec:null, bp:null}, errors:{spec:'', bp:''}, drag:null, reading:false,
+    overrideOpen:false, overrideChoice:'Non-Lab', overrideReason:'', overrideError:'', overrideApplied:null, overrideReasonShown:'',
+    map: SEED.map(r=>r.slice()), sel:{r:1,c:2},
+    comments:{details:[],outcomes:[],map:[]}, open:{}, drafts:{}, actionComment:'', actionError:'',
+    log:[{user:'Author A',role:'Author',time:'Today, 09:12',comment:'Uploaded the spec and created a draft.',status:'Draft'}],
+    settingsOpen:false, provider:'Gemini', apiKey:'', model:'gemini-2.5-flash', showKey:false, keyState:'idle', keyMsg:''
+  };
+  specRef = React.createRef(); bpRef = React.createRef();
+
+  componentDidMount(){
+    this.applyTheme();
+    try { const s = JSON.parse(localStorage.getItem('coguard-settings')||'null'); if (s) this.setState({provider:s.provider||'Gemini', apiKey:s.key||'', model:s.model||'gemini-2.5-flash'}); } catch(e){}
+    this.onEsc = e => { if (e.key === 'Escape' && this.state.settingsOpen) this.setState({settingsOpen:false}); };
+    window.addEventListener('keydown', this.onEsc);
+  }
+  componentWillUnmount(){ window.removeEventListener('keydown', this.onEsc); clearTimeout(this.t); clearTimeout(this.kt); }
+  componentDidUpdate(pp){ if (pp.theme !== this.props.theme) this.setState({theme:this.props.theme ?? 'system'}, ()=>this.applyTheme()); }
+  applyTheme(){ const el = document.documentElement; const t = this.state.theme; if (t === 'system') el.removeAttribute('data-theme'); else el.setAttribute('data-theme', t); }
+  isDark(){ const t = this.state.theme; return t === 'dark' || (t === 'system' && window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches); }
+  go(screen){ this.setState({screen}); window.scrollTo({top:0, behavior:'smooth'}); }
+  saveSettings(){ const {provider, apiKey, model} = this.state; try { localStorage.setItem('coguard-settings', JSON.stringify({provider, key:apiKey, model})); } catch(e){} }
+
+  setFile(kind, f){
+    if (!f) return;
+    const ext = (f.name.split('.').pop()||'').toLowerCase();
+    if (!OK_EXT.includes(ext)) { this.setState(s=>({errors:{...s.errors,[kind]:'This file could not be read. Try a .docx.'}, files:{...s.files,[kind]:null}, drag:null})); return; }
+    this.setState(s=>({files:{...s.files,[kind]:{name:f.name,size:fmtSize(f.size)}}, errors:{...s.errors,[kind]:''}, drag:null}));
+  }
+  setStatus(status, comment, extra){
+    const role = this.state.role;
+    this.setState(s=>({status, wig:!s.wig, actionComment:'', actionError:'', log:[{user:USERS[role], role, time:nowStr(), comment, status}, ...s.log], ...(extra||{})}));
+  }
+  returnWith(){
+    const c = this.state.actionComment.trim();
+    if (!c) { this.setState({actionError:'Write a short comment so the author knows what to fix.'}); return; }
+    this.setStatus('Returned', c, {returnedFrom: TL.indexOf(this.state.status)});
+  }
+  download(name, html){
+    const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([html],{type:'text/html'})); a.download = name;
+    document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href), 1000);
+  }
+
+  renderVals(){
+    const st = this.state, role = st.role, screen = st.screen;
+    const tplName = st.overrideApplied || 'Integrated';
+    const navItems = [['home','Home'],['dashboard','Dashboard']].map(([id,label])=>({label, current: screen===id ? 'page' : undefined, bg: screen===id ? 'var(--brand-soft)' : 'transparent', fg: screen===id ? 'var(--brand-text)' : 'var(--text)', onClick:()=>this.go(id)}));
+    const roles = ['Author','Reviewer','HOD'].map(r=>({label:r, active: role===r, bg: role===r ? 'var(--surface)' : 'transparent', fg: role===r ? 'var(--brand-text)' : 'var(--text-muted)', shadow: role===r ? 'var(--shadow-soft)' : 'none', onClick:()=>this.setState({role:r, actionError:''})}));
+    const flow = [['upload','Upload'],['parsed','Review'],['map','Map'],['validate','Validate'],['spec','Spec']];
+    const fi = flow.findIndex(f=>f[0]===screen);
+    const steps = flow.map(([id,label],i)=>({n:i+1, label, current: i===fi ? 'step' : undefined,
+      bg: i===fi ? 'var(--brand-soft)' : 'transparent', fg: i===fi ? 'var(--brand-text)' : 'var(--text-muted)',
+      numBg: i<=fi ? 'var(--brand-fill)' : 'var(--surface-2)', numFg: i<=fi ? '#fff' : 'var(--text-muted)', onClick:()=>this.go(id)}));
+
+    const mkZone = (kind, title, tag, ref) => ({
+      title, tag, ref, labelId:'zl-'+kind, descId:'zd-'+kind,
+      tagBg: kind==='spec' ? 'var(--brand-soft)' : 'var(--surface-2)', tagFg: kind==='spec' ? 'var(--brand-text)' : 'var(--text-muted)',
+      border: st.errors[kind] ? 'var(--sev-high-fg)' : st.drag===kind ? 'var(--brand-text)' : 'var(--border)',
+      bg: st.drag===kind ? 'var(--brand-soft)' : 'var(--surface)',
+      file: st.files[kind], error: st.errors[kind], removeLabel:'Remove '+((st.files[kind] && st.files[kind].name)||'file'),
+      pick:()=>ref.current && ref.current.click(),
+      onChange:e=>{ this.setFile(kind, e.target.files[0]); e.target.value=''; },
+      onDragOver:e=>{ e.preventDefault(); if (this.state.drag!==kind) this.setState({drag:kind}); },
+      onDragLeave:()=>this.setState({drag:null}),
+      onDrop:e=>{ e.preventDefault(); this.setFile(kind, e.dataTransfer.files[0]); },
+      remove:()=>this.setState(s=>({files:{...s.files,[kind]:null}}))
+    });
+
+    const bc = b => BLOOM_C[b];
+    const cos = COS.map(c=>({...c, bloomLabel:'L'+c.bloom+' '+BLOOM[c.bloom], bloomBg:bc(c.bloom)[0], bloomFg:bc(c.bloom)[1]}));
+    const details = [{k:'Title',v:'Sample Course'},{k:'Code',v:'SC-101'},{k:'Department',v:'Sample Department'},{k:'Credits (L:T:P)',v:'3:0:2'},{k:'Type',v:tplName}];
+
+    const sel = st.sel, canEdit = role === 'Author';
+    const reasonFor = (r,c,v) => v ? `Placeholder: one-line reason ${COS[r].id} supports ${COLS[c]} at level ${v}.` : `Placeholder: ${COS[r].id} does not address ${COLS[c]}.`;
+    const mapRows = COS.map((co,r)=>({id:co.id, bloomShort:'L'+co.bloom, bloomBg:bc(co.bloom)[0], bloomFg:bc(co.bloom)[1],
+      cells: COLS.map((col,c)=>{ const v = st.map[r][c]; const on = sel.r===r && sel.c===c;
+        return { label: v ? String(v) : '', docLabel: v ? String(v) : '–', selected:on,
+          bg: v ? `var(--s${v}-bg)` : 'transparent', fg: v ? `var(--s${v}-fg)` : 'var(--text-muted)',
+          border: v ? 'none' : '1.5px dotted var(--s0-border)', ring: on ? '0 0 0 3px var(--surface), 0 0 0 5px var(--focus)' : 'none',
+          title: `${STR[v]}: ${reasonFor(r,c,v)}`, aria: `${co.id} to ${col}: ${v ? v+' '+STR[v] : 'blank'}. ${reasonFor(r,c,v)}`,
+          onClick:()=>{ const cur = this.state.sel; if (cur.r!==r || cur.c!==c) this.setState({sel:{r,c}}); } }; })}));
+    const sv = st.map[sel.r][sel.c];
+
+    const sevGroups = ['High','Medium','Low'].map(n=>({name:n, count:VAL[n].length, countLabel:VAL[n].length+' '+n, countParen:'('+VAL[n].length+')', items:VAL[n], bg:SEV[n][0], fg:SEV[n][1], isHigh:n==='High', isMed:n==='Medium', isLow:n==='Low'}));
+
+    const status = st.status, curIdx = TL.indexOf(status);
+    const timeline = TL.map((label,i)=>{
+      const isCur = i===curIdx;
+      const done = status==='Returned' ? i<=st.returnedFrom : (i<curIdx && label!=='Returned');
+      const c = S[label];
+      return { label, done, notDone:!done, current: isCur ? 'step' : undefined, showLine: i<TL.length-1,
+        line: done ? 'var(--brand-fill)' : 'var(--border)',
+        bg: done ? 'var(--brand-fill)' : isCur ? c[0] : 'var(--surface)', fg: done ? '#fff' : isCur ? c[1] : 'var(--border)',
+        border: done || isCur ? 'none' : '2px dashed var(--border)', anim: isCur ? 'cgGlow 2.8s ease-in-out infinite' : 'none',
+        weight: isCur ? 700 : 500, labelColor: isCur ? 'var(--text)' : 'var(--text-muted)' };
+    });
+
+    let primaryAction = null, secondaryAction = null, waitingText = '';
+    const retAct = {label:'Return with comment', fn:()=>this.returnWith()};
+    if (role==='Author') {
+      if (status==='Draft') primaryAction = {label:'Submit', fn:()=>this.setStatus('Submitted','Submitted for review.')};
+      else if (status==='Returned') primaryAction = {label:'Resubmit', fn:()=>this.setStatus('Submitted','Resubmitted with changes.')};
+      else if (status!=='Approved') waitingText = 'Waiting on the '+(status==='Pending HOD'?'HOD':'Reviewer')+'.';
+    } else if (role==='Reviewer') {
+      if (status==='Submitted') primaryAction = {label:'Start review', fn:()=>this.setStatus('Under Review','Started the review.')};
+      else if (status==='Under Review') { primaryAction = {label:'Forward to HOD', fn:()=>this.setStatus('Pending HOD','Forwarded to HOD.')}; secondaryAction = retAct; }
+      else if (status!=='Approved') waitingText = status==='Pending HOD' ? 'Waiting on the HOD.' : 'Nothing to review yet.';
+    } else {
+      if (status==='Pending HOD') { primaryAction = {label:'Approve', fn:()=>this.setStatus('Approved','Approved the spec.')}; secondaryAction = retAct; }
+      else if (status!=='Approved') waitingText = 'Nothing waiting for HOD approval yet.';
+    }
+
+    const secs = [['details','Course details'],['outcomes','Course outcomes'],['map','CO-PO-PSO map']];
+    const docSections = secs.map(([id,title])=>{ const list = st.comments[id]; return {
+      title, isDetails:id==='details', isOutcomes:id==='outcomes', isMap:id==='map', open:!!st.open[id], list, inputId:'cmt-'+id,
+      countLabel: list.length ? list.length+' comment'+(list.length>1?'s':'') : 'Comment', cmtLabel:'Comments on '+title,
+      draft: st.drafts[id]||'',
+      toggle:()=>this.setState(s=>({open:{...s.open,[id]:!s.open[id]}})),
+      onDraft:e=>{ const v=e.target.value; this.setState(s=>({drafts:{...s.drafts,[id]:v}})); },
+      add:()=>{ const t=(this.state.drafts[id]||'').trim(); if(!t) return; const rl=this.state.role;
+        this.setState(s=>({comments:{...s.comments,[id]:[...s.comments[id],{user:USERS[rl],role:rl,time:nowStr(),text:t}]}, drafts:{...s.drafts,[id]:''},
+          log:[{user:USERS[rl],role:rl,time:nowStr(),comment:`On ${title}: ${t}`,status:s.status},...s.log]})); }
+    };});
+
+    const logItems = st.log.map((e,i,a)=>({...e, showLine:i<a.length-1, dotBg:S[e.status][0], dotFg:S[e.status][1]}));
+    const specs = [
+      {title:'Sample Course',code:'SC-101',status,updated:st.log[0].time,open:()=>this.go('spec')},
+      {title:'Sample Course B',code:'SC-102',status:'Under Review',updated:'Yesterday',open:()=>this.go('spec')},
+      {title:'Sample Course C',code:'SC-201',status:'Approved',updated:'3 days ago',open:()=>this.go('spec')},
+      {title:'Sample Course D',code:'SC-205',status:'Returned',updated:'Last week',open:()=>this.go('spec')}
+    ].map(s=>({...s, bg:S[s.status][0], fg:S[s.status][1]}));
+    const empty = !!this.props.emptyDashboard;
+
+    const ks = st.keyState;
+    return {
+      navItems, roles, steps, role, status, userName:USERS[role],
+      isHome:screen==='home', isUpload:screen==='upload', isParsed:screen==='parsed', isMap:screen==='map', isValidate:screen==='validate', isSpec:screen==='spec', isDashboard:screen==='dashboard',
+      inFlow: fi>=0, grainOn: this.props.grain ?? true,
+      goHome:()=>this.go('home'), goUpload:()=>this.go('upload'), goDashboard:()=>this.go('dashboard'), goMap:()=>this.go('map'), goValidate:()=>this.go('validate'), goSpec:()=>this.go('spec'),
+      toggleTheme:()=>this.setState({theme:this.isDark()?'light':'dark'}, ()=>this.applyTheme()),
+      zones:[mkZone('spec','Course spec (.docx, .pdf, .html, .doc)','Required',this.specRef), mkZone('bp','Question-paper blueprint (optional)','Optional',this.bpRef)],
+      accepted:['.docx','.pdf','.html','.doc'], reading:st.reading, readLabel: st.reading ? 'Reading files…' : 'Read files',
+      useSamples:()=>this.setState({files:{spec:{name:'sample-course-spec.docx',size:'48 KB'},bp:{name:'sample-blueprint.pdf',size:'112 KB'}}, errors:{spec:'',bp:''}}),
+      readFiles:()=>{ if (this.state.reading) return;
+        if (!this.state.files.spec) { this.setState(s=>({errors:{...s.errors,spec:'Add a course spec first. It is the one marked Required.'}})); return; }
+        this.setState({reading:true}); this.t = setTimeout(()=>{ this.setState({reading:false}); this.go('parsed'); }, 2000); },
+      tplLabel:'Detected: '+tplName, tplName, overrideApplied: !!st.overrideApplied, overrideReasonShown: st.overrideReasonShown,
+      signals:['P > 0 in L:T:P, so lab hours are present','A list of experiments section was found','The assessment table has lab and theory parts'],
+      overrideOpen:st.overrideOpen, toggleOverride:()=>this.setState(s=>({overrideOpen:!s.overrideOpen})),
+      tplOptions:['Integrated','Non-Lab'].map(o=>({label:o, active:st.overrideChoice===o, bg:st.overrideChoice===o?'var(--brand-fill)':'transparent', fg:st.overrideChoice===o?'#fff':'var(--text)', onClick:()=>this.setState({overrideChoice:o})})),
+      overrideReason:st.overrideReason, overrideError:st.overrideError, overrideInvalid: !!st.overrideError, reasonBorder: st.overrideError ? 'var(--sev-high-fg)' : 'var(--border)',
+      onReason:e=>this.setState({overrideReason:e.target.value, overrideError:''}),
+      applyOverride:()=>{ const r = this.state.overrideReason.trim(); if (!r) { this.setState({overrideError:'Add a reason so reviewers know why you changed it.'}); return; }
+        this.setState(s=>({overrideApplied:s.overrideChoice, overrideReasonShown:r, overrideOpen:false, overrideReason:'', log:[{user:USERS[s.role],role:s.role,time:nowStr(),comment:`Changed template to ${s.overrideChoice}: ${r}`,status:s.status},...s.log]})); },
+      details, cos, cols:COLS, mapRows,
+      mapHint: canEdit ? 'As Author you can change a mark.' : '',
+      canEdit, cannotEdit:!canEdit,
+      selTitle: `${COS[sel.r].id} → ${COLS[sel.c]}`, selStrength: sv ? `${sv} ${STR[sv]}` : 'Blank', selReason: reasonFor(sel.r, sel.c, sv), selValue:String(sv),
+      onCellChange:e=>{ const v = +e.target.value; this.setState(s=>{ const m = s.map.map(r=>r.slice()); m[s.sel.r][s.sel.c] = v; return {map:m}; }); },
+      sevGroups, sevSummary: sevGroups.map(g=>g.count+' '+g.name).join(', '),
+      downloadReport:()=>this.download('validation_report.html', `<!doctype html><meta charset="utf-8"><title>Validation report</title><body style="font-family:sans-serif;max-width:720px;margin:40px auto"><h1>Validation report · Sample Course</h1>${sevGroups.map(g=>`<h2>${g.name} (${g.count})</h2><ul>${g.items.map(i=>`<li><b>${i.section}</b>: ${i.value}. <i>${i.reason}</i></li>`).join('')}</ul>`).join('')}</body>`),
+      exportHtml:()=>this.download('sample-course-spec.html', `<!doctype html><meta charset="utf-8"><title>Sample Course</title><body style="font-family:sans-serif;max-width:760px;margin:40px auto"><h1>Sample Course</h1><p>Status: ${status}</p><h2>Course outcomes</h2><ol>${cos.map(c=>`<li>${c.text} (${c.bloomLabel})</li>`).join('')}</ol><h2>CO-PO-PSO map</h2><table border="1" cellpadding="4"><tr><th>CO</th>${COLS.map(c=>`<th>${c}</th>`).join('')}</tr>${COS.map((c,r)=>`<tr><th>${c.id}</th>${st.map[r].map(v=>`<td>${v||''}</td>`).join('')}</tr>`).join('')}</table></body>`),
+      printPdf:()=>window.print(),
+      stBg:S[status][0], stFg:S[status][1], badgeAnim: st.wig===null ? 'none' : (st.wig ? 'cgWigA' : 'cgWigB')+' .7s var(--ease) 1',
+      timeline, showWatermark: status!=='Approved', isApproved: status==='Approved', docSections,
+      primaryAction, secondaryAction, waitingText, needsComment: !!secondaryAction,
+      actionComment:st.actionComment, actionError:st.actionError, actionInvalid:!!st.actionError, actionBorder: st.actionError ? 'var(--sev-high-fg)' : 'var(--border)',
+      onActionComment:e=>this.setState({actionComment:e.target.value, actionError:''}),
+      logItems, specs: empty ? [] : specs, hasSpecs: !empty, noSpecs: empty,
+      settingsOpen:st.settingsOpen, openSettings:()=>this.setState({settingsOpen:true}), closeSettings:()=>this.setState({settingsOpen:false}), stop:e=>e.stopPropagation(),
+      provider:st.provider, apiKey:st.apiKey, model:st.model, showKey:st.showKey, keyType: st.showKey ? 'text' : 'password', showKeyLabel: st.showKey ? 'Hide key' : 'Show key',
+      onProvider:e=>this.setState({provider:e.target.value, model:e.target.value==='Gemini'?'gemini-2.5-flash':'openrouter/auto'}, ()=>this.saveSettings()),
+      onKey:e=>this.setState({apiKey:e.target.value, keyState:'idle', keyMsg:''}, ()=>this.saveSettings()),
+      onModel:e=>this.setState({model:e.target.value}, ()=>this.saveSettings()),
+      toggleShowKey:()=>this.setState(s=>({showKey:!s.showKey})),
+      keyTesting: ks==='testing', keyMsg:st.keyMsg, keyBorder: ks==='error' ? 'var(--sev-high-fg)' : 'var(--border)',
+      keyMsgColor: ks==='error' ? 'var(--sev-high-fg)' : ks==='ok' ? 'var(--st-ok-fg)' : 'var(--text-muted)',
+      testKey:()=>{ if (!this.state.apiKey.trim()) { this.setState({keyState:'error', keyMsg:'Add a key first, then test it.'}); return; }
+        this.setState({keyState:'testing', keyMsg:'Testing your key…'});
+        this.kt = setTimeout(()=>this.setState(s=>({keyState:'ok', keyMsg:`Key works with ${s.provider}.`})), 1400); },
+      clearKey:()=>{ this.setState({apiKey:'', keyState:'idle', keyMsg:'Key cleared from this browser.'}); try { localStorage.removeItem('coguard-settings'); } catch(e){} }
+    };
+  }
+}
+</script>
+</body>
+</html>

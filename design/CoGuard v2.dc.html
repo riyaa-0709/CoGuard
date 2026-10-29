@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/industry-5314bd1a-ecf6-427a-b964-9bdf8f0fa89a/styles.css">
+<script src="_ds/industry-5314bd1a-ecf6-427a-b964-9bdf8f0fa89a/_ds_bundle.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&amp;family=Barlow:wght@400;500;600&amp;display=swap">
+<style>
+:root{--brand:#1a3d7c;--brand-fill:#1a3d7c;--brand-fill-hover:#143066;--brand-text:#1a3d7c;--brand-soft:#e4ebf8;--bg:#fff6e9;--surface:#ffffff;--surface-2:#fbecd9;--text:#2a2748;--text-muted:#5b5670;--border:#efdcc3;--focus:#1a3d7c;--paper:#fffdf8;--paper-text:#2a2748;
+--sky:#bfe3f2;--mint:#d7f2e6;--cream:#fff6e9;--sand:#f6e3c8;--blush:#f7c6d0;--coral:#f19a8a;--lilac:#d9c8f2;--plum:#2a2748;--ok-ink:#1f7a4c;
+--s3-bg:#1a3d7c;--s3-fg:#ffffff;--s2-bg:#5f7fc0;--s2-fg:#ffffff;--s1-bg:#b9cdf0;--s1-fg:#1a3d7c;--s0-border:#a49cb8;
+--st-draft-bg:#9aa3b2;--st-draft-fg:#2a2748;--st-sub-bg:#7fbfe6;--st-sub-fg:#2a2748;--st-rev-bg:#f6b98a;--st-rev-fg:#2a2748;--st-hod-bg:#b9a6ea;--st-hod-fg:#2a2748;--st-ok-bg:#8fd6a8;--st-ok-fg:#2a2748;--st-ret-bg:#f29fb0;--st-ret-fg:#2a2748;
+--sev-high-bg:#fbd3dc;--sev-high-fg:#8a1f3c;--sev-med-bg:#fde0c8;--sev-med-fg:#7a3f0c;--sev-low-bg:#e6e4ee;--sev-low-fg:#45405e;
+--shadow-soft:0 1px 2px rgba(42,39,72,.06),0 10px 28px rgba(42,39,72,.08);--shadow-lift:0 3px 8px rgba(42,39,72,.08),0 20px 44px rgba(42,39,72,.14);--ease:cubic-bezier(.2,.8,.2,1);color-scheme:light}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--brand-fill:#2b58a8;--brand-fill-hover:#3466bd;--brand-text:#b9cdf0;--brand-soft:#2a2f5a;--bg:#1b1930;--surface:#24223f;--surface-2:#2e2b4f;--text:#fff6e9;--text-muted:#cbc4dd;--border:#3c3862;--focus:#b9cdf0;--sky:#2a3768;--mint:#1f3d45;--ok-ink:#8fd6a8;--s0-border:#6f6893;--sev-high-bg:#4a1f33;--sev-high-fg:#f7c6d0;--sev-med-bg:#4a2f1c;--sev-med-fg:#f6c9a2;--sev-low-bg:#33304f;--sev-low-fg:#dcd6ea;--shadow-soft:0 1px 2px rgba(0,0,0,.3),0 10px 28px rgba(0,0,0,.3);--shadow-lift:0 3px 8px rgba(0,0,0,.35),0 20px 44px rgba(0,0,0,.4);color-scheme:dark}}
+:root[data-theme="dark"]{--brand-fill:#2b58a8;--brand-fill-hover:#3466bd;--brand-text:#b9cdf0;--brand-soft:#2a2f5a;--bg:#1b1930;--surface:#24223f;--surface-2:#2e2b4f;--text:#fff6e9;--text-muted:#cbc4dd;--border:#3c3862;--focus:#b9cdf0;--sky:#2a3768;--mint:#1f3d45;--ok-ink:#8fd6a8;--s0-border:#6f6893;--sev-high-bg:#4a1f33;--sev-high-fg:#f7c6d0;--sev-med-bg:#4a2f1c;--sev-med-fg:#f6c9a2;--sev-low-bg:#33304f;--sev-low-fg:#dcd6ea;--shadow-soft:0 1px 2px rgba(0,0,0,.3),0 10px 28px rgba(0,0,0,.3);--shadow-lift:0 3px 8px rgba(0,0,0,.35),0 20px 44px rgba(0,0,0,.4);color-scheme:dark}
+html,body{margin:0;background:var(--bg);color:var(--text);font-family:Barlow,system-ui,sans-serif;font-size:16px;line-height:1.6;overflow-x:clip}
+a{color:var(--brand-text)}a:hover{color:var(--brand-fill-hover)}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+@keyframes cgGrain{0%{transform:translate(0,0)}25%{transform:translate(-4%,3%)}50%{transform:translate(3%,-2%)}75%{transform:translate(-2%,-4%)}100%{transform:translate(0,0)}}
+@keyframes cgShimmer{from{background-position:200% 0}to{background-position:-200% 0}}
+@keyframes cgRise{from{opacity:0;transform:translateY(14px)}}
+@keyframes cgDraw{from{stroke-dashoffset:30}}
+@keyframes cgWigA{0%,100%{transform:rotate(0)}25%{transform:rotate(-5deg)}50%{transform:rotate(4deg)}75%{transform:rotate(-2deg)}}
+@keyframes cgWigB{0%,100%{transform:rotate(0)}25%{transform:rotate(-5deg)}50%{transform:rotate(4deg)}75%{transform:rotate(-2deg)}}
+@keyframes cgGlow{0%,100%{box-shadow:0 0 0 4px color-mix(in oklab,currentColor 22%,transparent)}50%{box-shadow:0 0 0 10px color-mix(in oklab,currentColor 6%,transparent)}}
+@keyframes cgFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes cgSway{0%,100%{transform:rotate(-2.5deg)}50%{transform:rotate(2.5deg)}}
+@keyframes cgPetal{0%{transform:translate(0,0) rotate(0);opacity:0}10%{opacity:1}100%{transform:translate(140px,340px) rotate(280deg);opacity:0}}
+@keyframes cgCloud{0%,100%{transform:translateX(0)}50%{transform:translateX(30px)}}
+@keyframes cgBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes cgTap{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes cgPoint{0%,100%{transform:rotate(0)}50%{transform:rotate(-9deg)}}
+@keyframes cgBlink{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.1)}}
+@keyframes inGateT{0%{transform:scale(1)}27.8%{transform:scale(1.18)}50%,100%{transform:scale(7)}}
+@keyframes inGateO{0%,40%{opacity:1}50%,100%{opacity:0}}
+@keyframes inSchoolT{0%,36%{transform:scale(.6)}48%{transform:scale(1.15)}57%,100%{transform:scale(8)}}
+@keyframes inSchoolO{0%,36%{opacity:0}42%,53%{opacity:1}57%,100%{opacity:0}}
+@keyframes inRoomT{0%,52%{transform:scale(1.15)}60%,78%{transform:scale(1)}97%,100%{transform:scale(2.75)}}
+@keyframes inRoomO{0%,52%{opacity:0}58%,100%{opacity:1}}
+@keyframes inScreen{0%,90%{opacity:0}100%{opacity:1}}
+@keyframes cgHint{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+@keyframes inFrame{0%,84%{opacity:0;transform:scale(.4)}92%,100%{opacity:1;transform:scale(1)}}
+@keyframes inWipe{0%,90%{clip-path:inset(0 100% 0 0)}96%,100%{clip-path:inset(0 0 0 0)}}
+@keyframes inOut{0%,96%{opacity:1}100%{opacity:0}}
+@keyframes inBubble{0%,62%{transform:scale(0)}66%{transform:scale(1.08)}69%,100%{transform:scale(1)}}
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none !important;transition:none !important}}
+</style>
+</helmet>
+<div style="min-height:100vh;background:var(--bg);color:var(--text);font-family:Barlow,system-ui,sans-serif;font-size:16px;line-height:1.6">
+
+<sc-if value="{{ introOn }}" hint-placeholder-val="{{ false }}">
+<div data-intro-wrap="1" style="position:relative;height:{{ introHeight }}">
+<div data-intro-stage="1" role="region" aria-label="Intro: Ramaiah University of Applied Sciences" data-screen-label="00 Intro" style="position:sticky;top:0;height:100vh;overflow:hidden;background:#bfe3f2">
+  <sc-if value="{{ introAnimated }}" hint-placeholder-val="{{ true }}">
+    <div style="position:absolute;inset:0;background:linear-gradient(180deg,#bfe3f2 0 60%,#a9dcb9 60%);animation:inSchoolO 1s linear both paused;animation-delay:calc(var(--ip, 0) * -1s)"><svg viewBox="0 0 1600 900" preserveAspectRatio="{{ introAspect }}" width="100%" height="100%" aria-hidden="true" style="display:block">
+<g style="transform-box:view-box;transform-origin:800px 420px;animation:inSchoolT 1s linear both paused;animation-delay:calc(var(--ip, 0) * -1s)">
+<rect width="1600" height="640" fill="#bfe3f2"></rect><rect y="620" width="1600" height="280" fill="#a9dcb9"></rect>
+<path d="M740 620 L860 620 L1150 900 L450 900Z" fill="#eadccb"></path>
+<path d="M400 272 L800 140 L1200 272Z" fill="#f19a8a" stroke="#f19a8a" stroke-width="14" stroke-linejoin="round"></path>
+<rect x="420" y="262" width="760" height="358" rx="24" fill="#fff6e9" stroke="#efdcc3" stroke-width="4"></rect>
+<circle cx="800" cy="210" r="26" fill="#fff6e9" stroke="#1a3d7c" stroke-width="4"></circle><path d="M800 196 V210 L810 218" stroke="#1a3d7c" stroke-width="4" fill="none" stroke-linecap="round"></path>
+<rect x="470" y="310" width="120" height="90" rx="16" fill="#bfe3f2" stroke="#f6e3c8" stroke-width="8"></rect><rect x="1010" y="310" width="120" height="90" rx="16" fill="#bfe3f2" stroke="#f6e3c8" stroke-width="8"></rect>
+<rect x="470" y="450" width="120" height="90" rx="16" fill="#bfe3f2" stroke="#f6e3c8" stroke-width="8"></rect><rect x="1010" y="450" width="120" height="90" rx="16" fill="#bfe3f2" stroke="#f6e3c8" stroke-width="8"></rect>
+<rect x="710" y="350" width="180" height="140" rx="20" fill="#f7c6d0" stroke="#f6e3c8" stroke-width="10"></rect>
+<rect x="745" y="378" width="110" height="64" rx="8" fill="#2a2748"></rect><rect x="752" y="385" width="96" height="50" rx="5" fill="#ffffff"></rect><rect x="760" y="420" width="34" height="9" rx="4.5" fill="#1a3d7c"></rect>
+<rect x="770" y="540" width="60" height="80" rx="14" fill="#c99b6d"></rect>
+<circle cx="450" cy="610" r="30" fill="#ef7fae"></circle><circle cx="500" cy="618" r="24" fill="#7acb9b"></circle><circle cx="1150" cy="610" r="30" fill="#f7c6d0"></circle><circle cx="1100" cy="618" r="24" fill="#6cbf8f"></circle>
+<g style="animation:cgCloud 7s ease-in-out infinite"><ellipse cx="240" cy="150" rx="80" ry="26" fill="#fff"></ellipse><ellipse cx="1360" cy="130" rx="90" ry="28" fill="#fff"></ellipse></g>
+</g></svg></div>
+    <div style="position:absolute;inset:0;background:linear-gradient(180deg,#bfe3f2 0 60%,#a9dcb9 60%);animation:inGateO 1s linear both paused;animation-delay:calc(var(--ip, 0) * -1s)"><svg viewBox="0 0 1600 900" preserveAspectRatio="{{ introAspect }}" width="100%" height="100%" aria-hidden="true" style="display:block"><defs><linearGradient id="igSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bfe3f2"></stop><stop offset="1" stop-color="#d7f2e6"></stop></linearGradient></defs>
+<g style="transform-box:view-box;transform-origin:800px 560px;animation:inGateT 1s linear both paused;animation-delay:calc(var(--ip, 0) * -1s)">
+<rect width="1600" height="700" fill="url(#igSky)"></rect>
+<circle cx="1290" cy="160" r="110" fill="#fff6e0" opacity=".7"></circle><circle cx="1290" cy="160" r="66" fill="#fff1c9"></circle>
+<g style="animation:cgCloud 8s ease-in-out infinite"><ellipse cx="300" cy="140" rx="90" ry="30" fill="#fff"></ellipse><ellipse cx="350" cy="118" rx="60" ry="34" fill="#fff"></ellipse><ellipse cx="1020" cy="110" rx="80" ry="26" fill="#fff"></ellipse><ellipse cx="1060" cy="94" rx="50" ry="28" fill="#fff"></ellipse></g>
+<path d="M0 520 Q300 430 620 500 T1200 480 T1600 500 V900 H0Z" fill="#c9ecd9"></path>
+<rect y="660" width="1600" height="240" fill="#a9dcb9"></rect>
+<circle cx="1150" cy="500" r="52" fill="#7acb9b"></circle><circle cx="1215" cy="488" r="62" fill="#6cbf8f"></circle><circle cx="1290" cy="505" r="46" fill="#8fd6a8"></circle>
+<rect x="740" y="520" width="120" height="70" rx="8" fill="#fff6e9"></rect><path d="M728 526 L800 486 L872 526Z" fill="#f19a8a"></path><rect x="788" y="540" width="24" height="18" rx="4" fill="#f7c6d0"></rect>
+<rect x="0" y="500" width="630" height="170" fill="#fff6e9"></rect><rect x="970" y="500" width="630" height="170" fill="#fff6e9"></rect>
+<rect x="0" y="488" width="630" height="22" rx="8" fill="#f6e3c8"></rect><rect x="970" y="488" width="630" height="22" rx="8" fill="#f6e3c8"></rect>
+<path d="M60 550H560M60 610H560M1040 550H1540M1040 610H1540" stroke="#f3e3cc" stroke-width="3"></path>
+<path d="M770 590 L830 590 L1000 700 L600 700Z" fill="#eadccb"></path><path d="M600 700 L1000 700 L1500 900 L100 900Z" fill="#eadccb"></path>
+<path d="M800 600 V900" stroke="#fff6e9" stroke-width="10" stroke-dasharray="34 30"></path>
+<path d="M372 700 L384 470 Q392 430 402 470 L416 700Z" fill="#a87b5a"></path>
+<g style="transform-box:fill-box;transform-origin:50% 100%;animation:cgSway 4s ease-in-out infinite"><circle cx="395" cy="330" r="120" fill="#6cbf8f"></circle><circle cx="300" cy="400" r="85" fill="#5aae80"></circle><circle cx="490" cy="390" r="90" fill="#7acb9b"></circle><circle cx="400" cy="240" r="85" fill="#7acb9b"></circle><circle cx="330" cy="300" r="60" fill="#8fd6a8"></circle></g>
+<rect x="610" y="360" width="64" height="340" rx="16" fill="#f6e3c8" stroke="#e8cfac" stroke-width="3"></rect><rect x="926" y="360" width="64" height="340" rx="16" fill="#f6e3c8" stroke="#e8cfac" stroke-width="3"></rect>
+<rect x="598" y="346" width="88" height="24" rx="10" fill="#fff6e9" stroke="#e8cfac" stroke-width="3"></rect><rect x="914" y="346" width="88" height="24" rx="10" fill="#fff6e9" stroke="#e8cfac" stroke-width="3"></rect>
+<path d="M642 370 Q800 190 958 370" stroke="#4fa879" stroke-width="54" fill="none" stroke-linecap="round"></path><path d="M642 370 Q800 190 958 370" stroke="#6cbf8f" stroke-width="34" fill="none" stroke-linecap="round"></path>
+<g style="transform-box:fill-box;transform-origin:50% 0%;animation:cgSway 5s ease-in-out infinite"><circle cx="642" cy="370" r="12" fill="#ef7fae"></circle><circle cx="655" cy="361" r="8" fill="#ffffff"></circle><circle cx="631" cy="381" r="7" fill="#e5586b"></circle><circle cx="674" cy="338" r="12" fill="#ffffff"></circle><circle cx="687" cy="329" r="8" fill="#e5586b"></circle><circle cx="663" cy="349" r="7" fill="#f7c6d0"></circle><circle cx="706" cy="312" r="12" fill="#e5586b"></circle><circle cx="719" cy="303" r="8" fill="#f7c6d0"></circle><circle cx="695" cy="323" r="7" fill="#f19a8a"></circle><circle cx="737" cy="294" r="12" fill="#f7c6d0"></circle><circle cx="750" cy="285" r="8" fill="#f19a8a"></circle><circle cx="726" cy="305" r="7" fill="#ef7fae"></circle><circle cx="769" cy="284" r="12" fill="#f19a8a"></circle><circle cx="782" cy="275" r="8" fill="#ef7fae"></circle><circle cx="758" cy="295" r="7" fill="#ffffff"></circle><circle cx="831" cy="284" r="12" fill="#ef7fae"></circle><circle cx="844" cy="275" r="8" fill="#ffffff"></circle><circle cx="820" cy="295" r="7" fill="#e5586b"></circle><circle cx="863" cy="294" r="12" fill="#ffffff"></circle><circle cx="876" cy="285" r="8" fill="#e5586b"></circle><circle cx="852" cy="305" r="7" fill="#f7c6d0"></circle><circle cx="894" cy="312" r="12" fill="#e5586b"></circle><circle cx="907" cy="303" r="8" fill="#f7c6d0"></circle><circle cx="883" cy="323" r="7" fill="#f19a8a"></circle><circle cx="926" cy="338" r="12" fill="#f7c6d0"></circle><circle cx="939" cy="329" r="8" fill="#f19a8a"></circle><circle cx="915" cy="349" r="7" fill="#ef7fae"></circle><circle cx="958" cy="370" r="12" fill="#f19a8a"></circle><circle cx="971" cy="361" r="8" fill="#ef7fae"></circle><circle cx="947" cy="381" r="7" fill="#ffffff"></circle><circle cx="636" cy="410" r="12" fill="#ef7fae"></circle><circle cx="649" cy="401" r="8" fill="#ffffff"></circle><circle cx="625" cy="421" r="7" fill="#e5586b"></circle><circle cx="652" cy="452" r="12" fill="#ffffff"></circle><circle cx="665" cy="443" r="8" fill="#e5586b"></circle><circle cx="641" cy="463" r="7" fill="#f7c6d0"></circle><circle cx="632" cy="494" r="12" fill="#e5586b"></circle><circle cx="645" cy="485" r="8" fill="#f7c6d0"></circle><circle cx="621" cy="505" r="7" fill="#f19a8a"></circle><circle cx="964" cy="410" r="12" fill="#f7c6d0"></circle><circle cx="977" cy="401" r="8" fill="#f19a8a"></circle><circle cx="953" cy="421" r="7" fill="#ef7fae"></circle><circle cx="948" cy="452" r="12" fill="#f19a8a"></circle><circle cx="961" cy="443" r="8" fill="#ef7fae"></circle><circle cx="937" cy="463" r="7" fill="#ffffff"></circle><circle cx="968" cy="494" r="12" fill="#ef7fae"></circle><circle cx="981" cy="485" r="8" fill="#ffffff"></circle><circle cx="957" cy="505" r="7" fill="#e5586b"></circle></g>
+<path d="M800 234 L826 245 V266 Q826 285 800 296 Q774 285 774 266 V245Z" fill="#1a3d7c" stroke="#fff6e9" stroke-width="4"></path><path d="M789 265 l7 7 14 -15" stroke="#fff6e9" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"></path>
+<path d="M690 214 V300 M910 214 V300" stroke="#a87b5a" stroke-width="8" stroke-linecap="round"></path><rect x="520" y="112" width="560" height="106" rx="28" fill="#fff6e9" stroke="#1a3d7c" stroke-width="5"></rect><rect x="534" y="126" width="532" height="78" rx="18" fill="none" stroke="#f7c6d0" stroke-width="3" stroke-dasharray="2 9"></rect><text x="800" y="164" text-anchor="middle" font-family="Fredoka, sans-serif" font-size="38" font-weight="600" fill="#1a3d7c">Ramaiah University</text><text x="800" y="198" text-anchor="middle" font-family="Fredoka, sans-serif" font-size="26" font-weight="500" fill="#2a2748">of Applied Sciences</text><circle cx="548" cy="165" r="9" fill="#ef7fae"></circle><circle cx="1052" cy="165" r="9" fill="#ef7fae"></circle>
+<ellipse cx="700" cy="300" rx="8" ry="4" fill="#ef7fae" style="transform-box:fill-box;transform-origin:center;animation:cgPetal 4.5s linear infinite;animation-delay:0s"></ellipse><ellipse cx="880" cy="290" rx="8" ry="4" fill="#fbe0e6" style="transform-box:fill-box;transform-origin:center;animation:cgPetal 5s linear infinite;animation-delay:-1.5s"></ellipse><ellipse cx="760" cy="340" rx="8" ry="4" fill="#e5586b" style="transform-box:fill-box;transform-origin:center;animation:cgPetal 4s linear infinite;animation-delay:-3s"></ellipse><ellipse cx="940" cy="360" rx="8" ry="4" fill="#f7c6d0" style="transform-box:fill-box;transform-origin:center;animation:cgPetal 5.5s linear infinite;animation-delay:-2s"></ellipse><ellipse cx="660" cy="420" rx="8" ry="4" fill="#f19a8a" style="transform-box:fill-box;transform-origin:center;animation:cgPetal 4.8s linear infinite;animation-delay:-0.7s"></ellipse><ellipse cx="820" cy="260" rx="8" ry="4" fill="#ef7fae" style="transform-box:fill-box;transform-origin:center;animation:cgPetal 5.2s linear infinite;animation-delay:-3.8s"></ellipse><ellipse cx="980" cy="430" rx="8" ry="4" fill="#fbe0e6" style="transform-box:fill-box;transform-origin:center;animation:cgPetal 4.2s linear infinite;animation-delay:-2.6s"></ellipse>
+</g></svg></div>
+  </sc-if>
+  <div style="position:absolute;inset:0;background:linear-gradient(180deg,#fff6e9 0 62%,#f6e3c8 62%);opacity:{{ roomOpacity }};animation:{{ roomAnim }};animation-delay:calc(var(--ip, 0) * -1s)"><svg viewBox="0 0 1600 900" preserveAspectRatio="{{ introAspect }}" width="100%" height="100%" aria-hidden="true" style="display:block"><defs><linearGradient id="irHero" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bfe3f2"></stop><stop offset="1" stop-color="#d7f2e6"></stop></linearGradient><clipPath id="irWin"><rect x="1250" y="160" width="250" height="280" rx="22"></rect></clipPath></defs>
+<g style="transform-box:view-box;transform-origin:800px 330px;animation:{{ roomTAnim }};animation-delay:calc(var(--ip, 0) * -1s)">
+<rect width="1600" height="640" fill="#fff6e9"></rect><rect y="626" width="1600" height="16" fill="#f0dcc2"></rect><rect y="640" width="1600" height="260" fill="#f6e3c8"></rect>
+<path d="M0 700H1600M0 770H1600M0 850H1600" stroke="#ecd3b0" stroke-width="3"></path>
+<path d="M60 62 Q300 112 540 62" stroke="#c9b3a0" stroke-width="2" fill="none"></path><path d="M1060 62 Q1300 112 1540 62" stroke="#c9b3a0" stroke-width="2" fill="none"></path><path d="M82 74 h36 l-18 32z" fill="#f7c6d0"></path><path d="M162 88 h36 l-18 32z" fill="#d7f2e6"></path><path d="M242 96 h36 l-18 32z" fill="#d9c8f2"></path><path d="M322 96 h36 l-18 32z" fill="#f19a8a"></path><path d="M402 88 h36 l-18 32z" fill="#bfe3f2"></path><path d="M482 74 h36 l-18 32z" fill="#f7c6d0"></path><path d="M1082 74 h36 l-18 32z" fill="#d9c8f2"></path><path d="M1162 88 h36 l-18 32z" fill="#f7c6d0"></path><path d="M1242 96 h36 l-18 32z" fill="#d7f2e6"></path><path d="M1322 96 h36 l-18 32z" fill="#f6b98a"></path><path d="M1402 88 h36 l-18 32z" fill="#bfe3f2"></path><path d="M1482 74 h36 l-18 32z" fill="#d9c8f2"></path>
+<g clip-path="url(#irWin)"><rect x="1250" y="160" width="250" height="280" fill="#bfe3f2"></rect><circle cx="1450" cy="215" r="26" fill="#fff1c9"></circle><circle cx="1320" cy="400" r="72" fill="#8fd0a8"></circle><circle cx="1430" cy="390" r="60" fill="#a9dcb9"></circle></g>
+<rect x="1250" y="160" width="250" height="280" rx="22" fill="none" stroke="#f6e3c8" stroke-width="14"></rect><path d="M1375 160V440M1250 300H1500" stroke="#f6e3c8" stroke-width="10"></path>
+<rect x="1500" y="560" width="70" height="70" rx="14" fill="#f19a8a"></rect><ellipse cx="1520" cy="540" rx="16" ry="34" fill="#6cbf8f"></ellipse><ellipse cx="1550" cy="535" rx="16" ry="40" fill="#7acb9b"></ellipse>
+<rect x="470" y="140" width="660" height="380" rx="22" fill="#2a2748"></rect><rect x="490" y="160" width="620" height="340" rx="12" fill="url(#irHero)"></rect>
+<rect x="490" y="160" width="620" height="38" rx="12" fill="#ffffff"></rect><rect x="490" y="184" width="620" height="14" fill="#ffffff"></rect>
+<rect x="506" y="169" width="20" height="20" rx="7" fill="#1a3d7c"></rect><text x="534" y="185" font-family="Fredoka, sans-serif" font-size="16" font-weight="600" fill="#2a2748">CoGuard</text>
+<rect x="954" y="169" width="104" height="20" rx="10" fill="#fbecd9"></rect><rect x="957" y="172" width="36" height="14" rx="7" fill="#ffffff"></rect><circle cx="1084" cy="179" r="9" fill="none" stroke="#2a2748" stroke-width="2.5"></circle>
+<ellipse cx="1050" cy="226" rx="34" ry="10" fill="#ffffff" opacity=".8" style="animation:cgCloud 6s ease-in-out infinite"></ellipse>
+<rect x="520" y="214" width="120" height="18" rx="9" fill="#ffffff"></rect><text x="532" y="227" font-family="Barlow, sans-serif" font-size="11" font-weight="600" fill="#2a2748">Course spec helper</text>
+<text x="520" y="268" font-family="Fredoka, sans-serif" font-size="30" font-weight="600" fill="#1a3d7c">Turn a messy course</text><text x="520" y="302" font-family="Fredoka, sans-serif" font-size="30" font-weight="600" fill="#1a3d7c">spec into a correct one</text>
+<rect x="520" y="318" width="250" height="8" rx="4" fill="#2a2748" opacity=".35"></rect><rect x="520" y="332" width="190" height="8" rx="4" fill="#2a2748" opacity=".35"></rect>
+<rect x="520" y="356" width="150" height="38" rx="19" fill="#1a3d7c"></rect><text x="595" y="380" text-anchor="middle" font-family="Fredoka, sans-serif" font-size="15" font-weight="600" fill="#ffffff">Upload a spec</text>
+<g style="transform-box:fill-box;animation:cgBob 2.4s ease-in-out infinite"><path d="M975 236 V250" stroke="#2a2748" stroke-width="2.5"></path><circle cx="975" cy="233" r="5" fill="#f19a8a"></circle><rect x="935" y="250" width="80" height="56" rx="18" fill="#ffffff" stroke="#1a3d7c" stroke-width="3"></rect><rect x="945" y="260" width="60" height="36" rx="12" fill="#1a3d7c"></rect><ellipse cx="963" cy="276" rx="5" ry="6" fill="#bfe3f2"></ellipse><ellipse cx="987" cy="276" rx="5" ry="6" fill="#bfe3f2"></ellipse><path d="M968 286q7 5 14 0" stroke="#bfe3f2" stroke-width="2.5" fill="none" stroke-linecap="round"></path><rect x="940" y="312" width="70" height="64" rx="18" fill="#ffffff" stroke="#1a3d7c" stroke-width="3"></rect><circle cx="975" cy="342" r="10" fill="#d7f2e6" stroke="#1f7a4c" stroke-width="2"></circle><path d="M1010 336 q20 -4 28 -20" stroke="#1a3d7c" stroke-width="5" fill="none" stroke-linecap="round"></path><rect x="1030" y="282" width="38" height="48" rx="6" fill="#fff6e9" stroke="#1a3d7c" stroke-width="2.5" transform="rotate(8 1049 306)"></rect></g>
+<path d="M1080 250l3 7 7 3-7 3-3 7-3-7-7-3 7-3z" fill="#fff1c9" stroke="#e5b93a" stroke-width="1.5" style="transform-box:fill-box;animation:cgFloat 3s ease-in-out infinite"></path>
+<rect x="600" y="520" width="400" height="10" rx="5" fill="#c99b6d"></rect>
+<rect x="318" y="520" width="26" height="110" rx="13" fill="#2a2748"></rect><rect x="352" y="520" width="26" height="110" rx="13" fill="#2a2748"></rect><ellipse cx="331" cy="632" rx="20" ry="10" fill="#1a3d7c"></ellipse><ellipse cx="365" cy="632" rx="20" ry="10" fill="#1a3d7c"></ellipse>
+<rect x="290" y="330" width="110" height="210" rx="46" fill="#d9c8f2"></rect><path d="M318 334 L345 372 L372 334" fill="#fff6e9"></path>
+<path d="M300 380 Q270 450 290 500" stroke="#c8b2ea" stroke-width="24" fill="none" stroke-linecap="round"></path><circle cx="291" cy="505" r="12" fill="#e8b590"></circle>
+<g style="transform-box:view-box;transform-origin:385px 370px;animation:cgPoint 1.6s ease-in-out infinite"><path d="M385 370 L470 302" stroke="#c8b2ea" stroke-width="24" fill="none" stroke-linecap="round"></path><circle cx="476" cy="297" r="13" fill="#e8b590"></circle><path d="M484 290 L540 248" stroke="#a87b5a" stroke-width="6" stroke-linecap="round"></path></g>
+<circle cx="345" cy="280" r="46" fill="#e8b590"></circle><circle cx="345" cy="222" r="20" fill="#5a3a3a"></circle><path d="M299 282 Q300 228 345 228 Q391 228 391 278 Q370 254 345 256 Q316 256 299 282Z" fill="#5a3a3a"></path>
+<circle cx="329" cy="286" r="11" fill="none" stroke="#2a2748" stroke-width="3"></circle><circle cx="361" cy="286" r="11" fill="none" stroke="#2a2748" stroke-width="3"></circle><path d="M340 286 H350" stroke="#2a2748" stroke-width="3"></path><circle cx="329" cy="287" r="3.5" fill="#2a2748"></circle><circle cx="361" cy="287" r="3.5" fill="#2a2748"></circle>
+<path d="M333 306 Q345 316 357 306" stroke="#2a2748" stroke-width="3" fill="none" stroke-linecap="round"></path><circle cx="315" cy="302" r="6" fill="#f7c6d0"></circle><circle cx="375" cy="302" r="6" fill="#f7c6d0"></circle>
+<g style="transform-box:view-box;transform-origin:300px 215px;animation:{{ bubbleAnim }};animation-delay:calc(var(--ip, 0) * -1s)"><rect x="70" y="120" width="300" height="76" rx="38" fill="#ffffff" stroke="#2a2748" stroke-width="3"></rect><path d="M262 194 L300 222 L240 195" fill="#ffffff" stroke="#2a2748" stroke-width="3" stroke-linejoin="round"></path><rect x="236" y="188" width="34" height="8" fill="#ffffff"></rect><text x="220" y="167" text-anchor="middle" font-family="Fredoka, sans-serif" font-size="24" font-weight="600" fill="#1a3d7c">Let's fix this spec!</text></g>
+<rect x="210" y="660" width="340" height="24" rx="10" fill="#c99b6d"></rect><rect x="220" y="684" width="320" height="44" fill="#b88a5d"></rect>
+<rect x="300" y="558" width="160" height="100" rx="10" fill="#2a2748"></rect><rect x="308" y="566" width="144" height="84" rx="6" fill="#bfe3f2"></rect><rect x="320" y="578" width="70" height="9" rx="4.5" fill="#1a3d7c"></rect><rect x="320" y="596" width="104" height="7" rx="3.5" fill="#ffffff"></rect><rect x="320" y="610" width="84" height="7" rx="3.5" fill="#ffffff"></rect>
+<rect x="285" y="652" width="190" height="10" rx="5" fill="#9aa3b2"></rect>
+<circle cx="338" cy="660" r="11" fill="#f2c9a8" style="transform-box:fill-box;animation:cgTap .45s ease-in-out infinite;animation-delay:0s"></circle><circle cx="422" cy="660" r="11" fill="#f2c9a8" style="transform-box:fill-box;animation:cgTap .45s ease-in-out infinite;animation-delay:-0.22s"></circle><rect x="630" y="660" width="340" height="24" rx="10" fill="#c99b6d"></rect><rect x="640" y="684" width="320" height="44" fill="#b88a5d"></rect>
+<rect x="720" y="558" width="160" height="100" rx="10" fill="#2a2748"></rect><rect x="728" y="566" width="144" height="84" rx="6" fill="#bfe3f2"></rect><rect x="740" y="578" width="70" height="9" rx="4.5" fill="#1a3d7c"></rect><rect x="740" y="596" width="104" height="7" rx="3.5" fill="#ffffff"></rect><rect x="740" y="610" width="84" height="7" rx="3.5" fill="#ffffff"></rect>
+<rect x="705" y="652" width="190" height="10" rx="5" fill="#9aa3b2"></rect>
+<circle cx="758" cy="660" r="11" fill="#c98e65" style="transform-box:fill-box;animation:cgTap .45s ease-in-out infinite;animation-delay:-0.5s"></circle><circle cx="842" cy="660" r="11" fill="#c98e65" style="transform-box:fill-box;animation:cgTap .45s ease-in-out infinite;animation-delay:-0.72s"></circle><rect x="1050" y="660" width="340" height="24" rx="10" fill="#c99b6d"></rect><rect x="1060" y="684" width="320" height="44" fill="#b88a5d"></rect>
+<rect x="1140" y="558" width="160" height="100" rx="10" fill="#2a2748"></rect><rect x="1148" y="566" width="144" height="84" rx="6" fill="#bfe3f2"></rect><rect x="1160" y="578" width="70" height="9" rx="4.5" fill="#1a3d7c"></rect><rect x="1160" y="596" width="104" height="7" rx="3.5" fill="#ffffff"></rect><rect x="1160" y="610" width="84" height="7" rx="3.5" fill="#ffffff"></rect>
+<rect x="1125" y="652" width="190" height="10" rx="5" fill="#9aa3b2"></rect>
+<circle cx="1178" cy="660" r="11" fill="#8d5a3b" style="transform-box:fill-box;animation:cgTap .45s ease-in-out infinite;animation-delay:-1s"></circle><circle cx="1262" cy="660" r="11" fill="#8d5a3b" style="transform-box:fill-box;animation:cgTap .45s ease-in-out infinite;animation-delay:-1.22s"></circle><g style="transform-box:fill-box;animation:cgBob 1.6s ease-in-out infinite;animation-delay:0s"><rect x="285" y="800" width="190" height="150" rx="70" fill="#8fd6a8"></rect><rect x="364" y="786" width="32" height="24" fill="#f2c9a8"></rect><circle cx="330" cy="762" r="12" fill="#f2c9a8"></circle><circle cx="430" cy="762" r="12" fill="#f2c9a8"></circle><circle cx="380" cy="755" r="50" fill="#f2c9a8"></circle><circle cx="380" cy="748" r="52" fill="#3b2b3f"></circle></g><g style="transform-box:fill-box;animation:cgBob 1.6s ease-in-out infinite;animation-delay:-0.5s"><rect x="705" y="800" width="190" height="150" rx="70" fill="#f7c6d0"></rect><rect x="784" y="786" width="32" height="24" fill="#c98e65"></rect><circle cx="750" cy="762" r="12" fill="#c98e65"></circle><circle cx="850" cy="762" r="12" fill="#c98e65"></circle><circle cx="800" cy="755" r="50" fill="#c98e65"></circle><circle cx="744" cy="716" r="22" fill="#2a2748"></circle><circle cx="856" cy="716" r="22" fill="#2a2748"></circle><circle cx="800" cy="748" r="52" fill="#2a2748"></circle></g><g style="transform-box:fill-box;animation:cgBob 1.6s ease-in-out infinite;animation-delay:-1s"><rect x="1125" y="800" width="190" height="150" rx="70" fill="#7fbfe6"></rect><rect x="1204" y="786" width="32" height="24" fill="#8d5a3b"></rect><circle cx="1170" cy="762" r="12" fill="#8d5a3b"></circle><circle cx="1270" cy="762" r="12" fill="#8d5a3b"></circle><circle cx="1220" cy="755" r="50" fill="#8d5a3b"></circle><circle cx="1220" cy="694" r="22" fill="#6b4a2b"></circle><circle cx="1220" cy="748" r="52" fill="#6b4a2b"></circle></g>
+</g></svg></div>
+  <sc-if value="{{ introAnimated }}" hint-placeholder-val="{{ true }}">
+    <div aria-hidden="true" style="position:absolute;inset:0;background:linear-gradient(180deg,#bfe3f2 0%,#d7f2e6 100%);animation:inScreen 1s linear both paused;animation-delay:calc(var(--ip, 0) * -1s)"></div>
+    <div style="position:absolute;left:16px;right:16px;bottom:clamp(96px,16vh,150px);display:grid;justify-items:center;text-align:center;opacity:calc(1 - var(--ip, 0) * 7);pointer-events:none">
+      <div style="padding:14px 26px;border-radius:24px;background:rgba(255,246,233,.92);border:2px solid #f7c6d0;box-shadow:0 10px 30px rgba(42,39,72,.12);max-width:640px;animation:cgRise 1.2s var(--ease) both">
+        <p style="margin:0 0 2px;font:600 15px Barlow,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#5b5670">Welcome to</p>
+        <h1 style="margin:0;font:600 clamp(26px,4.6vw,46px)/1.1 Fredoka,sans-serif;color:#1a3d7c;text-wrap:balance">Ramaiah University of Applied Sciences</h1>
+      </div>
+    </div>
+    <div aria-hidden="true" style="position:absolute;left:0;right:0;bottom:24px;display:grid;justify-items:center;gap:6px;opacity:calc(1 - var(--ip, 0) * 12);pointer-events:none;color:#2a2748;font:600 15px Barlow,sans-serif">
+      <span style="padding:4px 14px;border-radius:999px;background:rgba(255,246,233,.9)">Scroll to step inside</span>
+      <svg width="26" height="38" viewBox="0 0 26 38" fill="none" style="animation:cgHint 1.4s ease-in-out infinite"><rect x="2" y="2" width="22" height="34" rx="11" fill="#fff6e9" stroke="#2a2748" stroke-width="2.5"></rect><path d="M13 9v7" stroke="#f19a8a" stroke-width="3" stroke-linecap="round"></path></svg>
+    </div>
+  </sc-if>
+  <button type="button" onClick="{{ skipIntro }}" style="position:absolute;top:16px;right:16px;z-index:5;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border-radius:999px;border:2px solid #2a2748;background:#fff6e9;color:#2a2748;font:600 16px Fredoka,sans-serif;cursor:pointer;box-shadow:0 4px 0 #2a2748;transition:transform .2s var(--ease)" style-hover="transform:translateY(-2px)">Skip intro<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 17 5-5-5-5"></path><path d="m13 17 5-5-5-5"></path></svg></button>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ appOn }}" hint-placeholder-val="{{ true }}">
+<header style="position:sticky;top:0;z-index:30;background:color-mix(in oklab,var(--surface) 90%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border)">
+  <div style="max-width:1160px;margin:0 auto;padding:10px 16px;display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px">
+    <button type="button" onClick="{{ goHome }}" aria-label="CoGuard home" style="display:flex;align-items:center;gap:10px;background:none;border:none;padding:4px 6px;border-radius:14px;cursor:pointer;color:var(--text);flex:1 1 auto;min-height:44px">
+      <svg width="34" height="34" viewBox="0 0 34 34" fill="none" aria-hidden="true"><rect x="1" y="1" width="32" height="32" rx="11" fill="var(--brand-fill)"></rect><path d="M17 8.5c2.6 1.7 5 2.4 7.5 2.6v5.6c0 4.7-3.2 7.6-7.5 9-4.3-1.4-7.5-4.3-7.5-9v-5.6c2.5-.2 4.9-.9 7.5-2.6Z" stroke="#fff" stroke-width="1.75" stroke-linejoin="round"></path><path d="m13.6 17.2 2.4 2.4 4.4-4.6" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      <span style="font-family:Fredoka,Barlow,sans-serif;font-weight:600;font-size:22px;letter-spacing:-.01em">CoGuard</span>
+    </button>
+    <nav aria-label="Main" style="display:flex;gap:4px">
+      <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="2">
+        <button type="button" onClick="{{ n.onClick }}" aria-current="{{ n.current }}" style="min-height:44px;padding:0 14px;border-radius:999px;border:none;background:{{ n.bg }};color:{{ n.fg }};font:500 16px Barlow,sans-serif;cursor:pointer;transition:background .3s var(--ease)" style-hover="background:var(--surface-2)">{{ n.label }}</button>
+      </sc-for>
+    </nav>
+    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+      <div role="radiogroup" aria-label="Role" style="display:flex;gap:2px;padding:4px;border-radius:999px;background:var(--surface-2);border:1px solid var(--border)">
+        <sc-for list="{{ roles }}" as="r" hint-placeholder-count="3">
+          <button type="button" role="radio" aria-checked="{{ r.active }}" onClick="{{ r.onClick }}" style="min-height:36px;padding:0 14px;border-radius:999px;border:none;background:{{ r.bg }};color:{{ r.fg }};box-shadow:{{ r.shadow }};font:600 15px Barlow,sans-serif;cursor:pointer;transition:all .35s var(--ease)">{{ r.label }}</button>
+        </sc-for>
+      </div>
+      <button type="button" onClick="{{ toggleTheme }}" aria-label="Switch light or dark theme" style="width:44px;height:44px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--text);display:grid;place-items:center;cursor:pointer;transition:transform .3s var(--ease)" style-hover="transform:rotate(-12deg)">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>
+      </button>
+      <button type="button" onClick="{{ openSettings }}" aria-label="Settings" aria-haspopup="dialog" style="width:44px;height:44px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--text);display:grid;place-items:center;cursor:pointer;transition:transform .5s var(--ease)" style-hover="transform:rotate(45deg)">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+<section data-screen-label="01 Home" aria-labelledby="hero-title" style="position:relative;overflow:hidden;background:linear-gradient(180deg,var(--sky) 0%,var(--mint) 100%)">
+  <div aria-hidden="true" style="position:absolute;top:40px;left:6%;width:140px;height:44px;border-radius:999px;background:rgba(255,255,255,.7);animation:cgCloud 9s ease-in-out infinite"></div>
+  <div aria-hidden="true" style="position:absolute;top:110px;right:8%;width:100px;height:34px;border-radius:999px;background:rgba(255,255,255,.55);animation:cgCloud 11s ease-in-out infinite reverse"></div>
+  <div style="position:relative;max-width:1160px;margin:0 auto;padding:clamp(40px,8vw,96px) 16px clamp(64px,10vw,120px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:32px;align-items:center">
+    <div style="animation:cgRise 1s var(--ease) both">
+      <p style="display:inline-flex;align-items:center;gap:8px;margin:0 0 20px;padding:6px 14px;border-radius:999px;background:var(--surface);border:1.5px solid var(--border);font-size:15px;font-weight:600;color:var(--text)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f19a8a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"></path></svg>Course spec helper
+      </p>
+      <h1 id="hero-title" style="font-family:Fredoka,Barlow,sans-serif;font-weight:600;font-size:clamp(36px,6vw,60px);line-height:1.08;letter-spacing:-.02em;margin:0 0 20px;color:var(--brand-text);text-wrap:balance">Turn a messy course spec into a correct one</h1>
+      <p style="font-size:clamp(17px,2vw,20px);line-height:1.6;color:var(--text);max-width:36ch;margin:0 0 32px;text-wrap:pretty">CoGuard reads your spec, fixes what's off, and builds the CO-PO-PSO map with a reason for every mark.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:12px">
+        <button type="button" onClick="{{ goUpload }}" style="display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:0 26px;border-radius:999px;border:none;background:var(--brand-fill);color:#ffffff;font:600 17px Fredoka,Barlow,sans-serif;cursor:pointer;box-shadow:0 5px 0 #10295a;transition:transform .25s var(--ease),box-shadow .25s var(--ease)" style-hover="transform:translateY(-2px);box-shadow:0 7px 0 #10295a" style-active="transform:translateY(3px);box-shadow:0 2px 0 #10295a">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>Upload a spec
+        </button>
+        <button type="button" onClick="{{ goDashboard }}" style="min-height:52px;padding:0 22px;border-radius:999px;border:1.5px solid var(--border);background:var(--surface);color:var(--text);font:600 17px Barlow,sans-serif;cursor:pointer;transition:transform .25s var(--ease)" style-hover="transform:translateY(-2px)">See my specs</button>
+      </div>
+    </div>
+    <div aria-hidden="true" style="display:grid;place-items:center;animation:cgRise 1.3s var(--ease) .15s both">
+      <svg viewBox="0 0 440 360" width="100%" style="max-width:440px" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <ellipse cx="220" cy="330" rx="200" ry="16" fill="#2a2748" opacity=".08"></ellipse>
+        <g transform="rotate(-14 70 300)"><rect x="22" y="262" width="78" height="56" rx="8" fill="#fff6e9" stroke="#2a2748" stroke-width="2.5"></rect><path d="M34 280c10-6 18 6 28 0s14 4 24 0M34 298c12 4 20-6 40 0" stroke="#f19a8a" stroke-width="2.5"></path></g>
+        <g transform="rotate(10 110 310)"><rect x="70" y="282" width="70" height="46" rx="8" fill="#ffffff" stroke="#2a2748" stroke-width="2.5"></rect><path d="M82 298h30M82 312h20" stroke="#d9c8f2" stroke-width="3"></path><path d="M120 296l10 10M130 296l-10 10" stroke="#f29fb0" stroke-width="2.5"></path></g>
+        <g style="transform-box:fill-box;animation:cgBob 3s ease-in-out infinite">
+          <path d="M190 64 V88" stroke="#2a2748" stroke-width="3"></path><path d="M190 64c-4-8-14-4-10 4l10 8 10-8c4-8-6-12-10-4z" fill="#f19a8a"></path>
+          <rect x="130" y="88" width="120" height="84" rx="28" fill="#ffffff" stroke="#1a3d7c" stroke-width="3"></rect>
+          <rect x="146" y="102" width="88" height="54" rx="18" fill="#1a3d7c"></rect>
+          <ellipse cx="172" cy="126" rx="7" ry="9" fill="#bfe3f2" style="transform-box:fill-box;transform-origin:center;animation:cgBlink 4s infinite"></ellipse><ellipse cx="208" cy="126" rx="7" ry="9" fill="#bfe3f2" style="transform-box:fill-box;transform-origin:center;animation:cgBlink 4s infinite"></ellipse>
+          <path d="M178 142q12 9 24 0" stroke="#bfe3f2" stroke-width="3"></path><circle cx="156" cy="146" r="5" fill="#f7c6d0"></circle><circle cx="224" cy="146" r="5" fill="#f7c6d0"></circle>
+          <rect x="180" y="172" width="20" height="10" fill="#f6e3c8"></rect>
+          <rect x="140" y="180" width="100" height="96" rx="26" fill="#ffffff" stroke="#1a3d7c" stroke-width="3"></rect>
+          <circle cx="190" cy="222" r="15" fill="#d7f2e6" stroke="#1f7a4c" stroke-width="2.5"></circle><path d="M183 222l5 5 9-10" stroke="#1f7a4c" stroke-width="3"></path>
+          <path d="M140 214q-26 12-34 40" stroke="#1a3d7c" stroke-width="6"></path><path d="M106 254l-8 22" stroke="#a87b5a" stroke-width="4"></path><path d="M90 276q8 10 18 0q-4 12-18 0z" fill="#f19a8a" stroke="#f19a8a" stroke-width="4"></path>
+          <path d="M240 212q30-6 44-28" stroke="#1a3d7c" stroke-width="6"></path><circle cx="286" cy="182" r="8" fill="#ffffff" stroke="#1a3d7c" stroke-width="3"></circle>
+          <ellipse cx="165" cy="286" rx="18" ry="10" fill="#2a2748"></ellipse><ellipse cx="215" cy="286" rx="18" ry="10" fill="#2a2748"></ellipse>
+        </g>
+        <g transform="rotate(8 306 172)"><rect x="280" y="136" width="54" height="68" rx="8" fill="#fff6e9" stroke="#1a3d7c" stroke-width="2.5"></rect><path d="M290 152h34M290 164h26M290 176h30" stroke="#5f7fc0" stroke-width="2.5"></path><rect x="290" y="186" width="9" height="9" rx="3" fill="#1a3d7c"></rect><rect x="302" y="186" width="9" height="9" rx="3" fill="#5f7fc0"></rect><rect x="314" y="186" width="9" height="9" rx="3" fill="#b9cdf0"></rect></g>
+        <path d="M340 110l3 8 8 3-8 3-3 8-3-8-8-3 8-3z" fill="#fff1c9" stroke="#e5b93a" stroke-width="1.5" style="transform-box:fill-box;animation:cgFloat 3s ease-in-out infinite"></path>
+        <rect x="372" y="262" width="14" height="56" rx="7" fill="#2a2748"></rect><rect x="394" y="262" width="14" height="56" rx="7" fill="#2a2748"></rect><ellipse cx="379" cy="320" rx="13" ry="7" fill="#f19a8a"></ellipse><ellipse cx="401" cy="320" rx="13" ry="7" fill="#f19a8a"></ellipse>
+        <rect x="356" y="176" width="68" height="100" rx="28" fill="#d9c8f2"></rect>
+        <path d="M362 204q-22 -4 -30 -20" stroke="#d9c8f2" stroke-width="14"></path><circle cx="332" cy="184" r="8" fill="#f2c9a8"></circle>
+        <circle cx="390" cy="140" r="32" fill="#f2c9a8"></circle><path d="M358 140q0-38 34-38q34 0 30 36q-12-14-34-16q-18 0-30 18z" fill="#3b2b3f"></path>
+        <circle cx="380" cy="144" r="3.5" fill="#2a2748"></circle><circle cx="400" cy="144" r="3.5" fill="#2a2748"></circle><path d="M382 156q8 7 16 0" stroke="#2a2748" stroke-width="2.5"></path><circle cx="372" cy="154" r="5" fill="#f7c6d0"></circle><circle cx="408" cy="154" r="5" fill="#f7c6d0"></circle>
+      </svg>
+    </div>
+  </div>
+  <svg aria-hidden="true" viewBox="0 0 1440 60" preserveAspectRatio="none" style="position:absolute;left:0;bottom:-1px;width:100%;height:40px;display:block"><path d="M0 30 Q180 0 360 30 T720 30 T1080 30 T1440 30 V60 H0Z" fill="var(--bg)"></path></svg>
+</section>
+</sc-if>
+
+<sc-if value="{{ inFlow }}" hint-placeholder-val="{{ false }}">
+  <div style="max-width:1160px;margin:0 auto;padding:20px 16px 0">
+    <ol aria-label="Steps" style="list-style:none;margin:0;padding:4px;display:flex;gap:6px;overflow-x:auto;border-radius:999px;background:var(--surface);border:1px solid var(--border);width:fit-content;max-width:100%;box-sizing:border-box">
+      <sc-for list="{{ steps }}" as="s" hint-placeholder-count="5">
+        <li style="flex:0 0 auto">
+          <button type="button" onClick="{{ s.onClick }}" aria-current="{{ s.current }}" style="display:flex;align-items:center;gap:8px;min-height:40px;padding:0 14px 0 6px;border-radius:999px;border:none;background:{{ s.bg }};color:{{ s.fg }};font:600 15px Barlow,sans-serif;cursor:pointer;white-space:nowrap;transition:background .35s var(--ease)">
+            <span style="width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:{{ s.numBg }};color:{{ s.numFg }};font:600 14px Fredoka,sans-serif">{{ s.n }}</span>{{ s.label }}
+          </button>
+        </li>
+      </sc-for>
+    </ol>
+  </div>
+</sc-if>
+
+<main style="max-width:1160px;margin:0 auto;padding:28px 16px 72px">
+
+<sc-if value="{{ isUpload }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="02 Upload" aria-labelledby="up-title" style="animation:cgRise .8s var(--ease) both">
+  <h2 id="up-title" style="font:600 clamp(28px,4vw,36px)/1.15 Fredoka,sans-serif;margin:0 0 8px;color:var(--text)">Upload your files</h2>
+  <p style="margin:0 0 24px;color:var(--text-muted);max-width:60ch">Add the course spec. A question-paper blueprint helps CoGuard check assessment marks, but you can skip it.</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:20px">
+    <sc-for list="{{ zones }}" as="z" hint-placeholder-count="2">
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
+          <h3 id="{{ z.labelId }}" style="font:600 19px Fredoka,sans-serif;margin:0;color:var(--text)">{{ z.title }}</h3>
+          <span style="padding:2px 12px;border-radius:999px;font:600 14px Barlow,sans-serif;background:{{ z.tagBg }};color:{{ z.tagFg }}">{{ z.tag }}</span>
+        </div>
+        <input type="file" ref="{{ z.ref }}" onChange="{{ z.onChange }}" accept=".docx,.pdf,.html,.htm,.doc" tabindex="-1" aria-hidden="true" style="display:none">
+        <button type="button" onClick="{{ z.pick }}" onDragOver="{{ z.onDragOver }}" onDragLeave="{{ z.onDragLeave }}" onDrop="{{ z.onDrop }}" aria-describedby="{{ z.descId }}" aria-labelledby="{{ z.labelId }}" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;min-height:200px;padding:28px 20px;border-radius:24px;border:2px dashed {{ z.border }};background:{{ z.bg }};color:var(--text);cursor:pointer;text-align:center;transition:all .4s var(--ease)" style-hover="border-color:var(--brand-text);transform:translateY(-2px)">
+          <span style="width:56px;height:56px;border-radius:18px;display:grid;place-items:center;background:var(--brand-soft);color:var(--brand-text)">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+          </span>
+          <span style="font:600 17px Barlow,sans-serif">Drop a file here or <span style="color:var(--brand-text);text-decoration:underline;text-underline-offset:3px">browse</span></span>
+          <span id="{{ z.descId }}" style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px">
+            <sc-for list="{{ accepted }}" as="t" hint-placeholder-count="4"><span style="padding:2px 10px;border-radius:999px;background:var(--surface-2);border:1px solid var(--border);font-size:14px;color:var(--text-muted)">{{ t }}</span></sc-for>
+          </span>
+        </button>
+        <sc-if value="{{ z.error }}" hint-placeholder-val="{{ false }}">
+          <p role="alert" style="display:flex;align-items:center;gap:8px;margin:0;color:var(--sev-high-fg);font-weight:500">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4"></path><path d="M12 16h.01"></path></svg>{{ z.error }}
+          </p>
+        </sc-if>
+        <sc-if value="{{ z.file }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;align-items:center;gap:12px;padding:12px 12px 12px 14px;border-radius:18px;background:var(--surface);border:1px solid var(--border);box-shadow:var(--shadow-soft);animation:cgRise .6s var(--ease) both">
+            <span style="width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:var(--surface-2);color:var(--brand-text);flex:none">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+            </span>
+            <span style="flex:1;min-width:0">
+              <span style="display:block;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ z.file.name }}</span>
+              <span style="display:block;font-size:15px;color:var(--text-muted)">{{ z.file.size }}</span>
+            </span>
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--ok-ink)" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Added"><path d="M20 6 9 17l-5-5" stroke-dasharray="30" style="animation:cgDraw .7s var(--ease) .15s both"></path></svg>
+            <button type="button" onClick="{{ z.remove }}" aria-label="{{ z.removeLabel }}" style="width:40px;height:40px;border-radius:999px;border:none;background:transparent;color:var(--text-muted);display:grid;place-items:center;cursor:pointer" style-hover="background:var(--surface-2)">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+            </button>
+          </div>
+        </sc-if>
+      </div>
+    </sc-for>
+  </div>
+  <div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:28px">
+    <button type="button" onClick="{{ readFiles }}" aria-busy="{{ reading }}" style="position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:0 28px;border-radius:999px;border:none;background:var(--brand-fill);color:#fff;font:600 17px Fredoka,sans-serif;cursor:pointer;transition:background .3s var(--ease),transform .3s var(--ease)" style-hover="background:var(--brand-fill-hover);transform:translateY(-1px)">
+      <sc-if value="{{ reading }}" hint-placeholder-val="{{ false }}"><span aria-hidden="true" style="position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.35) 50%,transparent 70%);background-size:200% 100%;animation:cgShimmer 1.3s linear infinite"></span></sc-if>
+      <span style="position:relative">{{ readLabel }}</span>
+    </button>
+    <button type="button" onClick="{{ useSamples }}" style="min-height:44px;padding:0 18px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--brand-text);font:600 16px Barlow,sans-serif;cursor:pointer" style-hover="background:var(--surface-2)">Use sample files</button>
+  </div>
+  <sc-if value="{{ reading }}" hint-placeholder-val="{{ false }}">
+    <div aria-live="polite" style="margin-top:28px;display:grid;gap:12px;max-width:640px">
+      <p style="margin:0;color:var(--text-muted)">Reading the spec and finding the template…</p>
+      <div style="height:18px;width:60%;border-radius:999px;background:linear-gradient(90deg,var(--surface-2) 0%,var(--border) 50%,var(--surface-2) 100%);background-size:200% 100%;animation:cgShimmer 1.4s linear infinite"></div>
+      <div style="height:96px;border-radius:20px;background:linear-gradient(90deg,var(--surface-2) 0%,var(--border) 50%,var(--surface-2) 100%);background-size:200% 100%;animation:cgShimmer 1.4s linear infinite"></div>
+      <div style="height:18px;width:80%;border-radius:999px;background:linear-gradient(90deg,var(--surface-2) 0%,var(--border) 50%,var(--surface-2) 100%);background-size:200% 100%;animation:cgShimmer 1.4s linear infinite"></div>
+    </div>
+  </sc-if>
+</section>
+</sc-if>
+
+<sc-if value="{{ isParsed }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="03 Parsed review" aria-labelledby="pr-title" style="animation:cgRise .8s var(--ease) both">
+  <h2 id="pr-title" style="font:600 clamp(28px,4vw,36px)/1.15 Fredoka,sans-serif;margin:0 0 8px">Check what CoGuard found</h2>
+  <p style="margin:0 0 24px;color:var(--text-muted);max-width:60ch">If anything looks wrong, fix it here before the map is built.</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:20px;align-items:start">
+    <div style="padding:24px;border-radius:24px;background:var(--surface);border:1px solid var(--border);box-shadow:var(--shadow-soft)">
+      <p style="margin:0 0 10px;font-size:15px;font-weight:600;color:var(--text-muted)">Template</p>
+      <span style="display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:999px;background:var(--brand-soft);color:var(--brand-text);font:600 18px Fredoka,sans-serif">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>{{ tplLabel }}
+      </span>
+      <sc-if value="{{ overrideApplied }}" hint-placeholder-val="{{ false }}"><p style="margin:10px 0 0;font-size:15px;color:var(--text-muted)">Changed by you. Reason: {{ overrideReasonShown }}</p></sc-if>
+      <p style="margin:20px 0 8px;font-weight:600">Signals used</p>
+      <ul style="list-style:none;margin:0;padding:0;display:grid;gap:8px">
+        <sc-for list="{{ signals }}" as="sig" hint-placeholder-count="3">
+          <li style="display:flex;gap:10px;align-items:flex-start;color:var(--text)"><span style="flex:none;margin-top:4px;width:18px;height:18px;border-radius:50%;background:var(--st-ok-bg);color:var(--ok-ink);display:grid;place-items:center"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg></span>{{ sig }}</li>
+        </sc-for>
+      </ul>
+      <button type="button" onClick="{{ toggleOverride }}" aria-expanded="{{ overrideOpen }}" style="margin-top:20px;min-height:44px;padding:0 18px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--brand-text);font:600 16px Barlow,sans-serif;cursor:pointer" style-hover="background:var(--surface-2)">Change template</button>
+      <sc-if value="{{ overrideOpen }}" hint-placeholder-val="{{ false }}">
+        <div style="margin-top:16px;padding:16px;border-radius:18px;background:var(--surface-2);display:grid;gap:14px;animation:cgRise .5s var(--ease) both">
+          <div role="radiogroup" aria-label="Template" style="display:flex;gap:4px;padding:4px;border-radius:999px;background:var(--surface);border:1px solid var(--border);width:fit-content">
+            <sc-for list="{{ tplOptions }}" as="o" hint-placeholder-count="2">
+              <button type="button" role="radio" aria-checked="{{ o.active }}" onClick="{{ o.onClick }}" style="min-height:40px;padding:0 16px;border-radius:999px;border:none;background:{{ o.bg }};color:{{ o.fg }};font:600 15px Barlow,sans-serif;cursor:pointer">{{ o.label }}</button>
+            </sc-for>
+          </div>
+          <label for="ov-reason" style="font-weight:600">Reason <span style="font-weight:400;color:var(--text-muted)">(required)</span></label>
+          <textarea id="ov-reason" value="{{ overrideReason }}" onChange="{{ onReason }}" rows="3" aria-invalid="{{ overrideInvalid }}" aria-describedby="ov-err" placeholder="Why is the detected template wrong?" style="width:100%;box-sizing:border-box;padding:12px 14px;border-radius:14px;border:1.5px solid {{ reasonBorder }};background:var(--surface);color:var(--text);font:16px/1.5 Barlow,sans-serif;resize:vertical"></textarea>
+          <sc-if value="{{ overrideError }}" hint-placeholder-val="{{ false }}"><p id="ov-err" role="alert" style="margin:-6px 0 0;color:var(--sev-high-fg);font-weight:500">{{ overrideError }}</p></sc-if>
+          <button type="button" onClick="{{ applyOverride }}" style="justify-self:start;min-height:44px;padding:0 22px;border-radius:999px;border:none;background:var(--brand-fill);color:#fff;font:600 16px Fredoka,sans-serif;cursor:pointer" style-hover="background:var(--brand-fill-hover)">Apply change</button>
+        </div>
+      </sc-if>
+    </div>
+    <div style="padding:24px;border-radius:24px;background:var(--surface);border:1px solid var(--border);box-shadow:var(--shadow-soft)">
+      <p style="margin:0 0 14px;font-size:15px;font-weight:600;color:var(--text-muted)">Course details</p>
+      <dl style="margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:16px 20px">
+        <sc-for list="{{ details }}" as="d" hint-placeholder-count="5">
+          <div><dt style="font-size:15px;color:var(--text-muted)">{{ d.k }}</dt><dd style="margin:2px 0 0;font:600 18px Fredoka,sans-serif">{{ d.v }}</dd></div>
+        </sc-for>
+      </dl>
+    </div>
+  </div>
+  <h3 style="font:600 22px Fredoka,sans-serif;margin:36px 0 6px">Course outcomes</h3>
+  <p style="margin:0 0 16px;color:var(--text-muted)">Each outcome gets a Bloom's level from 1 Remember to 6 Create.</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:16px">
+    <sc-for list="{{ cos }}" as="co" hint-placeholder-count="5">
+      <article style="padding:20px;border-radius:20px;background:var(--surface);border:1px solid var(--border);box-shadow:var(--shadow-soft);transition:transform .45s var(--ease),box-shadow .45s var(--ease)" style-hover="transform:translateY(-4px);box-shadow:var(--shadow-lift)">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px">
+          <span style="font:600 18px Fredoka,sans-serif;color:var(--brand-text)">{{ co.id }}</span>
+          <span style="padding:3px 12px;border-radius:999px;background:{{ co.bloomBg }};color:{{ co.bloomFg }};font:600 14px Barlow,sans-serif">{{ co.bloomLabel }}</span>
+        </div>
+        <p style="margin:0;color:var(--text)">{{ co.text }}</p>
+      </article>
+    </sc-for>
+  </div>
+  <div style="margin-top:28px"><button type="button" onClick="{{ goMap }}" style="min-height:52px;padding:0 28px;border-radius:999px;border:none;background:var(--brand-fill);color:#fff;font:600 17px Fredoka,sans-serif;cursor:pointer" style-hover="background:var(--brand-fill-hover)">Looks right, build the map</button></div>
+</section>
+</sc-if>
+
+<sc-if value="{{ isMap }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="04 CO-PO-PSO map" aria-labelledby="map-title" style="animation:cgRise .8s var(--ease) both">
+  <h2 id="map-title" style="font:600 clamp(28px,4vw,36px)/1.15 Fredoka,sans-serif;margin:0 0 8px">CO-PO-PSO map</h2>
+  <p style="margin:0 0 18px;color:var(--text-muted);max-width:62ch">Tap or hover a cell to see why it got that mark. {{ mapHint }}</p>
+  <div aria-label="Legend" style="display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin-bottom:16px;padding:12px 16px;border-radius:18px;background:var(--surface);border:1px solid var(--border);width:fit-content;max-width:100%;box-sizing:border-box">
+    <span style="font-weight:600">3 dark, 2 medium, 1 light</span>
+    <span style="display:flex;align-items:center;gap:6px"><span style="width:28px;height:28px;border-radius:9px;background:var(--s3-bg);color:var(--s3-fg);display:grid;place-items:center;font:600 14px Fredoka,sans-serif">3</span>Very strong</span>
+    <span style="display:flex;align-items:center;gap:6px"><span style="width:28px;height:28px;border-radius:9px;background:var(--s2-bg);color:var(--s2-fg);display:grid;place-items:center;font:600 14px Fredoka,sans-serif">2</span>Strong</span>
+    <span style="display:flex;align-items:center;gap:6px"><span style="width:28px;height:28px;border-radius:9px;background:var(--s1-bg);color:var(--s1-fg);display:grid;place-items:center;font:600 14px Fredoka,sans-serif">1</span>Moderate</span>
+    <span style="display:flex;align-items:center;gap:6px"><span style="width:28px;height:28px;border-radius:9px;border:1.5px dotted var(--s0-border);box-sizing:border-box"></span>Blank</span>
+  </div>
+  <div tabindex="0" role="region" aria-label="Map table, scrolls sideways" style="overflow:auto;max-height:520px;border-radius:24px;background:var(--surface);border:1px solid var(--border);box-shadow:var(--shadow-soft)">
+    <table style="border-collapse:separate;border-spacing:0;min-width:100%;font-size:15px">
+      <thead>
+        <tr>
+          <th scope="col" style="position:sticky;top:0;left:0;z-index:3;background:var(--surface-2);text-align:left;padding:12px 14px;font:600 15px Barlow,sans-serif;border-bottom:1px solid var(--border);border-right:1px solid var(--border);white-space:nowrap">CO · Bloom</th>
+          <sc-for list="{{ cols }}" as="c" hint-placeholder-count="13">
+            <th scope="col" style="position:sticky;top:0;z-index:2;background:var(--surface-2);padding:12px 6px;font:600 14px Barlow,sans-serif;border-bottom:1px solid var(--border);white-space:nowrap;min-width:52px">{{ c }}</th>
+          </sc-for>
+        </tr>
+      </thead>
+      <tbody>
+        <sc-for list="{{ mapRows }}" as="row" hint-placeholder-count="5">
+          <tr>
+            <th scope="row" style="position:sticky;left:0;z-index:1;background:var(--surface);text-align:left;padding:8px 14px;border-right:1px solid var(--border);border-bottom:1px solid var(--border);white-space:nowrap">
+              <span style="display:flex;align-items:center;gap:8px"><span style="font:600 16px Fredoka,sans-serif">{{ row.id }}</span><span style="padding:1px 8px;border-radius:999px;background:{{ row.bloomBg }};color:{{ row.bloomFg }};font:600 13px Barlow,sans-serif">{{ row.bloomShort }}</span></span>
+            </th>
+            <sc-for list="{{ row.cells }}" as="cell" hint-placeholder-count="13">
+              <td style="padding:5px;border-bottom:1px solid var(--border);text-align:center">
+                <button type="button" title="{{ cell.title }}" aria-label="{{ cell.aria }}" aria-pressed="{{ cell.selected }}" onClick="{{ cell.onClick }}" onMouseEnter="{{ cell.onClick }}" onFocus="{{ cell.onClick }}" style="width:42px;height:42px;border-radius:12px;border:{{ cell.border }};background:{{ cell.bg }};color:{{ cell.fg }};font:700 19px Fredoka,sans-serif;cursor:pointer;box-shadow:{{ cell.ring }};transition:transform .3s var(--ease)" style-hover="transform:scale(1.08)">{{ cell.label }}</button>
+              </td>
+            </sc-for>
+          </tr>
+        </sc-for>
+      </tbody>
+    </table>
+  </div>
+  <div aria-live="polite" style="margin-top:16px;padding:18px 20px;border-radius:20px;background:var(--surface);border:1px solid var(--border);display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px">
+    <div style="flex:1 1 280px;min-width:0">
+      <p style="margin:0 0 2px;font:600 18px Fredoka,sans-serif">{{ selTitle }} <span style="font:600 15px Barlow,sans-serif;color:var(--text-muted)">· {{ selStrength }}</span></p>
+      <p style="margin:0;color:var(--text-muted)">{{ selReason }}</p>
+    </div>
+    <sc-if value="{{ canEdit }}" hint-placeholder-val="{{ true }}">
+      <label style="display:flex;align-items:center;gap:10px;font-weight:600">Mark
+        <select value="{{ selValue }}" onChange="{{ onCellChange }}" style="min-height:44px;padding:0 14px;border-radius:999px;border:1.5px solid var(--border);background:var(--surface);color:var(--text);font:16px Barlow,sans-serif">
+          <option value="3">3 · Very strong</option><option value="2">2 · Strong</option><option value="1">1 · Moderate</option><option value="0">Blank</option>
+        </select>
+      </label>
+    </sc-if>
+    <sc-if value="{{ cannotEdit }}" hint-placeholder-val="{{ false }}"><p style="margin:0;font-size:15px;color:var(--text-muted)">Only the Author can change marks.</p></sc-if>
+  </div>
+  <div style="margin-top:28px"><button type="button" onClick="{{ goValidate }}" style="min-height:52px;padding:0 28px;border-radius:999px;border:none;background:var(--brand-fill);color:#fff;font:600 17px Fredoka,sans-serif;cursor:pointer" style-hover="background:var(--brand-fill-hover)">Run validation</button></div>
+</section>
+</sc-if>
+
+<sc-if value="{{ isValidate }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="05 Validation report" aria-labelledby="val-title" style="animation:cgRise .8s var(--ease) both">
+  <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:20px">
+    <div>
+      <h2 id="val-title" style="font:600 clamp(28px,4vw,36px)/1.15 Fredoka,sans-serif;margin:0 0 8px">Validation report</h2>
+      <p style="margin:0;color:var(--text-muted)">Every change CoGuard made, with the reason.</p>
+    </div>
+    <button type="button" onClick="{{ downloadReport }}" style="display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 22px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--brand-text);font:600 16px Barlow,sans-serif;cursor:pointer" style-hover="background:var(--surface-2)">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>Download validation_report.html
+    </button>
+  </div>
+  <div style="padding:20px 24px;border-radius:24px;background:var(--surface);border:1px solid var(--border);box-shadow:var(--shadow-soft);display:flex;flex-wrap:wrap;align-items:center;gap:12px 24px;margin-bottom:28px">
+    <p style="margin:0;font:600 22px Fredoka,sans-serif">{{ sevSummary }}</p>
+    <div style="display:flex;flex-wrap:wrap;gap:8px">
+      <sc-for list="{{ sevGroups }}" as="g" hint-placeholder-count="3">
+        <span style="display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:999px;background:{{ g.bg }};color:{{ g.fg }};font:600 15px Barlow,sans-serif">
+          <sc-if value="{{ g.isHigh }}" hint-placeholder-val="{{ false }}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"></polygon><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg></sc-if>
+          <sc-if value="{{ g.isMed }}" hint-placeholder-val="{{ false }}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"></path><path d="M12 9v4"></path><path d="M12 17h.01"></path></svg></sc-if>
+          <sc-if value="{{ g.isLow }}" hint-placeholder-val="{{ false }}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg></sc-if>
+          {{ g.countLabel }}
+        </span>
+      </sc-for>
+    </div>
+  </div>
+  <div style="display:grid;gap:28px">
+    <sc-for list="{{ sevGroups }}" as="g" hint-placeholder-count="3">
+      <div>
+        <h3 style="display:flex;align-items:center;gap:10px;font:600 21px Fredoka,sans-serif;margin:0 0 12px">
+          <span style="width:32px;height:32px;border-radius:11px;display:grid;place-items:center;background:{{ g.bg }};color:{{ g.fg }}">
+            <sc-if value="{{ g.isHigh }}" hint-placeholder-val="{{ false }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"></polygon><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg></sc-if>
+            <sc-if value="{{ g.isMed }}" hint-placeholder-val="{{ false }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"></path><path d="M12 9v4"></path><path d="M12 17h.01"></path></svg></sc-if>
+            <sc-if value="{{ g.isLow }}" hint-placeholder-val="{{ false }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg></sc-if>
+          </span>{{ g.name }} <span style="font:500 16px Barlow,sans-serif;color:var(--text-muted)">{{ g.countParen }}</span>
+        </h3>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr));gap:14px">
+          <sc-for list="{{ g.items }}" as="it" hint-placeholder-count="2">
+            <article style="padding:18px 20px;border-radius:20px;background:var(--surface);border:1px solid var(--border);transition:transform .45s var(--ease),box-shadow .45s var(--ease)" style-hover="transform:translateY(-3px);box-shadow:var(--shadow-lift)">
+              <p style="margin:0 0 8px;font-size:15px;font-weight:600;color:var(--text-muted)">{{ it.section }}</p>
+              <p style="margin:0 0 6px"><span style="font-weight:600">Value chosen: </span>{{ it.value }}</p>
+              <p style="margin:0;color:var(--text-muted)"><span style="font-weight:600;color:var(--text)">Reason: </span>{{ it.reason }}</p>
+            </article>
+          </sc-for>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+  <div style="margin-top:28px"><button type="button" onClick="{{ goSpec }}" style="min-height:52px;padding:0 28px;border-radius:999px;border:none;background:var(--brand-fill);color:#fff;font:600 17px Fredoka,sans-serif;cursor:pointer" style-hover="background:var(--brand-fill-hover)">Preview the spec</button></div>
+</section>
+</sc-if>
+
+<sc-if value="{{ isSpec }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="06 Spec + workflow" aria-labelledby="spec-title" style="animation:cgRise .8s var(--ease) both">
+  <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px">
+    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px">
+      <h2 id="spec-title" style="font:600 clamp(28px,4vw,36px)/1.15 Fredoka,sans-serif;margin:0">Sample Course</h2>
+      <span role="status" style="display:inline-flex;align-items:center;gap:8px;padding:5px 14px;border-radius:999px;background:{{ stBg }};color:{{ stFg }};font:600 15px Barlow,sans-serif;animation:{{ badgeAnim }}"><span aria-hidden="true" style="width:8px;height:8px;border-radius:50%;background:currentColor"></span>{{ status }}</span>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px">
+      <button type="button" onClick="{{ exportHtml }}" style="min-height:44px;padding:0 18px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--brand-text);font:600 16px Barlow,sans-serif;cursor:pointer" style-hover="background:var(--surface-2)">Export spec (.html)</button>
+      <button type="button" onClick="{{ printPdf }}" style="min-height:44px;padding:0 18px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--brand-text);font:600 16px Barlow,sans-serif;cursor:pointer" style-hover="background:var(--surface-2)">Download as PDF</button>
+    </div>
+  </div>
+  <div data-screen-label="07 Workflow" style="padding:20px 16px 16px;border-radius:24px;background:var(--surface);border:1px solid var(--border);box-shadow:var(--shadow-soft);margin-bottom:24px;overflow-x:auto">
+    <ol aria-label="Workflow status" style="list-style:none;margin:0;padding:0;display:flex;min-width:560px">
+      <sc-for list="{{ timeline }}" as="t" hint-placeholder-count="6">
+        <li aria-current="{{ t.current }}" style="flex:1;position:relative;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center">
+          <sc-if value="{{ t.showLine }}" hint-placeholder-val="{{ true }}"><span aria-hidden="true" style="position:absolute;top:15px;left:calc(50% + 20px);right:calc(-50% + 20px);height:2px;border-radius:2px;background:{{ t.line }}"></span></sc-if>
+          <span style="position:relative;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:{{ t.bg }};color:{{ t.fg }};border:{{ t.border }};box-sizing:border-box;animation:{{ t.anim }}">
+            <sc-if value="{{ t.done }}" hint-placeholder-val="{{ false }}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg></sc-if>
+            <sc-if value="{{ t.notDone }}" hint-placeholder-val="{{ true }}"><span style="width:10px;height:10px;border-radius:50%;background:currentColor"></span></sc-if>
+          </span>
+          <span style="font-size:15px;font-weight:{{ t.weight }};color:{{ t.labelColor }}">{{ t.label }}</span>
+        </li>
+      </sc-for>
+    </ol>
+  </div>
+  <div style="display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start">
+    <div style="flex:2 1 560px;min-width:0">
+      <article aria-label="Spec document preview" style="position:relative;overflow:hidden;max-width:780px;margin:0 auto;background:var(--paper);color:var(--paper-text);border-radius:8px;box-shadow:0 1px 2px rgba(19,32,59,.08),0 12px 40px rgba(19,32,59,.16);padding:clamp(24px,6vw,56px) clamp(20px,6vw,60px)">
+        <sc-if value="{{ showWatermark }}" hint-placeholder-val="{{ true }}">
+          <div aria-hidden="true" style="position:absolute;inset:0;display:grid;place-items:center;pointer-events:none;z-index:4"><span style="transform:rotate(-30deg);font:600 clamp(90px,18vw,180px)/1 Fredoka,sans-serif;letter-spacing:.08em;color:rgba(26,61,124,.08);white-space:nowrap">DRAFT</span></div>
+        </sc-if>
+        <p style="margin:0 0 4px;font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:#5b5670">Course specification · {{ tplName }}</p>
+        <h3 style="font:600 30px/1.2 Fredoka,sans-serif;margin:0 0 24px;color:#2a2748">Sample Course</h3>
+        <sc-for list="{{ docSections }}" as="sec" hint-placeholder-count="3">
+          <div style="position:relative;padding:18px 0;border-top:1px solid #e4e8f0">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px">
+              <h4 style="font:600 19px Fredoka,sans-serif;margin:0;color:#2a2748">{{ sec.title }}</h4>
+              <button type="button" onClick="{{ sec.toggle }}" aria-expanded="{{ sec.open }}" aria-label="{{ sec.cmtLabel }}" style="display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:0 12px;border-radius:999px;border:1px solid #d9e0ec;background:#ffffff;color:#1a3d7c;font:600 14px Barlow,sans-serif;cursor:pointer" style-hover="background:#eef2f9">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path></svg>{{ sec.countLabel }}
+              </button>
+            </div>
+            <sc-if value="{{ sec.isDetails }}" hint-placeholder-val="{{ false }}">
+              <dl style="margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px 20px">
+                <sc-for list="{{ details }}" as="d" hint-placeholder-count="5"><div><dt style="font-size:14px;color:#5b5670">{{ d.k }}</dt><dd style="margin:0;font-weight:600">{{ d.v }}</dd></div></sc-for>
+              </dl>
+            </sc-if>
+            <sc-if value="{{ sec.isOutcomes }}" hint-placeholder-val="{{ false }}">
+              <ol style="margin:0;padding-left:0;list-style:none;display:grid;gap:8px">
+                <sc-for list="{{ cos }}" as="co" hint-placeholder-count="5"><li style="display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline"><strong style="flex:none;color:#1a3d7c">{{ co.id }}</strong><span style="flex:1 1 180px">{{ co.text }}</span><span style="flex:none;font-size:14px;color:#5b5670">{{ co.bloomLabel }}</span></li></sc-for>
+              </ol>
+            </sc-if>
+            <sc-if value="{{ sec.isMap }}" hint-placeholder-val="{{ false }}">
+              <div style="overflow-x:auto">
+                <table style="border-collapse:collapse;font-size:14px;min-width:100%">
+                  <thead><tr><th scope="col" style="text-align:left;padding:6px 8px;border-bottom:1px solid #d9e0ec">CO</th><sc-for list="{{ cols }}" as="c" hint-placeholder-count="13"><th scope="col" style="padding:6px 4px;border-bottom:1px solid #d9e0ec;white-space:nowrap;font-weight:600">{{ c }}</th></sc-for></tr></thead>
+                  <tbody><sc-for list="{{ mapRows }}" as="row" hint-placeholder-count="5"><tr><th scope="row" style="text-align:left;padding:6px 8px;border-bottom:1px solid #eef1f6">{{ row.id }}</th><sc-for list="{{ row.cells }}" as="cell" hint-placeholder-count="13"><td style="padding:6px 4px;text-align:center;border-bottom:1px solid #eef1f6">{{ cell.docLabel }}</td></sc-for></tr></sc-for></tbody>
+                </table>
+              </div>
+            </sc-if>
+            <sc-if value="{{ sec.open }}" hint-placeholder-val="{{ false }}">
+              <div style="position:relative;z-index:5;margin-top:14px;padding:14px;border-radius:16px;background:#eef2f9;display:grid;gap:10px;animation:cgRise .5s var(--ease) both">
+                <sc-for list="{{ sec.list }}" as="cm" hint-placeholder-count="0">
+                  <div style="padding:10px 12px;border-radius:12px;background:#ffffff"><p style="margin:0 0 2px;font-size:14px;color:#5b5670"><strong style="color:#2a2748">{{ cm.user }}</strong> · {{ cm.role }} · {{ cm.time }}</p><p style="margin:0">{{ cm.text }}</p></div>
+                </sc-for>
+                <label for="{{ sec.inputId }}" style="font-weight:600;color:#2a2748">Comment on {{ sec.title }}</label>
+                <textarea id="{{ sec.inputId }}" rows="2" value="{{ sec.draft }}" onChange="{{ sec.onDraft }}" placeholder="Write a comment…" style="width:100%;box-sizing:border-box;padding:10px 12px;border-radius:12px;border:1.5px solid #d9e0ec;background:#ffffff;color:#2a2748;font:16px/1.5 Barlow,sans-serif;resize:vertical"></textarea>
+                <button type="button" onClick="{{ sec.add }}" style="justify-self:start;min-height:40px;padding:0 18px;border-radius:999px;border:none;background:#1a3d7c;color:#fff;font:600 15px Fredoka,sans-serif;cursor:pointer" style-hover="background:#143066">Add comment</button>
+              </div>
+            </sc-if>
+          </div>
+        </sc-for>
+      </article>
+    </div>
+    <aside style="flex:1 1 300px;min-width:0;display:grid;gap:20px">
+      <div style="padding:22px;border-radius:24px;background:var(--surface);border:1px solid var(--border);box-shadow:var(--shadow-soft)">
+        <p style="margin:0 0 4px;font:600 19px Fredoka,sans-serif">Your next step</p>
+        <p style="margin:0 0 16px;color:var(--text-muted)">Signed in as {{ userName }} ({{ role }})</p>
+        <sc-if value="{{ needsComment }}" hint-placeholder-val="{{ false }}">
+          <label for="act-cmt" style="display:block;font-weight:600;margin-bottom:6px">Comment for the author</label>
+          <textarea id="act-cmt" rows="3" value="{{ actionComment }}" onChange="{{ onActionComment }}" aria-invalid="{{ actionInvalid }}" aria-describedby="act-err" placeholder="What needs to change?" style="width:100%;box-sizing:border-box;padding:10px 12px;border-radius:14px;border:1.5px solid {{ actionBorder }};background:var(--surface);color:var(--text);font:16px/1.5 Barlow,sans-serif;resize:vertical;margin-bottom:8px"></textarea>
+          <sc-if value="{{ actionError }}" hint-placeholder-val="{{ false }}"><p id="act-err" role="alert" style="margin:0 0 10px;color:var(--sev-high-fg);font-weight:500">{{ actionError }}</p></sc-if>
+        </sc-if>
+        <div style="display:flex;flex-wrap:wrap;gap:10px">
+          <sc-if value="{{ primaryAction }}" hint-placeholder-val="{{ true }}">
+            <button type="button" onClick="{{ primaryAction.fn }}" style="min-height:48px;padding:0 24px;border-radius:999px;border:none;background:var(--brand-fill);color:#fff;font:600 16px Fredoka,sans-serif;cursor:pointer;transition:transform .3s var(--ease)" style-hover="background:var(--brand-fill-hover);transform:translateY(-1px)">{{ primaryAction.label }}</button>
+          </sc-if>
+          <sc-if value="{{ secondaryAction }}" hint-placeholder-val="{{ false }}">
+            <button type="button" onClick="{{ secondaryAction.fn }}" style="min-height:48px;padding:0 20px;border-radius:999px;border:1.5px solid var(--sev-high-fg);background:transparent;color:var(--sev-high-fg);font:600 16px Barlow,sans-serif;cursor:pointer" style-hover="background:var(--sev-high-bg)">{{ secondaryAction.label }}</button>
+          </sc-if>
+        </div>
+        <sc-if value="{{ waitingText }}" hint-placeholder-val="{{ false }}"><p style="margin:0;color:var(--text-muted)">{{ waitingText }}</p></sc-if>
+        <sc-if value="{{ isApproved }}" hint-placeholder-val="{{ false }}">
+          <p style="display:flex;align-items:center;gap:10px;margin:12px 0 0;color:var(--ok-ink);font-weight:600"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" opacity=".35"></circle><path d="m8 12.5 3 3 5-6" stroke-dasharray="30" style="animation:cgDraw .8s var(--ease) .1s both"></path></svg>Approved. The DRAFT mark is gone.</p>
+        </sc-if>
+      </div>
+      <div data-screen-label="08 Activity log" style="padding:22px;border-radius:24px;background:var(--surface);border:1px solid var(--border);box-shadow:var(--shadow-soft)">
+        <h3 style="font:600 19px Fredoka,sans-serif;margin:0 0 16px">Activity</h3>
+        <ol style="list-style:none;margin:0;padding:0;display:grid">
+          <sc-for list="{{ logItems }}" as="e" hint-placeholder-count="2">
+            <li style="position:relative;padding:0 0 18px 28px">
+              <sc-if value="{{ e.showLine }}" hint-placeholder-val="{{ true }}"><span aria-hidden="true" style="position:absolute;left:6px;top:18px;bottom:0;width:2px;border-radius:2px;background:var(--border)"></span></sc-if>
+              <span aria-hidden="true" style="position:absolute;left:0;top:6px;width:14px;height:14px;border-radius:50%;background:{{ e.dotBg }};border:3px solid var(--surface);box-shadow:0 0 0 1.5px {{ e.dotFg }};box-sizing:border-box"></span>
+              <p style="margin:0;display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px"><strong>{{ e.user }}</strong><span style="padding:0 8px;border-radius:999px;background:var(--surface-2);font-size:14px;color:var(--text-muted)">{{ e.role }}</span><span style="font-size:14px;color:var(--text-muted)">{{ e.time }}</span></p>
+              <p style="margin:2px 0 0;color:var(--text)">{{ e.comment }}</p>
+            </li>
+          </sc-for>
+        </ol>
+      </div>
+    </aside>
+  </div>
+</section>
+</sc-if>
+
+<sc-if value="{{ isDashboard }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="09 Dashboard" aria-labelledby="dash-title" style="animation:cgRise .8s var(--ease) both">
+  <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin-bottom:24px">
+    <h2 id="dash-title" style="font:600 clamp(28px,4vw,36px)/1.15 Fredoka,sans-serif;margin:0">Your specs</h2>
+    <button type="button" onClick="{{ goUpload }}" style="display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:0 22px;border-radius:999px;border:none;background:var(--brand-fill);color:#fff;font:600 16px Fredoka,sans-serif;cursor:pointer" style-hover="background:var(--brand-fill-hover)">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg>Upload a spec
+    </button>
+  </div>
+  <sc-if value="{{ hasSpecs }}" hint-placeholder-val="{{ true }}">
+    <ul style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:16px">
+      <sc-for list="{{ specs }}" as="sp" hint-placeholder-count="4">
+        <li>
+          <button type="button" onClick="{{ sp.open }}" style="width:100%;text-align:left;padding:20px;border-radius:22px;background:var(--surface);border:1px solid var(--border);box-shadow:var(--shadow-soft);color:var(--text);cursor:pointer;display:grid;gap:10px;transition:transform .45s var(--ease),box-shadow .45s var(--ease)" style-hover="transform:translateY(-4px);box-shadow:var(--shadow-lift)">
+            <span style="display:flex;align-items:center;justify-content:space-between;gap:8px">
+              <span style="font-size:15px;font-weight:600;color:var(--text-muted)">{{ sp.code }}</span>
+              <span style="display:inline-flex;align-items:center;gap:6px;padding:2px 12px;border-radius:999px;background:{{ sp.bg }};color:{{ sp.fg }};font:600 14px Barlow,sans-serif"><span aria-hidden="true" style="width:7px;height:7px;border-radius:50%;background:currentColor"></span>{{ sp.status }}</span>
+            </span>
+            <span style="font:600 20px Fredoka,sans-serif">{{ sp.title }}</span>
+            <span style="font-size:15px;color:var(--text-muted)">Updated {{ sp.updated }}</span>
+          </button>
+        </li>
+      </sc-for>
+    </ul>
+  </sc-if>
+  <sc-if value="{{ noSpecs }}" hint-placeholder-val="{{ false }}">
+    <div style="display:grid;justify-items:center;text-align:center;gap:12px;padding:56px 20px;border-radius:28px;border:2px dashed var(--border);background:var(--surface)">
+      <svg width="180" height="140" viewBox="0 0 180 140" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M28 96h124l-12 30H40z" stroke="var(--text-muted)" stroke-width="2" fill="var(--surface-2)"></path>
+        <rect x="58" y="26" width="64" height="80" rx="12" stroke="var(--brand-text)" stroke-width="2" fill="var(--surface)" transform="rotate(-6 90 66)"></rect>
+        <path d="M72 50h34M72 64h28M72 78h20" stroke="var(--brand-text)" stroke-width="2" transform="rotate(-6 90 66)"></path>
+        <g style="animation:cgFloat 4s ease-in-out infinite"><path d="M140 22l3 8 8 3-8 3-3 8-3-8-8-3 8-3z" fill="#fff4c9" stroke="#e5b93a" stroke-width="1.5"></path><circle cx="36" cy="40" r="3" fill="#f3a9c9"></circle></g>
+      </svg>
+      <p style="margin:0;font:600 21px Fredoka,sans-serif">Upload your first spec to start</p>
+      <p style="margin:0;color:var(--text-muted);max-width:40ch">CoGuard will read it and get it ready for review.</p>
+    </div>
+  </sc-if>
+</section>
+</sc-if>
+</main>
+</sc-if>
+
+<sc-if value="{{ settingsOpen }}" hint-placeholder-val="{{ false }}">
+  <div onClick="{{ closeSettings }}" style="position:fixed;inset:0;z-index:50;background:rgba(5,10,24,.55);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);display:grid;place-items:center;padding:16px;animation:cgRise .4s var(--ease) both">
+    <div role="dialog" aria-modal="true" aria-labelledby="set-title" data-screen-label="10 Settings" onClick="{{ stop }}" style="width:100%;max-width:460px;max-height:calc(100vh - 32px);overflow:auto;box-sizing:border-box;padding:24px;border-radius:24px;background:var(--surface);color:var(--text);border:1px solid var(--border);box-shadow:var(--shadow-lift)">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:6px">
+        <h2 id="set-title" style="font:600 24px Fredoka,sans-serif;margin:0">Settings</h2>
+        <button type="button" onClick="{{ closeSettings }}" aria-label="Close settings" style="width:44px;height:44px;border-radius:999px;border:none;background:var(--surface-2);color:var(--text);display:grid;place-items:center;cursor:pointer">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+        </button>
+      </div>
+      <p style="display:flex;gap:8px;align-items:flex-start;margin:0 0 20px;padding:10px 14px;border-radius:14px;background:var(--brand-soft);color:var(--brand-text);font-size:15px">
+        <svg style="flex:none;margin-top:2px" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+        Your key stays in this browser only. CoGuard never stores it on a server.
+      </p>
+      <div style="display:grid;gap:16px">
+        <label style="display:grid;gap:6px;font-weight:600">Provider
+          <select value="{{ provider }}" onChange="{{ onProvider }}" style="min-height:48px;padding:0 14px;border-radius:14px;border:1.5px solid var(--border);background:var(--surface);color:var(--text);font:16px Barlow,sans-serif">
+            <option value="Gemini">Gemini</option><option value="OpenRouter">OpenRouter</option>
+          </select>
+        </label>
+        <div style="display:grid;gap:6px">
+          <label for="api-key" style="font-weight:600">API key</label>
+          <div style="display:flex;gap:8px">
+            <input id="api-key" type="{{ keyType }}" value="{{ apiKey }}" onChange="{{ onKey }}" autocomplete="off" aria-describedby="key-msg" placeholder="Paste your key" style="flex:1;min-width:0;min-height:48px;padding:0 14px;border-radius:14px;border:1.5px solid {{ keyBorder }};background:var(--surface);color:var(--text);font:16px Barlow,sans-serif">
+            <button type="button" onClick="{{ toggleShowKey }}" aria-pressed="{{ showKey }}" aria-label="{{ showKeyLabel }}" style="width:48px;height:48px;flex:none;border-radius:14px;border:1.5px solid var(--border);background:var(--surface);color:var(--text);display:grid;place-items:center;cursor:pointer">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+            </button>
+          </div>
+        </div>
+        <label style="display:grid;gap:6px;font-weight:600">Model name
+          <input type="text" value="{{ model }}" onChange="{{ onModel }}" placeholder="Model name" style="min-height:48px;padding:0 14px;border-radius:14px;border:1.5px solid var(--border);background:var(--surface);color:var(--text);font:16px Barlow,sans-serif">
+        </label>
+        <sc-if value="{{ keyTesting }}" hint-placeholder-val="{{ false }}"><div aria-hidden="true" style="height:10px;border-radius:999px;background:linear-gradient(90deg,var(--surface-2) 0%,var(--border) 50%,var(--surface-2) 100%);background-size:200% 100%;animation:cgShimmer 1.2s linear infinite"></div></sc-if>
+        <p id="key-msg" aria-live="polite" style="margin:0;min-height:1.6em;font-weight:500;color:{{ keyMsgColor }}">{{ keyMsg }}</p>
+        <div style="display:flex;flex-wrap:wrap;gap:10px">
+          <button type="button" onClick="{{ testKey }}" style="min-height:48px;padding:0 24px;border-radius:999px;border:none;background:var(--brand-fill);color:#fff;font:600 16px Fredoka,sans-serif;cursor:pointer" style-hover="background:var(--brand-fill-hover)">Test key</button>
+          <button type="button" onClick="{{ clearKey }}" style="min-height:48px;padding:0 20px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--text);font:600 16px Barlow,sans-serif;cursor:pointer" style-hover="background:var(--surface-2)">Clear key</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;introMode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;once&quot;,&quot;always&quot;,&quot;off&quot;],&quot;default&quot;:&quot;always&quot;,&quot;tsType&quot;:&quot;'once'|'always'|'off'&quot;},&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;system&quot;,&quot;light&quot;,&quot;dark&quot;],&quot;default&quot;:&quot;system&quot;,&quot;tsType&quot;:&quot;'system'|'light'|'dark'&quot;},&quot;emptyDashboard&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;States&quot;}}">
+const COLS = ['PO-1','PO-2','PO-3','PO-4','PO-5','PO-6','PO-7','PO-8','PO-9','PO-10','PO-11','PSO-1','PSO-2'];
+const BLOOM = [null,'Remember','Understand','Apply','Analyse','Evaluate','Create'];
+const BLOOM_C = [null,['#e6eefb','#1d3f78'],['#ddf2ec','#155c4d'],['#fdf0d4','#734600'],['#fde4d9','#86320f'],['#efe5fb','#55308d'],['#fbe2ee','#8c2356']];
+const COS = [1,2,3,4,5].map((n,i)=>({ id:'CO-'+n, text:'CO-'+n+' … placeholder outcome statement.', bloom:[2,3,3,4,6][i] }));
+const SEED = [[3,2,1,0,0,1,0,0,1,0,1,2,1],[2,3,2,1,0,0,0,0,1,1,0,3,1],[1,2,3,2,1,0,1,0,2,0,1,2,2],[1,1,2,3,2,0,0,1,1,1,0,1,3],[0,1,2,2,3,1,1,1,2,2,1,2,3]];
+const STR = {3:'Very strong',2:'Strong',1:'Moderate',0:'Blank'};
+const S = {
+  'Draft':['var(--st-draft-bg)','var(--st-draft-fg)'],'Submitted':['var(--st-sub-bg)','var(--st-sub-fg)'],
+  'Under Review':['var(--st-rev-bg)','var(--st-rev-fg)'],'Pending HOD':['var(--st-hod-bg)','var(--st-hod-fg)'],
+  'Approved':['var(--st-ok-bg)','var(--st-ok-fg)'],'Returned':['var(--st-ret-bg)','var(--st-ret-fg)']};
+const TL = ['Draft','Submitted','Under Review','Pending HOD','Approved','Returned'];
+const USERS = {Author:'Author A', Reviewer:'Reviewer B', HOD:'HOD C'};
+const VAL = {
+  High:[{section:'Course outcomes',value:'CO-3 set to Bloom L4 Analyse',reason:'The outcome verb belongs to Analyse, not Apply.'},
+        {section:'CO-PO-PSO map',value:'PO-7 marked 1 for CO-3',reason:'Every PO needs at least one mapped CO or a note.'},
+        {section:'Credits',value:'L:T:P set to 3:0:2',reason:'The listed hours did not add up to the stated credits.'}],
+  Medium:[{section:'Course details',value:'Type set to Integrated',reason:'Lab hours are present, so Non-Lab does not fit.'},
+          {section:'Assessment',value:'Weightage scaled to 100%',reason:'The original weightages added up to 110%.'}],
+  Low:[{section:'Formatting',value:'Headings renamed to the standard set',reason:'Headings differed from the template wording.'}]};
+const SEV = {High:['var(--sev-high-bg)','var(--sev-high-fg)'],Medium:['var(--sev-med-bg)','var(--sev-med-fg)'],Low:['var(--sev-low-bg)','var(--sev-low-fg)']};
+const OK_EXT = ['docx','pdf','html','htm','doc'];
+const fmtSize = b => b < 1024 ? b+' B' : b < 1048576 ? Math.round(b/1024)+' KB' : (b/1048576).toFixed(1)+' MB';
+const nowStr = () => 'Today, ' + new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+
+class Component extends DCLogic {
+  state = {
+    theme: this.props.theme ?? 'system', intro: this.computeIntro(), screen:'home', role:'Author', status:'Draft', wig:null, returnedFrom:2,
+    files:{spec:null, bp:null}, errors:{spec:'', bp:''}, drag:null, reading:false,
+    overrideOpen:false, overrideChoice:'Non-Lab', overrideReason:'', overrideError:'', overrideApplied:null, overrideReasonShown:'',
+    map: SEED.map(r=>r.slice()), sel:{r:1,c:2},
+    comments:{details:[],outcomes:[],map:[]}, open:{}, drafts:{}, actionComment:'', actionError:'',
+    log:[{user:'Author A',role:'Author',time:'Today, 09:12',comment:'Uploaded the spec and created a draft.',status:'Draft'}],
+    settingsOpen:false, provider:'Gemini', apiKey:'', model:'gemini-2.5-flash', showKey:false, keyState:'idle', keyMsg:''
+  };
+  specRef = React.createRef(); bpRef = React.createRef(); introWrap = React.createRef(); introStage = React.createRef();
+
+  componentDidMount(){
+    this.applyTheme(); this.startIntro();
+    this.onScrollRaf = () => { if (this.raf) return; this.raf = requestAnimationFrame(()=>{ this.raf = 0; this.onIntroScroll(); }); };
+    document.addEventListener('scroll', this.onScrollRaf, {passive:true, capture:true}); window.addEventListener('resize', this.onScrollRaf);
+    try { const s = JSON.parse(localStorage.getItem('coguard-settings')||'null'); if (s) this.setState({provider:s.provider||'Gemini', apiKey:s.key||'', model:s.model||'gemini-2.5-flash'}); } catch(e){}
+    this.onEsc = e => { if (e.key === 'Escape' && this.state.settingsOpen) this.setState({settingsOpen:false}); };
+    window.addEventListener('keydown', this.onEsc);
+  }
+  componentWillUnmount(){ window.removeEventListener('keydown', this.onEsc); document.removeEventListener('scroll', this.onScrollRaf, {capture:true}); window.removeEventListener('resize', this.onScrollRaf); clearTimeout(this.t); clearTimeout(this.kt); clearTimeout(this.it); clearInterval(this.poll); }
+  componentDidUpdate(pp){ if ((pp.introMode ?? 'always') !== (this.props.introMode ?? 'always')) this.setState({intro:this.computeIntro()}, ()=>this.startIntro()); if (pp.theme !== this.props.theme) this.setState({theme:this.props.theme ?? 'system'}, ()=>this.applyTheme()); }
+  applyTheme(){ const el = document.documentElement; const t = this.state.theme; if (t === 'system') el.removeAttribute('data-theme'); else el.setAttribute('data-theme', t); }
+  computeIntro(){
+    const mode = this.props.introMode ?? 'always'; if (mode === 'off') return null;
+    if (mode === 'once') { try { if (sessionStorage.getItem('coguard-intro-seen') === '1') return null; } catch(e){} }
+    let reduce = false; try { reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch(e){}
+    return reduce ? 'still' : 'play';
+  }
+  startIntro(){ clearTimeout(this.it); if (!this.state.intro) return; if (this.state.intro === 'still') this.it = setTimeout(()=>this.endIntro(), 1000); else { window.scrollTo(0,0); this.onIntroScroll(); clearInterval(this.poll); this.poll = setInterval(()=>{ if (this.state.intro !== 'play') { clearInterval(this.poll); return; } this.onIntroScroll(); }, 120); } }
+  onIntroScroll(){ const s = document.querySelector('[data-intro-stage]'), w = s && s.parentElement; if (!w || !s || this.state.intro !== 'play') return; const max = Math.max(1, w.offsetHeight - window.innerHeight); const p = Math.min(1, Math.max(0, (window.scrollY - w.offsetTop) / max)); s.style.setProperty('--ip', p.toFixed(4)); if (p >= 0.99 && !this.ending) { this.ending = true; clearInterval(this.poll); setTimeout(()=>{ this.endIntro(); this.ending = false; }, 0); } }
+  endIntro(){ clearTimeout(this.it); try { sessionStorage.setItem('coguard-intro-seen','1'); } catch(e){} this.setState({intro:null}, ()=>window.scrollTo(0,0)); }
+  isDark(){ const t = this.state.theme; return t === 'dark' || (t === 'system' && window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches); }
+  go(screen){ this.setState({screen}); window.scrollTo({top:0, behavior:'smooth'}); }
+  saveSettings(){ const {provider, apiKey, model} = this.state; try { localStorage.setItem('coguard-settings', JSON.stringify({provider, key:apiKey, model})); } catch(e){} }
+
+  setFile(kind, f){
+    if (!f) return;
+    const ext = (f.name.split('.').pop()||'').toLowerCase();
+    if (!OK_EXT.includes(ext)) { this.setState(s=>({errors:{...s.errors,[kind]:'This file could not be read. Try a .docx.'}, files:{...s.files,[kind]:null}, drag:null})); return; }
+    this.setState(s=>({files:{...s.files,[kind]:{name:f.name,size:fmtSize(f.size)}}, errors:{...s.errors,[kind]:''}, drag:null}));
+  }
+  setStatus(status, comment, extra){
+    const role = this.state.role;
+    this.setState(s=>({status, wig:!s.wig, actionComment:'', actionError:'', log:[{user:USERS[role], role, time:nowStr(), comment, status}, ...s.log], ...(extra||{})}));
+  }
+  returnWith(){
+    const c = this.state.actionComment.trim();
+    if (!c) { this.setState({actionError:'Write a short comment so the author knows what to fix.'}); return; }
+    this.setStatus('Returned', c, {returnedFrom: TL.indexOf(this.state.status)});
+  }
+  download(name, html){
+    const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([html],{type:'text/html'})); a.download = name;
+    document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href), 1000);
+  }
+
+  renderVals(){
+    const st = this.state, role = st.role, screen = st.screen;
+    const tplName = st.overrideApplied || 'Integrated';
+    const navItems = [['home','Home'],['dashboard','Dashboard']].map(([id,label])=>({label, current: screen===id ? 'page' : undefined, bg: screen===id ? 'var(--brand-soft)' : 'transparent', fg: screen===id ? 'var(--brand-text)' : 'var(--text)', onClick:()=>this.go(id)}));
+    const roles = ['Author','Reviewer','HOD'].map(r=>({label:r, active: role===r, bg: role===r ? 'var(--surface)' : 'transparent', fg: role===r ? 'var(--brand-text)' : 'var(--text-muted)', shadow: role===r ? 'var(--shadow-soft)' : 'none', onClick:()=>this.setState({role:r, actionError:''})}));
+    const flow = [['upload','Upload'],['parsed','Review'],['map','Map'],['validate','Validate'],['spec','Spec']];
+    const fi = flow.findIndex(f=>f[0]===screen);
+    const steps = flow.map(([id,label],i)=>({n:i+1, label, current: i===fi ? 'step' : undefined,
+      bg: i===fi ? 'var(--brand-soft)' : 'transparent', fg: i===fi ? 'var(--brand-text)' : 'var(--text-muted)',
+      numBg: i<=fi ? 'var(--brand-fill)' : 'var(--surface-2)', numFg: i<=fi ? '#fff' : 'var(--text-muted)', onClick:()=>this.go(id)}));
+
+    const mkZone = (kind, title, tag, ref) => ({
+      title, tag, ref, labelId:'zl-'+kind, descId:'zd-'+kind,
+      tagBg: kind==='spec' ? 'var(--brand-soft)' : 'var(--surface-2)', tagFg: kind==='spec' ? 'var(--brand-text)' : 'var(--text-muted)',
+      border: st.errors[kind] ? 'var(--sev-high-fg)' : st.drag===kind ? 'var(--brand-text)' : 'var(--border)',
+      bg: st.drag===kind ? 'var(--brand-soft)' : 'var(--surface)',
+      file: st.files[kind], error: st.errors[kind], removeLabel:'Remove '+((st.files[kind] && st.files[kind].name)||'file'),
+      pick:()=>ref.current && ref.current.click(),
+      onChange:e=>{ this.setFile(kind, e.target.files[0]); e.target.value=''; },
+      onDragOver:e=>{ e.preventDefault(); if (this.state.drag!==kind) this.setState({drag:kind}); },
+      onDragLeave:()=>this.setState({drag:null}),
+      onDrop:e=>{ e.preventDefault(); this.setFile(kind, e.dataTransfer.files[0]); },
+      remove:()=>this.setState(s=>({files:{...s.files,[kind]:null}}))
+    });
+
+    const bc = b => BLOOM_C[b];
+    const cos = COS.map(c=>({...c, bloomLabel:'L'+c.bloom+' '+BLOOM[c.bloom], bloomBg:bc(c.bloom)[0], bloomFg:bc(c.bloom)[1]}));
+    const details = [{k:'Title',v:'Sample Course'},{k:'Code',v:'SC-101'},{k:'Department',v:'Sample Department'},{k:'Credits (L:T:P)',v:'3:0:2'},{k:'Type',v:tplName}];
+
+    const sel = st.sel, canEdit = role === 'Author';
+    const reasonFor = (r,c,v) => v ? `Placeholder: one-line reason ${COS[r].id} supports ${COLS[c]} at level ${v}.` : `Placeholder: ${COS[r].id} does not address ${COLS[c]}.`;
+    const mapRows = COS.map((co,r)=>({id:co.id, bloomShort:'L'+co.bloom, bloomBg:bc(co.bloom)[0], bloomFg:bc(co.bloom)[1],
+      cells: COLS.map((col,c)=>{ const v = st.map[r][c]; const on = sel.r===r && sel.c===c;
+        return { label: v ? String(v) : '', docLabel: v ? String(v) : '–', selected:on,
+          bg: v ? `var(--s${v}-bg)` : 'transparent', fg: v ? `var(--s${v}-fg)` : 'var(--text-muted)',
+          border: v ? 'none' : '1.5px dotted var(--s0-border)', ring: on ? '0 0 0 3px var(--surface), 0 0 0 5px var(--focus)' : 'none',
+          title: `${STR[v]}: ${reasonFor(r,c,v)}`, aria: `${co.id} to ${col}: ${v ? v+' '+STR[v] : 'blank'}. ${reasonFor(r,c,v)}`,
+          onClick:()=>{ const cur = this.state.sel; if (cur.r!==r || cur.c!==c) this.setState({sel:{r,c}}); } }; })}));
+    const sv = st.map[sel.r][sel.c];
+
+    const sevGroups = ['High','Medium','Low'].map(n=>({name:n, count:VAL[n].length, countLabel:VAL[n].length+' '+n, countParen:'('+VAL[n].length+')', items:VAL[n], bg:SEV[n][0], fg:SEV[n][1], isHigh:n==='High', isMed:n==='Medium', isLow:n==='Low'}));
+
+    const status = st.status, curIdx = TL.indexOf(status);
+    const timeline = TL.map((label,i)=>{
+      const isCur = i===curIdx;
+      const done = status==='Returned' ? i<=st.returnedFrom : (i<curIdx && label!=='Returned');
+      const c = S[label];
+      return { label, done, notDone:!done, current: isCur ? 'step' : undefined, showLine: i<TL.length-1,
+        line: done ? 'var(--brand-fill)' : 'var(--border)',
+        bg: done ? 'var(--brand-fill)' : isCur ? c[0] : 'var(--surface)', fg: done ? '#fff' : isCur ? c[1] : 'var(--border)',
+        border: done || isCur ? 'none' : '2px dashed var(--border)', anim: isCur ? 'cgGlow 2.8s ease-in-out infinite' : 'none',
+        weight: isCur ? 700 : 500, labelColor: isCur ? 'var(--text)' : 'var(--text-muted)' };
+    });
+
+    let primaryAction = null, secondaryAction = null, waitingText = '';
+    const retAct = {label:'Return with comment', fn:()=>this.returnWith()};
+    if (role==='Author') {
+      if (status==='Draft') primaryAction = {label:'Submit', fn:()=>this.setStatus('Submitted','Submitted for review.')};
+      else if (status==='Returned') primaryAction = {label:'Resubmit', fn:()=>this.setStatus('Submitted','Resubmitted with changes.')};
+      else if (status!=='Approved') waitingText = 'Waiting on the '+(status==='Pending HOD'?'HOD':'Reviewer')+'.';
+    } else if (role==='Reviewer') {
+      if (status==='Submitted') primaryAction = {label:'Start review', fn:()=>this.setStatus('Under Review','Started the review.')};
+      else if (status==='Under Review') { primaryAction = {label:'Forward to HOD', fn:()=>this.setStatus('Pending HOD','Forwarded to HOD.')}; secondaryAction = retAct; }
+      else if (status!=='Approved') waitingText = status==='Pending HOD' ? 'Waiting on the HOD.' : 'Nothing to review yet.';
+    } else {
+      if (status==='Pending HOD') { primaryAction = {label:'Approve', fn:()=>this.setStatus('Approved','Approved the spec.')}; secondaryAction = retAct; }
+      else if (status!=='Approved') waitingText = 'Nothing waiting for HOD approval yet.';
+    }
+
+    const secs = [['details','Course details'],['outcomes','Course outcomes'],['map','CO-PO-PSO map']];
+    const docSections = secs.map(([id,title])=>{ const list = st.comments[id]; return {
+      title, isDetails:id==='details', isOutcomes:id==='outcomes', isMap:id==='map', open:!!st.open[id], list, inputId:'cmt-'+id,
+      countLabel: list.length ? list.length+' comment'+(list.length>1?'s':'') : 'Comment', cmtLabel:'Comments on '+title,
+      draft: st.drafts[id]||'',
+      toggle:()=>this.setState(s=>({open:{...s.open,[id]:!s.open[id]}})),
+      onDraft:e=>{ const v=e.target.value; this.setState(s=>({drafts:{...s.drafts,[id]:v}})); },
+      add:()=>{ const t=(this.state.drafts[id]||'').trim(); if(!t) return; const rl=this.state.role;
+        this.setState(s=>({comments:{...s.comments,[id]:[...s.comments[id],{user:USERS[rl],role:rl,time:nowStr(),text:t}]}, drafts:{...s.drafts,[id]:''},
+          log:[{user:USERS[rl],role:rl,time:nowStr(),comment:`On ${title}: ${t}`,status:s.status},...s.log]})); }
+    };});
+
+    const logItems = st.log.map((e,i,a)=>({...e, showLine:i<a.length-1, dotBg:S[e.status][0], dotFg:S[e.status][1]}));
+    const specs = [
+      {title:'Sample Course',code:'SC-101',status,updated:st.log[0].time,open:()=>this.go('spec')},
+      {title:'Sample Course B',code:'SC-102',status:'Under Review',updated:'Yesterday',open:()=>this.go('spec')},
+      {title:'Sample Course C',code:'SC-201',status:'Approved',updated:'3 days ago',open:()=>this.go('spec')},
+      {title:'Sample Course D',code:'SC-205',status:'Returned',updated:'Last week',open:()=>this.go('spec')}
+    ].map(s=>({...s, bg:S[s.status][0], fg:S[s.status][1]}));
+    const empty = !!this.props.emptyDashboard;
+
+    const ks = st.keyState;
+    return {
+      navItems, roles, steps, role, status, userName:USERS[role],
+      isHome:screen==='home', isUpload:screen==='upload', isParsed:screen==='parsed', isMap:screen==='map', isValidate:screen==='validate', isSpec:screen==='spec', isDashboard:screen==='dashboard',
+      inFlow: fi>=0,
+      introOn: !!st.intro, introAnimated: st.intro === 'play', skipIntro: ()=>this.endIntro(),
+      introAspect: (typeof window !== 'undefined' && window.innerWidth < window.innerHeight) ? 'xMidYMid meet' : 'xMidYMid slice',
+      appOn: !st.intro, introHeight: st.intro === 'play' ? '650vh' : '100vh',
+      roomOpacity: st.intro === 'still' ? 1 : 0, roomAnim: st.intro === 'play' ? 'inRoomO 1s linear both paused' : 'none',
+      roomTAnim: st.intro === 'play' ? 'inRoomT 1s linear both paused' : 'none',
+      bubbleAnim: st.intro === 'play' ? 'inBubble 1s linear both paused' : 'none',
+      goHome:()=>this.go('home'), goUpload:()=>this.go('upload'), goDashboard:()=>this.go('dashboard'), goMap:()=>this.go('map'), goValidate:()=>this.go('validate'), goSpec:()=>this.go('spec'),
+      toggleTheme:()=>this.setState({theme:this.isDark()?'light':'dark'}, ()=>this.applyTheme()),
+      zones:[mkZone('spec','Course spec (.docx, .pdf, .html, .doc)','Required',this.specRef), mkZone('bp','Question-paper blueprint (optional)','Optional',this.bpRef)],
+      accepted:['.docx','.pdf','.html','.doc'], reading:st.reading, readLabel: st.reading ? 'Reading files…' : 'Read files',
+      useSamples:()=>this.setState({files:{spec:{name:'sample-course-spec.docx',size:'48 KB'},bp:{name:'sample-blueprint.pdf',size:'112 KB'}}, errors:{spec:'',bp:''}}),
+      readFiles:()=>{ if (this.state.reading) return;
+        if (!this.state.files.spec) { this.setState(s=>({errors:{...s.errors,spec:'Add a course spec first. It is the one marked Required.'}})); return; }
+        this.setState({reading:true}); this.t = setTimeout(()=>{ this.setState({reading:false}); this.go('parsed'); }, 2000); },
+      tplLabel:'Detected: '+tplName, tplName, overrideApplied: !!st.overrideApplied, overrideReasonShown: st.overrideReasonShown,
+      signals:['P > 0 in L:T:P, so lab hours are present','A list of experiments section was found','The assessment table has lab and theory parts'],
+      overrideOpen:st.overrideOpen, toggleOverride:()=>this.setState(s=>({overrideOpen:!s.overrideOpen})),
+      tplOptions:['Integrated','Non-Lab'].map(o=>({label:o, active:st.overrideChoice===o, bg:st.overrideChoice===o?'var(--brand-fill)':'transparent', fg:st.overrideChoice===o?'#fff':'var(--text)', onClick:()=>this.setState({overrideChoice:o})})),
+      overrideReason:st.overrideReason, overrideError:st.overrideError, overrideInvalid: !!st.overrideError, reasonBorder: st.overrideError ? 'var(--sev-high-fg)' : 'var(--border)',
+      onReason:e=>this.setState({overrideReason:e.target.value, overrideError:''}),
+      applyOverride:()=>{ const r = this.state.overrideReason.trim(); if (!r) { this.setState({overrideError:'Add a reason so reviewers know why you changed it.'}); return; }
+        this.setState(s=>({overrideApplied:s.overrideChoice, overrideReasonShown:r, overrideOpen:false, overrideReason:'', log:[{user:USERS[s.role],role:s.role,time:nowStr(),comment:`Changed template to ${s.overrideChoice}: ${r}`,status:s.status},...s.log]})); },
+      details, cos, cols:COLS, mapRows,
+      mapHint: canEdit ? 'As Author you can change a mark.' : '',
+      canEdit, cannotEdit:!canEdit,
+      selTitle: `${COS[sel.r].id} → ${COLS[sel.c]}`, selStrength: sv ? `${sv} ${STR[sv]}` : 'Blank', selReason: reasonFor(sel.r, sel.c, sv), selValue:String(sv),
+      onCellChange:e=>{ const v = +e.target.value; this.setState(s=>{ const m = s.map.map(r=>r.slice()); m[s.sel.r][s.sel.c] = v; return {map:m}; }); },
+      sevGroups, sevSummary: sevGroups.map(g=>g.count+' '+g.name).join(', '),
+      downloadReport:()=>this.download('validation_report.html', `<!doctype html><meta charset="utf-8"><title>Validation report</title><body style="font-family:sans-serif;max-width:720px;margin:40px auto"><h1>Validation report · Sample Course</h1>${sevGroups.map(g=>`<h2>${g.name} (${g.count})</h2><ul>${g.items.map(i=>`<li><b>${i.section}</b>: ${i.value}. <i>${i.reason}</i></li>`).join('')}</ul>`).join('')}</body>`),
+      exportHtml:()=>this.download('sample-course-spec.html', `<!doctype html><meta charset="utf-8"><title>Sample Course</title><body style="font-family:sans-serif;max-width:760px;margin:40px auto"><h1>Sample Course</h1><p>Status: ${status}</p><h2>Course outcomes</h2><ol>${cos.map(c=>`<li>${c.text} (${c.bloomLabel})</li>`).join('')}</ol><h2>CO-PO-PSO map</h2><table border="1" cellpadding="4"><tr><th>CO</th>${COLS.map(c=>`<th>${c}</th>`).join('')}</tr>${COS.map((c,r)=>`<tr><th>${c.id}</th>${st.map[r].map(v=>`<td>${v||''}</td>`).join('')}</tr>`).join('')}</table></body>`),
+      printPdf:()=>window.print(),
+      stBg:S[status][0], stFg:S[status][1], badgeAnim: st.wig===null ? 'none' : (st.wig ? 'cgWigA' : 'cgWigB')+' .7s var(--ease) 1',
+      timeline, showWatermark: status!=='Approved', isApproved: status==='Approved', docSections,
+      primaryAction, secondaryAction, waitingText, needsComment: !!secondaryAction,
+      actionComment:st.actionComment, actionError:st.actionError, actionInvalid:!!st.actionError, actionBorder: st.actionError ? 'var(--sev-high-fg)' : 'var(--border)',
+      onActionComment:e=>this.setState({actionComment:e.target.value, actionError:''}),
+      logItems, specs: empty ? [] : specs, hasSpecs: !empty, noSpecs: empty,
+      settingsOpen:st.settingsOpen, openSettings:()=>this.setState({settingsOpen:true}), closeSettings:()=>this.setState({settingsOpen:false}), stop:e=>e.stopPropagation(),
+      provider:st.provider, apiKey:st.apiKey, model:st.model, showKey:st.showKey, keyType: st.showKey ? 'text' : 'password', showKeyLabel: st.showKey ? 'Hide key' : 'Show key',
+      onProvider:e=>this.setState({provider:e.target.value, model:e.target.value==='Gemini'?'gemini-2.5-flash':'openrouter/auto'}, ()=>this.saveSettings()),
+      onKey:e=>this.setState({apiKey:e.target.value, keyState:'idle', keyMsg:''}, ()=>this.saveSettings()),
+      onModel:e=>this.setState({model:e.target.value}, ()=>this.saveSettings()),
+      toggleShowKey:()=>this.setState(s=>({showKey:!s.showKey})),
+      keyTesting: ks==='testing', keyMsg:st.keyMsg, keyBorder: ks==='error' ? 'var(--sev-high-fg)' : 'var(--border)',
+      keyMsgColor: ks==='error' ? 'var(--sev-high-fg)' : ks==='ok' ? 'var(--ok-ink)' : 'var(--text-muted)',
+      testKey:()=>{ if (!this.state.apiKey.trim()) { this.setState({keyState:'error', keyMsg:'Add a key first, then test it.'}); return; }
+        this.setState({keyState:'testing', keyMsg:'Testing your key…'});
+        this.kt = setTimeout(()=>this.setState(s=>({keyState:'ok', keyMsg:`Key works with ${s.provider}.`})), 1400); },
+      clearKey:()=>{ this.setState({apiKey:'', keyState:'idle', keyMsg:'Key cleared from this browser.'}); try { localStorage.removeItem('coguard-settings'); } catch(e){} }
+    };
+  }
+}
+</script>
+</body>
+</html>

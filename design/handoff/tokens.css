@@ -1,0 +1,134 @@
+/* CoGuard v2 tokens (cartoon palette) — import once in main.tsx */
+:root{--brand:#1a3d7c;
+  --brand-fill:#1a3d7c;
+  --brand-fill-hover:#143066;
+  --brand-text:#1a3d7c;
+  --brand-soft:#e4ebf8;
+  --bg:#fff6e9;
+  --surface:#ffffff;
+  --surface-2:#fbecd9;
+  --text:#2a2748;
+  --text-muted:#5b5670;
+  --border:#efdcc3;
+  --focus:#1a3d7c;
+  --paper:#fffdf8;
+  --paper-text:#2a2748;
+  
+--sky:#bfe3f2;
+  --mint:#d7f2e6;
+  --cream:#fff6e9;
+  --sand:#f6e3c8;
+  --blush:#f7c6d0;
+  --coral:#f19a8a;
+  --lilac:#d9c8f2;
+  --plum:#2a2748;
+  --ok-ink:#1f7a4c;
+  
+--s3-bg:#1a3d7c;
+  --s3-fg:#ffffff;
+  --s2-bg:#5f7fc0;
+  --s2-fg:#ffffff;
+  --s1-bg:#b9cdf0;
+  --s1-fg:#1a3d7c;
+  --s0-border:#a49cb8;
+  
+--st-draft-bg:#9aa3b2;
+  --st-draft-fg:#2a2748;
+  --st-sub-bg:#7fbfe6;
+  --st-sub-fg:#2a2748;
+  --st-rev-bg:#f6b98a;
+  --st-rev-fg:#2a2748;
+  --st-hod-bg:#b9a6ea;
+  --st-hod-fg:#2a2748;
+  --st-ok-bg:#8fd6a8;
+  --st-ok-fg:#2a2748;
+  --st-ret-bg:#f29fb0;
+  --st-ret-fg:#2a2748;
+  
+--sev-high-bg:#fbd3dc;
+  --sev-high-fg:#8a1f3c;
+  --sev-med-bg:#fde0c8;
+  --sev-med-fg:#7a3f0c;
+  --sev-low-bg:#e6e4ee;
+  --sev-low-fg:#45405e;
+  
+--shadow-soft:0 1px 2px rgba(42,39,72,.06),0 10px 28px rgba(42,39,72,.08);
+  --shadow-lift:0 3px 8px rgba(42,39,72,.08),0 20px 44px rgba(42,39,72,.14);
+  --ease:cubic-bezier(.2,.8,.2,1);
+  color-scheme:light}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--brand-fill:#2b58a8;
+  --brand-fill-hover:#3466bd;
+  --brand-text:#b9cdf0;
+  --brand-soft:#2a2f5a;
+  --bg:#1b1930;
+  --surface:#24223f;
+  --surface-2:#2e2b4f;
+  --text:#fff6e9;
+  --text-muted:#cbc4dd;
+  --border:#3c3862;
+  --focus:#b9cdf0;
+  --sky:#2a3768;
+  --mint:#1f3d45;
+  --ok-ink:#8fd6a8;
+  --s0-border:#6f6893;
+  --sev-high-bg:#4a1f33;
+  --sev-high-fg:#f7c6d0;
+  --sev-med-bg:#4a2f1c;
+  --sev-med-fg:#f6c9a2;
+  --sev-low-bg:#33304f;
+  --sev-low-fg:#dcd6ea;
+  --shadow-soft:0 1px 2px rgba(0,0,0,.3),0 10px 28px rgba(0,0,0,.3);
+  --shadow-lift:0 3px 8px rgba(0,0,0,.35),0 20px 44px rgba(0,0,0,.4);
+  color-scheme:dark}}
+:root[data-theme="dark"]{--brand-fill:#2b58a8;
+  --brand-fill-hover:#3466bd;
+  --brand-text:#b9cdf0;
+  --brand-soft:#2a2f5a;
+  --bg:#1b1930;
+  --surface:#24223f;
+  --surface-2:#2e2b4f;
+  --text:#fff6e9;
+  --text-muted:#cbc4dd;
+  --border:#3c3862;
+  --focus:#b9cdf0;
+  --sky:#2a3768;
+  --mint:#1f3d45;
+  --ok-ink:#8fd6a8;
+  --s0-border:#6f6893;
+  --sev-high-bg:#4a1f33;
+  --sev-high-fg:#f7c6d0;
+  --sev-med-bg:#4a2f1c;
+  --sev-med-fg:#f6c9a2;
+  --sev-low-bg:#33304f;
+  --sev-low-fg:#dcd6ea;
+  --shadow-soft:0 1px 2px rgba(0,0,0,.3),0 10px 28px rgba(0,0,0,.3);
+  --shadow-lift:0 3px 8px rgba(0,0,0,.35),0 20px 44px rgba(0,0,0,.4);
+  color-scheme:dark}
+
+html,body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 Barlow,system-ui,sans-serif;overflow-x:clip}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+@keyframes cgShimmer{from{background-position:200% 0}to{background-position:-200% 0}}
+@keyframes cgRise{from{opacity:0;transform:translateY(14px)}}
+@keyframes cgDraw{from{stroke-dashoffset:30}}
+@keyframes cgWigA{0%,100%{transform:rotate(0)}25%{transform:rotate(-5deg)}50%{transform:rotate(4deg)}75%{transform:rotate(-2deg)}}
+@keyframes cgWigB{0%,100%{transform:rotate(0)}25%{transform:rotate(-5deg)}50%{transform:rotate(4deg)}75%{transform:rotate(-2deg)}}
+@keyframes cgGlow{0%,100%{box-shadow:0 0 0 4px color-mix(in oklab,currentColor 22%,transparent)}50%{box-shadow:0 0 0 10px color-mix(in oklab,currentColor 6%,transparent)}}
+@keyframes cgFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes cgSway{0%,100%{transform:rotate(-2.5deg)}50%{transform:rotate(2.5deg)}}
+@keyframes cgPetal{0%{transform:translate(0,0) rotate(0);opacity:0}10%{opacity:1}100%{transform:translate(140px,340px) rotate(280deg);opacity:0}}
+@keyframes cgCloud{0%,100%{transform:translateX(0)}50%{transform:translateX(30px)}}
+@keyframes cgBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes cgTap{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes cgPoint{0%,100%{transform:rotate(0)}50%{transform:rotate(-9deg)}}
+@keyframes cgBlink{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.1)}}
+@keyframes inGateT{0%{transform:scale(1)}27.8%{transform:scale(1.18)}50%,100%{transform:scale(7)}}
+@keyframes inGateO{0%,40%{opacity:1}50%,100%{opacity:0}}
+@keyframes inSchoolT{0%,36%{transform:scale(.6)}48%{transform:scale(1.15)}57%,100%{transform:scale(8)}}
+@keyframes inSchoolO{0%,36%{opacity:0}42%,53%{opacity:1}57%,100%{opacity:0}}
+@keyframes inRoomT{0%,52%{transform:scale(1.15)}60%,83.3%{transform:scale(1)}93%,100%{transform:scale(2.5)}}
+@keyframes inRoomO{0%,52%{opacity:0}58%,95%{opacity:1}100%{opacity:0}}
+@keyframes inFrame{0%,84%{opacity:0;transform:scale(.4)}92%,100%{opacity:1;transform:scale(1)}}
+@keyframes inWipe{0%,90%{clip-path:inset(0 100% 0 0)}96%,100%{clip-path:inset(0 0 0 0)}}
+@keyframes inOut{0%,96%{opacity:1}100%{opacity:0}}
+@keyframes inBubble{0%,62%{transform:scale(0)}66%{transform:scale(1.08)}69%,100%{transform:scale(1)}}
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none !important;transition:none !important}}
