@@ -87,10 +87,11 @@ export function validateV1toV10(args: {
 
   // V4: no CO id outside section 3 (already covered via extras)
 
-  // V5: teaching hours add up
+  // V5: teaching hours add up (interaction total may equal lectures+lab, with tests extra)
   const th = args.output.teaching_hours;
   const sum = th.lectures + th.lab + th.tests_exams;
-  if (Math.abs(sum - th.total) > 0.01) {
+  const taught = th.lectures + th.lab;
+  if (Math.abs(sum - th.total) > 0.01 && Math.abs(taught - th.total) > 0.01) {
     defects.push({
       code: "HOURS_INCONSISTENT",
       location: { source: "spec", section: 6, refs: [] },

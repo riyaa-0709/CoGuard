@@ -43,7 +43,7 @@ for (const [coId, row] of Object.entries(map)) {
 }
 
 const decision = chooseTemplate(extracted.credits_ltp ?? "0:0:0", extracted.course_type ?? "");
-const summary = summaryCoveringUnits(extracted.summary ?? mappingAi.summary, extracted.units);
+const summary = summaryCoveringUnits(extracted.summary ?? "", extracted.units);
 const teaching_hours = extracted.teaching_hours ?? { lectures: 0, lab: 0, tests_exams: 0, total: 0 };
 
 const base = {
