@@ -513,6 +513,35 @@ function sourceMapRuleDefects(
   return defects;
 }
 
+// Layout slips in the syllabus: a lab line run on after a comma, or a blueprint number left inside a unit title cell.
+function contentsFormatDefects(contentsText: string, blueprint: ParsedDoc | null): Defect[] {
+  const defects: Defect[] = [];
+  for (const m of contentsText.matchAll(/,\s*Lab Exercises/gi)) {
+    const unit = [...contentsText.slice(0, m.index).matchAll(/Unit\s+(\d+)\s*\(/gi)].pop()?.[1];
+    if (!unit) continue;
+    defects.push({
+      code: "TYPO_OR_FORMAT",
+      location: { source: "spec", section: 4, refs: [`Unit-${unit}`] },
+      description: `Unit ${unit}'s lab exercises run on from the syllabus text after a comma instead of starting their own line.`,
+      fix: `End Unit ${unit}'s topics with a full stop and start the lab exercises on a new line.`,
+    });
+  }
+  for (const t of blueprint?.tables ?? []) {
+    for (const row of t.rows) {
+      const n = norm(row[0] ?? "").match(/^(\d{1,2})$/);
+      const stray = norm(row[1] ?? "").match(/[a-z]\.\s+(\d{1,3})$/i);
+      if (!n || !stray || norm(row[1] ?? "").length < 20) continue;
+      defects.push({
+        code: "TYPO_OR_FORMAT",
+        location: { source: "blueprint", section: null, refs: [`Unit-${n[1]}`] },
+        description: `Unit ${n[1]}'s row has the number ${stray[1]} inside the unit title cell instead of its own column.`,
+        fix: `Move ${stray[1]} out of Unit ${n[1]}'s title into the hours column.`,
+      });
+    }
+  }
+  return defects;
+}
+
 // A unit's lab line that names a different unit title (e.g. a shortened or older title).
 function labLabelDefects(units: Extracted["units"]): Defect[] {
   const defects: Defect[] = [];
@@ -649,6 +678,7 @@ export function extractFromDocs(spec: ParsedDoc, blueprint: ParsedDoc | null): E
   defects.push(...sourceMapRuleDefects(spec, assessment?.co_coverage ?? {}, bloomByCo, contentsText));
   defects.push(...labAssessmentDefect(assessment, definedIds));
   defects.push(...labLabelDefects(units));
+  defects.push(...contentsFormatDefects(contentsText, blueprint));
 
   return {
     title,
