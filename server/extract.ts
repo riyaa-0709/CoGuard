@@ -503,7 +503,7 @@ function sourceMapRuleDefects(
         add("MAPPING_BLOOM_MISMATCH", `${row.coId} is Bloom L${bloom} but the source map sets ${cell.col}=${level}; the most that level supports is ${ceiling}.`, `Lower ${row.coId}/${cell.col} to ${ceiling} or less.`);
       } else if (SOFT_PO_EVIDENCE[cell.col] && !SOFT_PO_EVIDENCE[cell.col].test(evidence)) {
         add("MAPPING_UNSUPPORTED", `Source map sets ${row.coId}→${cell.col}=${level}, but the syllabus and assessment show no evidence for ${cell.col}.`, `Blank ${row.coId}/${cell.col}.`);
-      } else if (cell.col === "PO-5" && !toolUse) {
+      } else if (cell.col === "PO-5" && level >= 2 && !toolUse) {
         add("MAPPING_UNSUPPORTED", `Source map sets ${row.coId}→PO-5=${level}, but ${row.coId} is not assessed in a lab or programming component, so there is no real tool use.`, `Lower or blank ${row.coId}/PO-5.`);
       } else if ((cell.col === "PO-3" || cell.col === "PO-5") && level >= 2 && !practical) {
         add("MAPPING_UNSUPPORTED", `Source map sets ${row.coId}→${cell.col}=${level} but ${row.coId} is not assessed in a practical or assignment.`, `Blank ${cell.col} or add practical/assignment coverage for ${row.coId}.`);
