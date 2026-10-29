@@ -210,7 +210,8 @@ export function localMapping(args: {
     };
 
     if (/analys|analyz|problem|identify|select|formulate|compare|evaluat|algorithm|comput/.test(text) || co.bloom_level >= 3) {
-      const want = co.bloom_level >= 4 ? 3 : co.bloom_level >= 3 ? 2 : 1;
+      // Problem analysis peaks at the Analyse level; applying, evaluating and creating lean on it less.
+      const want = co.bloom_level === 4 ? 3 : co.bloom_level >= 3 ? 2 : 1;
       put(
         "PO-2",
         want,

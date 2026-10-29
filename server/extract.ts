@@ -294,6 +294,13 @@ function hoursDefect(
       description: `Total hours of interaction (${interaction}) do not match the teaching-and-learning table total (${tableTotal}; ${hours.lectures} lectures + ${hours.lab} lab + ${hours.tests_exams} tests/exams = ${sum}).`,
       fix: "Keep the teaching-hours table total and flag the section 2 figure.",
     });
+    // The same conflict shows in the teaching-and-learning table, whose total disagrees with section 2.
+    defects.push({
+      code: "HOURS_INCONSISTENT",
+      location: { source: "spec", section: 6, refs: [] },
+      description: `The teaching-and-learning table totals ${tableTotal} hours, but section 2 states ${interaction} hours of interaction.`,
+      fix: "Recompute the table total and make section 2 agree with it.",
+    });
     return defects;
   }
   if (Math.abs(sum - hours.total) > 0.01 && Math.abs(hours.lectures + hours.lab - hours.total) > 0.01) {
@@ -501,7 +508,8 @@ function sourceMapRuleDefects(
       const ceiling = bloom == null || cell.col === "PO-1" ? 3 : cell.col === "PO-3" ? designCeiling(bloom) : bloom <= 1 ? 1 : bloom <= 2 ? 2 : 3;
       if (level > ceiling) {
         add("MAPPING_BLOOM_MISMATCH", `${row.coId} is Bloom L${bloom} but the source map sets ${cell.col}=${level}; the most that level supports is ${ceiling}.`, `Lower ${row.coId}/${cell.col} to ${ceiling} or less.`);
-      } else if (SOFT_PO_EVIDENCE[cell.col] && !SOFT_PO_EVIDENCE[cell.col].test(evidence)) {
+      }
+      if (SOFT_PO_EVIDENCE[cell.col] && !SOFT_PO_EVIDENCE[cell.col].test(evidence)) {
         add("MAPPING_UNSUPPORTED", `Source map sets ${row.coId}→${cell.col}=${level}, but the syllabus and assessment show no evidence for ${cell.col}.`, `Blank ${row.coId}/${cell.col}.`);
       } else if (cell.col === "PO-5" && level >= 2 && !toolUse) {
         add("MAPPING_UNSUPPORTED", `Source map sets ${row.coId}→PO-5=${level}, but ${row.coId} is not assessed in a lab or programming component, so there is no real tool use.`, `Lower or blank ${row.coId}/PO-5.`);
