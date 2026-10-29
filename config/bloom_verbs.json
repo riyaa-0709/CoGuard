@@ -1,0 +1,8 @@
+{
+  "L1": ["define", "list", "recall", "state", "name", "identify"],
+  "L2": ["explain", "describe", "summarise", "summarize", "classify", "discuss", "interpret"],
+  "L3": ["apply", "solve", "use", "implement", "compute", "demonstrate"],
+  "L4": ["analyse", "analyze", "compare", "differentiate", "examine", "distinguish", "select"],
+  "L5": ["evaluate", "assess", "justify", "critique", "judge", "recommend"],
+  "L6": ["design", "develop", "build", "construct", "formulate", "propose"]
+}
