@@ -286,7 +286,7 @@ export function localMapping(args: {
       );
       put(
         "PSO-2",
-        co.bloom_level >= 3 ? 3 : 1,
+        co.bloom_level >= 6 ? 3 : co.bloom_level >= 3 ? 2 : 1,
         `software practice via ${labUnits || unitsCite} and ${assess}`,
       );
     }
